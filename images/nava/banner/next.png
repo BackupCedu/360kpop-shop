@@ -1,0 +1,1599 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />  
+  <meta name="revisit-after" content="1 days" />  
+  <meta content="Shop.nava.vn" name="description" />  
+  <meta content="nava, shop online, bán hàng, mua hàng" name="keywords" />  
+  <meta content="index, follow" name="robots" />  
+
+  <title>360KPOP SHOP</title>
+
+  <base href="http://localhost/360kpop-shop/">
+
+  <link rel="canonical" href="http://localhost/360kpop-shop" />
+  <link href="http://static.nava.vn/nava_shop/res/images/favicon.ico" rel="shortcut icon" />  
+  <link href="http://static.nava.vn/nava_shop/res/images/nava-logo.gif" rel="image_src"/>  
+  <link href="http://localhost/360kpop-shop/css/screen.css?rand=20120823.2" rel="stylesheet" type="text/css" />
+
+  <script type="text/javascript">
+       var GLOBAL_ROOT_URL='http://nava.vn/';
+       var GLOBAL_LOGIN_URL='http://id.nava.vn/';
+       var GLOBAL_RESOURCES_PATH = 'http://static.nava.vn/nava_shop/res/';  
+       var GLOBAL_IMAGE_URL = 'http://shop.gonct.info/nava_shop/images/';
+       //var refresh = setTimeout("window.location.reload()", '600000'); 
+  </script>
+
+  <script src="http://localhost/360kpop-shop/js/nava/lib.pack.js?rand=1" type="text/javascript"></script>
+  <script src="http://localhost/360kpop-shop/js/nava/core.pack.js?rand=1" type="text/javascript"></script>
+  <script src="http://localhost/360kpop-shop/js/nava/jquery.cookie.js?rand=1" type="text/javascript"></script>
+  <script src="http://localhost/360kpop-shop/js/jquery.stickyPanel.js?rand=1" type="text/javascript"></script>
+  <script src="http://localhost/360kpop-shop/js/jquery.simplemodal.js?rand=1" type="text/javascript"></script>
+  <script type="text/javascript">scrolltotop.init();</script>
+
+</head>
+<body>
+<!--Header-->    
+<div class="header" >
+  <ul>
+    <li>
+      <a href="http://localhost/360kpop-shop" title="Trang chủ" >Nava.vn - Cổng thương mại điện tử online</a>
+    </li>
+  </ul>
+  <div class="right-panel">
+    <div class="search">
+      <input type="text" class="input" id="txt_search"  value="Nhập từ khóa" />    
+<input type="button" class="btn-submit" value="Tìm kiếm"  id="bt_search"/>        </div>
+    <div class="shop">
+      <a href="javascript:;" class="support">HỖ TRỢ</a>
+            <a href="javascript:;" class="post-product" title="Đăng sản phẩm"></a>
+    </div>
+  </div>
+</div>
+<!--End header-->    
+
+<!--Header Menu-->    
+
+<!--Menu -->    
+<div class="topmenu">
+  <div class="menu">
+        <div class="wmenu">
+	<ul></ul>
+	<div class="account">
+		<a href="/360kpop-shop/user" title="Đăng nhập">Đăng nhập</a> |
+		<a href="/360kpop-shop/user/register" title="Đăng ký thành viên">Đăng ký</a>
+	</div>
+</div>
+  </div>
+  <div class="submenu">
+        
+<ul>
+    <li>
+        <h1><a class="ico-home" href="/360kpop-shop/">Trang chủ</a></h1>
+    </li>
+                    <li catid="2">
+        <a class='c' href="/360kpop-shop/album" >Album</a>
+                                <div class="sub subid-2">
+                        <ul>
+                <li class='subtitle'>
+                    <a href="/360kpop-shop/album">Album</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/2ne1" >2NE1</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/2am" >2AM</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/2pm" >2PM</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/4minute" >4Minute</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/aftershool" >AfterShool</a>
+                </li>
+                            </ul>
+                        <ul>
+                <li class='subtitle'>
+                    <a href="/360kpop-shop/album">Album</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/b-a-p" >B.A.P</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/bigbang" >BigBang</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/beast" >BEAST</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/boyfriend" >Boyfriend</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/block-b" >Block B</a>
+                </li>
+                            </ul>
+                        <ul>
+                <li class='subtitle'>
+                    <a href="/360kpop-shop/album">Album</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/cn-blue" >CN BLUE</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/dbsk-tvxq" >DBSK/TVXQ</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/ft-island" >FT Island</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/g-na" >G.NA</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/f-x" >F(x)</a>
+                </li>
+                            </ul>
+                        <ul>
+                <li class='subtitle'>
+                    <a href="/360kpop-shop/album">Album</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/infinite" >Infinite</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/kara" >Kara</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/mblaq" >MBLAQ</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/super-junior" >Super Junior</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/shinee" >SHINee</a>
+                </li>
+                            </ul>
+                        <ul>
+                <li class='subtitle'>
+                    <a href="/360kpop-shop/album">Album</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/snsd-girls-generation" >SNSD/Girls' Generation</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/ss501" >SS501</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/t-ara" >T-ara</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/jyj" >JYJ</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/u-kiss" >U-Kiss</a>
+                </li>
+                            </ul>
+                        <ul>
+                <li class='subtitle'>
+                    <a href="/360kpop-shop/album">Album</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/khac" >Khác</a>
+                </li>
+                            </ul>
+                    </div>
+            </li>
+                    <li catid="3">
+        <a class='c' href="/360kpop-shop/my-pham" >Mỹ phẩm</a>
+                                <div class="sub subid-3">
+                        <ul>
+                <li class='subtitle'>
+                    <a href="/360kpop-shop/my-pham">Mỹ phẩm</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/skinfood" >Skinfood</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/thefaceshop" >Thefaceshop</a>
+                </li>
+                            </ul>
+                        <ul>
+                <li class='subtitle'>
+                    <a href="/360kpop-shop/my-pham">Mỹ phẩm</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/missha" >Missha</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/tony-moly" >Tony moly</a>
+                </li>
+                            </ul>
+                        <ul>
+                <li class='subtitle'>
+                    <a href="/360kpop-shop/my-pham">Mỹ phẩm</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/nature-republic" >Nature Republic</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/innisfree" >Innisfree</a>
+                </li>
+                            </ul>
+                        <ul>
+                <li class='subtitle'>
+                    <a href="/360kpop-shop/my-pham">Mỹ phẩm</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/my-pham-khac" >Mỹ phẩm khác</a>
+                </li>
+                            </ul>
+                    </div>
+            </li>
+                    <li catid="4">
+        <a class='c' href="/360kpop-shop/phu-kien" >Phụ kiện</a>
+                                <div class="sub subid-4">
+                        <ul>
+                <li class='subtitle'>
+                    <a href="/360kpop-shop/phu-kien">Phụ kiện</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/lightstick-khan-co-vu" >Lightstick/Khăn cổ vũ</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/moc-dien-thoai-op-dien-thoai" >Móc điện thoại/Ốp điện thoại</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/lich" >Lịch</a>
+                </li>
+                            </ul>
+                        <ul>
+                <li class='subtitle'>
+                    <a href="/360kpop-shop/phu-kien">Phụ kiện</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/photobook" >Photobook</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/tap-chi" >Tạp chí</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/bong-bay" >Bóng bay</a>
+                </li>
+                            </ul>
+                        <ul>
+                <li class='subtitle'>
+                    <a href="/360kpop-shop/phu-kien">Phụ kiện</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/vong-deo-tay" >Vòng đeo tay</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/so-note" >Sổ/Note</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/card-post-card" >Card/Post card</a>
+                </li>
+                            </ul>
+                        <ul>
+                <li class='subtitle'>
+                    <a href="/360kpop-shop/phu-kien">Phụ kiện</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/ao-tat-chibi" >Áo/Tất chibi</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/poster-official" >Poster Official</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/anh-dan-sticker" >Ảnh dán/Sticker</a>
+                </li>
+                            </ul>
+                        <ul>
+                <li class='subtitle'>
+                    <a href="/360kpop-shop/phu-kien">Phụ kiện</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/cap-balo" >Cặp/Balo</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/mu-o-du" >Mũ/Ô dù</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/hop-but-vo" >Hộp bút/Vở</a>
+                </li>
+                            </ul>
+                        <ul>
+                <li class='subtitle'>
+                    <a href="/360kpop-shop/phu-kien">Phụ kiện</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/nhan-day-chuyen-khuyen-tai" >Nhẫn/Dây chuyền/Khuyên tai</a>
+                </li>
+                                                <li>
+                    <a href="/360kpop-shop/phu-kien-khac" >Phụ kiện khác</a>
+                </li>
+                            </ul>
+                    </div>
+            </li>
+        <li>
+        <a class="c" href="javascript:;">News</a>
+    </li>
+    <li>
+        <a class="c" href="javascript:;">Forum</a>
+    </li>
+    <li>
+        <a class="c" href="/360kpop-shop/cart">Giỏ hàng</a>
+    </li>
+    <li>
+        <a class="c" href="/360kpop-shop/history">Mới xem gần đây</a>
+    </li>
+    <li>
+        <a class="c" href="/360kpop-shop/order">Đặt mua hàng</a>
+    </li>
+</ul>
+
+<script>
+    $('.submenu ul li:first').addClass('active');
+</script>  </div>
+</div>
+
+<!--End Header Menu-->    
+
+<div class="bgmain" style="" >
+  <!--Top -->
+    <div class="wpage poupinfo">
+	<a target="_blank" href="javascript:;">
+		<img id="img-1" alt="Quà Quốc Tế thiếu nhi 1/6" src="http://localhost/360kpop-shop/images/nava/banner/nava_note.png" />
+	</a>
+</div>  <!--Product -->    
+  <!--Content-->    
+  <form id="formmain" method="Post" action="" enctype="multipart/form-data" >
+    <!-- Top Banner -->
+        <div class="list">
+  <div id="idslide" class="slidecontentwrapper">
+    <ul>
+      <li class="h279" style="top: 0px; left: 0px">
+        <a href="#Pha_Le_3D">
+          <img class="hvimage" alt="" src="http://static.nava.vn/nava_shop/res//tpl/images/banner/120819.1/1.jpg" width="140" height="420" />
+          <div class="hoverdiv" style="width: 140px; height: 420px;"></div>
+        </a>
+      </li>
+      <li class="h279" style="top: 0px; left: 140px">
+        <a href="#DIDONGGIARE">
+          <img alt="" src="http://static.nava.vn/nava_shop/res//tpl/images/banner/120819.1/2.jpg" width="280" height="140" />
+          <div class="hoverdiv" style="width: 280px; height: 140px;"></div>
+        </a>
+      </li>
+      <li class="h279" style="top: 140px; left: 140px">
+        <a href="#KentaShop">
+          <img alt="" src="http://static.nava.vn/nava_shop/res//tpl/images/banner/120819.1/3.jpg" width="280" height="280" />
+          <div class="hoverdiv" style="width: 280px; height: 280px;"></div>
+        </a>
+      </li>
+      <li class="h279" style="top: 0px; left: 420px">
+        <a href="#Hula_Shop">
+          <img alt="" src="http://static.nava.vn/nava_shop/res//tpl/images/banner/120819.1/4.jpg" width="140" height="420" />
+          <div class="hoverdiv" style="width: 140px; height: 420px;"></div>
+        </a>
+      </li>
+      <li class="h279" style="top: 0px; left: 560px">
+        <a href="#VNgiftshop">
+          <img alt="" src="http://static.nava.vn/nava_shop/res//tpl/images/banner/120819.1/5.jpg" width="140" height="420" />
+          <div class="hoverdiv" style="width: 140px; height: 420px;"></div>
+        </a>
+      </li>
+      <li class="h279" style="top: 0px; left: 700px">
+        <a href="#dangcap9x">
+          <img alt="" src="http://static.nava.vn/nava_shop/res//tpl/images/banner/120819.1/6.jpg" width="280" height="280" />
+          <div class="hoverdiv" style="width: 280px; height:280px;"></div>
+        </a>
+      </li>
+      <li class="h279" style="top: 280px; left: 700px">
+        <a href="#THANHTRAIPHONE">
+          <img alt="" src="http://static.nava.vn/nava_shop/res//tpl/images/banner/120819.1/7.jpg" width="280" height="140" />
+          <div class="hoverdiv" style="width: 280px; height: 140px;"></div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<script type="text/javascript">
+    featuredcontentglider.init({
+        gliderid: "idslide", //ID of main glider container
+        contentclass: "list", //Shared CSS class name of each glider content
+        togglerid: "p-select", //ID of toggler container
+        remotecontent: "", //Get gliding contents from external file on server? "filename" or "" to disable
+        selected: 0, //Default selected content index (0=1st)
+        persiststate: false, //Remember last content shown within browser session (true/false)?
+        speed: 700, //Glide animation duration (in milliseconds)
+        direction: "", //set direction of glide: "updown", "downup", "leftright", or "rightleft"
+        autorotate: true, //Auto rotate contents (true/false)?
+        autorotateconfig: [10000, 2] //if auto rotate enabled, set [milliseconds_btw_rotations, cycles_before_stopping]
+    })
+    
+    $(".hoverdiv").hover(
+        function(){                               
+        $(this).stop().animate({opacity: 0.7},200);},
+        function(){               
+        $(this).stop().animate({opacity: 0},200);           
+    });
+    
+    $("#idslide").hover(
+        function(){                              
+        $(".mvleft").stop().animate({opacity: 1},200);
+        $(".mvright").stop().animate({opacity: 1},200);},
+        function(){               
+        $(".mvleft").stop().animate({opacity: 0},200);  
+        $(".mvright").stop().animate({opacity: 0},200); 
+    });
+                    
+</script>    <!-- End Top Banner -->    
+
+    <!-- Main Content -->    
+    <div class="wcontent">
+      <div class="col-710">
+                                                        
+        <!--Shop Tieu bieu -->
+                <div class="blk-main">
+	<div class="title-typical">
+		<h3>
+			<a href="javascript:;" title="Shop tiêu biểu">SHOP V.I.P</a>
+		</h3>
+		<ul>
+			<li>
+				<a id="#vip6231" href="http://nava.vn/TrungTamVietSingMobile" title="TRUNG TÂM VIỆT-SING MOBILE"  class="active" >TRUNG TÂM VIỆT-SING MOBILE</a>
+			</li>
+
+			<li>|</li>
+
+			<li>
+				<a id="#vip6299" href="http://nava.vn/ZINGMOBILE" title="ZING MOBILE" >ZING MOBILE</a>
+			</li>
+
+			<li>|</li>
+
+			<li>
+				<a id="#vip6286" href="http://nava.vn/DIDONGGIARE" title="DI ĐỘNG GIÁ RẺ" >DI ĐỘNG GIÁ RẺ</a>
+			</li>
+
+			<li>|</li>
+
+			<li>
+				<a id="#vip6151" href="http://nava.vn/Pha_Le_3D" title="PHA LÊ 3D" >PHA LÊ 3D</a>
+			</li>
+
+			<li>|</li>
+
+			<li>
+				<a id="#vip6229" href="http://nava.vn/DuDatMobile" title="DƯ ĐẠT MOBILE" >DƯ ĐẠT MOBILE</a>
+			</li>
+
+			<li>|</li>
+
+			<li>
+				<a id="#vip7160" href="http://nava.vn/VienDongSaiGon" title="VIENDONGSAIGON" >VIENDONGSAIGON</a>
+			</li>
+
+		</ul>
+	</div>
+
+	<div class="pdshop contentvip" id="vip6231_c">
+
+		<div class="col-232 ">
+			<a href="http://nava.vn/p-wuzvejnhp/nokia-e71.html" class="img-60" title="Nokia E71 - 1.600.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/small/2012/4/26/634709954003756354-533.jpg" width="60" height="60" border="0" alt="Nokia E71" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzvejnhp/nokia-e71.html" title="">Nokia E71</a>
+			</h3>
+			<p class="price">1.600.000đ</p>
+		</div>
+
+		<div class="col-232 ">
+			<a href="http://nava.vn/p-wuzcefean/nokia-n9-64gb.html" class="img-60" title="Nokia N9 64GB - 2.500.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/small/2012/4/4/634691800434427500-474.jpg" width="60" height="60" border="0" alt="Nokia N9 64GB" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzcefean/nokia-n9-64gb.html" title="">Nokia N9 64GB</a>
+			</h3>
+			<p class="price">2.500.000đ</p>
+		</div>
+
+		<div class="col-232  last ">
+			<a href="http://nava.vn/p-wuzvejbie/nokia-c7.html" class="img-60" title="Nokia C7 - 2.000.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/small/2012/4/25/634709943012193854-606.jpg" width="60" height="60" border="0" alt="Nokia C7" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzvejbie/nokia-c7.html" title="">Nokia C7</a>
+			</h3>
+			<p class="price">2.000.000đ</p>
+		</div>
+
+		<div class="col-232 ">
+			<a href="http://nava.vn/p-wuzvekwii/iphone-4s-16gb.html" class="img-60" title="Iphone 4S-16GB - 3.500.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/small/2012/4/26/634709964800787604-694.jpg" width="60" height="60" border="0" alt="Iphone 4S-16GB" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzvekwii/iphone-4s-16gb.html" title="">Iphone 4S-16GB</a>
+			</h3>
+			<p class="price">3.500.000đ</p>
+		</div>
+
+		<div class="col-232 ">
+			<a href="http://nava.vn/p-wuzvejjfg/nokia-e72.html" class="img-60" title="Nokia E72 - 1.800.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/small/2012/4/25/634709925563600104-576.jpg" width="60" height="60" border="0" alt="Nokia E72" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzvejjfg/nokia-e72.html" title="">Nokia E72</a>
+			</h3>
+			<p class="price">1.800.000đ</p>
+		</div>
+
+		<div class="col-232  last ">
+			<a href="http://nava.vn/p-wuzcefwwm/nokia-n8-32gb.html" class="img-60" title="Nokia N8 32GB - 2.000.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/small/2012/4/4/634691799639115000-467.jpg" width="60" height="60" border="0" alt="Nokia N8 32GB" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzcefwwm/nokia-n8-32gb.html" title="">Nokia N8 32GB</a>
+			</h3>
+			<p class="price">2.000.000đ</p>
+		</div>
+
+		<div class="col-232 ">
+			<a href="http://nava.vn/p-wuzcefrzb/iphone-4s-32gb.html" class="img-60" title="Iphone 4S-32GB - 4.000.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/small/2012/4/4/634691801112865000-855.jpg" width="60" height="60" border="0" alt="Iphone 4S-32GB" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzcefrzb/iphone-4s-32gb.html" title="">Iphone 4S-32GB</a>
+			</h3>
+			<p class="price">4.000.000đ</p>
+		</div>
+
+		<div class="col-232 ">
+			<a href="http://nava.vn/p-wuzvejkvf/nokia-x6-32gb.html" class="img-60" title="Nokia X6-32gb - 1.700.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/small/2012/4/25/634709933123912604-806.jpg" width="60" height="60" border="0" alt="Nokia X6-32gb" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzvejkvf/nokia-x6-32gb.html" title="">Nokia X6-32gb</a>
+			</h3>
+			<p class="price">1.700.000đ</p>
+		</div>
+
+		<div class="col-232  last ">
+			<a href="http://nava.vn/p-wuzbeqxop/samsung-galaxy-note-n7000.html" class="img-60" title="SamSung Galaxy Note N7000 - 5.500.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/small/2012/7/3/634769046723421250-395.jpg" width="60" height="60" border="0" alt="SamSung Galaxy Note N7000" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzbeqxop/samsung-galaxy-note-n7000.html" title="">SamSung Galaxy Note N7000</a>
+			</h3>
+			<p class="price">5.500.000đ</p>
+		</div>
+
+		<div class="col-232 ">
+			<a href="http://nava.vn/p-wuzvejodd/iphone-4-32gb.html" class="img-60" title="Iphone 4-32gb - 3.000.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/small/2012/4/25/634709890818600104-797.jpg" width="60" height="60" border="0" alt="Iphone 4-32gb" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzvejodd/iphone-4-32gb.html" title="">Iphone 4-32gb</a>
+			</h3>
+			<p class="price">3.000.000đ</p>
+		</div>
+
+		<div class="col-232 ">
+			<a href="http://nava.vn/p-wuzvejhth/iphone-4-16gb-hang-xach-tay.html" class="img-60" title="Iphone 4-16gb hàng xách tay - 2.800.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/small/2012/4/25/634709906873600104-655.jpg" width="60" height="60" border="0" alt="Iphone 4-16gb hàng xách tay" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzvejhth/iphone-4-16gb-hang-xach-tay.html" title="">Iphone 4-16gb hàng xách tay</a>
+			</h3>
+			<p class="price">2.800.000đ</p>
+		</div>
+
+		<div class="col-232  last ">
+			<a href="http://nava.vn/p-wuzvejddk/samsung-galaxy-sii.html" class="img-60" title="SamSung Galaxy SII - 5.000.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/small/2012/4/25/634709900641100104-136.jpg" width="60" height="60" border="0" alt="SamSung Galaxy SII" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzvejddk/samsung-galaxy-sii.html" title="">SamSung Galaxy SII</a>
+			</h3>
+			<p class="price">5.000.000đ</p>
+		</div>
+
+		<br class="clr" />
+	</div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip6299_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip6286_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip6151_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip6229_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip7160_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip6297_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip6643_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip4579_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip1343_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip3213_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip7011_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip7536_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip7127_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip6285_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip6298_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip1373_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip5888_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip6715_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip6284_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip828_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip46_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip6300_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip5164_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip3083_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip157_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip134_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip33_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip4192_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip6227_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip5834_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip5126_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip6122_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip4985_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip7271_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip6283_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip2875_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip5643_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip38_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip705_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip7258_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip1365_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip732_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip4115_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip5105_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip7439_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip5827_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip6642_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip4022_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip4918_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip194_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip5904_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip7371_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip1541_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip6909_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip5177_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip1030_c"></div>
+
+	<div class="pdshop contentvip" style="display:none;" id="vip1603_c"></div>
+
+</div>
+        <!--Shop mới -->
+        
+        <!--Product hot --> 
+        <div class="blk-main">
+	<div class="title-newpro">
+		<h3>
+			<a href="javascript:;" title="">SẢN PHẨM HOT</a>
+		</h3>
+		<ul>
+
+			<li>
+				<a href="http://shop.nava.vn/c1/thoi-trang.html" id="#newcate_3" title="Thời trang"  class="active" >Thời trang</a>
+			</li>
+
+			<li>|</li>
+
+			<li>
+				<a href="http://shop.nava.vn/c2/phu-kien-thoi-trang.html" id="#newcate_4" title="Phụ kiện thời trang" >Phụ kiện thời trang</a>
+			</li>
+
+			<li>|</li>
+
+			<li>
+				<a href="http://shop.nava.vn/c3/lam-dep.html" id="#newcate_5" title="Mỹ phẩm - Nước hoa" >Mỹ phẩm - Nước hoa</a>
+			</li>
+
+			<li>|</li>
+
+			<li>
+				<a href="http://shop.nava.vn/c4/qua-tang-do-choi.html" id="#newcate_6" title="Quà tặng - Đồ chơi" >Quà tặng - Đồ chơi</a>
+			</li>
+
+			<li>|</li>
+
+			<li>
+				<a href="http://shop.nava.vn/c5/dien-may-ky-thuat-so.html" id="#newcate_58" title="Tổng hợp" >Tổng hợp</a>
+			</li>
+
+		</ul>
+	</div>
+
+	<div class="pdshop bycate" id="newcate_3">
+
+		<div class="col-140 " onmouseout="this.className='col-140';" onmouseover="this.className='col-140 bggray';">
+			<a href="http://nava.vn/p-wuzbzftdr/dam-hong-lech-vai-chan-vay-den-ma-ab060.html" class="img-140" title="Đầm hồng lệch vai chân váy đen - mã AB060 - 230.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/8/15/634806640476998960-389.jpg" alt="Đầm hồng lệch vai chân váy đen - mã AB060" width="120" height="120" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzbzftdr/dam-hong-lech-vai-chan-vay-den-ma-ab060.html" title="">Đầm hồng lệch vai chân váy đen - mã AB060</a>
+
+			</h3>
+			<p class="price">230.000đ</p>
+		</div>
+
+		<div class="col-140 " onmouseout="this.className='col-140';" onmouseover="this.className='col-140 bggray';">
+			<a href="http://nava.vn/p-wyltjfxjd/quan-kaki-han-quoc-gia-re.html" class="img-140" title="Quần kaki Hàn Quốc giá rẻ - 150.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2011/8/14/634489152781246250-452.jpg" alt="Quần kaki Hàn Quốc giá rẻ" width="120" height="120" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wyltjfxjd/quan-kaki-han-quoc-gia-re.html" title="">Quần kaki Hàn Quốc giá rẻ</a>
+
+			</h3>
+			<p class="price">150.000đ</p>
+		</div>
+
+		<div class="col-140 " onmouseout="this.className='col-140';" onmouseover="this.className='col-140 bggray';">
+			<a href="http://nava.vn/p-wuzxqbrri/ao-thun-body-vai-thun-co-gian-4-chieu-pha-gia-lang-ao-thun.html" class="img-140" title="Áo thun body vải thun co giãn 4 chiều phá giá làng áo thun - 120.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/3/22/634680102938135000-927.jpg" alt="Áo thun body vải thun co giãn 4 chiều phá giá làng áo thun" width="120" height="120" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzxqbrri/ao-thun-body-vai-thun-co-gian-4-chieu-pha-gia-lang-ao-thun.html" title="">Áo thun body vải thun co giãn 4 chiều phá giá làng áo thun</a>
+
+			</h3>
+			<p class="price">120.000đ</p>
+		</div>
+
+		<div class="col-140 " onmouseout="this.className='col-140';" onmouseover="this.className='col-140 bggray';">
+			<a href="http://nava.vn/p-wuzvklxvf/ao-khoac-kieu-ao-ghi-le.html" class="img-140" title="Áo khoác kiểu, Áo ghi lê - 140.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/6/8/634747693795931250-592.jpg" alt="Áo khoác kiểu, Áo ghi lê" width="120" height="120" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzvklxvf/ao-khoac-kieu-ao-ghi-le.html" title="">Áo khoác kiểu, Áo ghi lê</a>
+
+			</h3>
+			<p class="price">140.000đ</p>
+		</div>
+
+		<div class="col-140  last " onmouseout="this.className='col-140';" onmouseover="this.className='col-140 bggray';">
+			<a href="http://nava.vn/p-wylczcgkb/ao-somi-nam-ao-somi-han-quoc-form-body.html" class="img-140" title="Áo sơmi nam - áo sơmi hàn quốc form body - 149.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2011/9/24/634524806780382220-543.jpg" alt="Áo sơmi nam - áo sơmi hàn quốc form body" width="120" height="120" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wylczcgkb/ao-somi-nam-ao-somi-han-quoc-form-body.html" title="">Áo sơmi nam - áo sơmi hàn quốc form body</a>
+
+			</h3>
+			<p class="price">149.000đ</p>
+		</div>
+
+		<div class="col-140 " onmouseout="this.className='col-140';" onmouseover="this.className='col-140 bggray';">
+			<a href="http://nava.vn/p-wuzbztsyw/dam-cong-so-forever-300.html" class="img-140" title="Đầm công sở Forever 300 - 450.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/8/14/634805583749271250-406.jpg" alt="Đầm công sở Forever 300" width="120" height="120" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzbztsyw/dam-cong-so-forever-300.html" title="">Đầm công sở Forever 300</a>
+
+			</h3>
+			<p class="price">450.000đ</p>
+		</div>
+
+		<div class="col-140 " onmouseout="this.className='col-140';" onmouseover="this.className='col-140 bggray';">
+			<a href="http://nava.vn/p-wuzbikxun/ao-so-mi-nam.html" class="img-140" title="Áo sơ mi nam - 150.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/7/12/634776838153725000-854.jpg" alt="Áo sơ mi nam" width="120" height="120" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzbikxun/ao-so-mi-nam.html" title="">Áo sơ mi nam</a>
+
+			</h3>
+			<p class="price">150.000đ</p>
+		</div>
+
+		<div class="col-140 " onmouseout="this.className='col-140';" onmouseover="this.className='col-140 bggray';">
+			<a href="http://nava.vn/p-wuzbdvtee/dam-maxi-soc-nhieu-mau-ms-262.html" class="img-140" title="Đầm Maxi sọc nhiều màu MS 262 - 255.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/7/24/634787696113170000-496.jpg" alt="Đầm Maxi sọc nhiều màu MS 262" width="120" height="120" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzbdvtee/dam-maxi-soc-nhieu-mau-ms-262.html" title="">Đầm Maxi sọc nhiều màu MS 262</a>
+
+			</h3>
+			<p class="price">255.000đ</p>
+		</div>
+
+		<div class="col-140 " onmouseout="this.className='col-140';" onmouseover="this.className='col-140 bggray';">
+			<a href="http://nava.vn/p-wuzvlizfp/bo-suu-tap-nam-ca-tinh-moi-hot.html" class="img-140" title="Bộ sưu tập nam cá tính mới hot - 190.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/7/27/634789751100200000-562.jpg" alt="Bộ sưu tập nam cá tính mới hot" width="120" height="120" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzvlizfp/bo-suu-tap-nam-ca-tinh-moi-hot.html" title="">Bộ sưu tập nam cá tính mới hot</a>
+
+			</h3>
+			<p class="price">190.000đ</p>
+		</div>
+
+		<div class="col-140  last " onmouseout="this.className='col-140';" onmouseover="this.className='col-140 bggray';">
+			<a href="http://nava.vn/p-wuzbupqgs/ao-thun-body-hang-chat-form-cuc-chuan-gia-cuc-re.html" class="img-140" title="Áo thun BODY hàng Chất - form cực chuẩn - giá cực rê - 79.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/7/9/634774605255778750-871.jpg" alt="Áo thun BODY hàng Chất - form cực chuẩn - giá cực rê" width="120" height="120" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzbupqgs/ao-thun-body-hang-chat-form-cuc-chuan-gia-cuc-re.html" title="">Áo thun BODY hàng Chất - form cực chuẩn - giá cực rê</a>
+
+			</h3>
+			<p class="price">79.000đ</p>
+		</div>
+
+		<div class="col-140 " onmouseout="this.className='col-140';" onmouseover="this.className='col-140 bggray';">
+			<a href="http://nava.vn/p-wuzxnjnvj/ao-so-mi-cao-cap.html" class="img-140" title="Áo sơ mi cao cấp - 220.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/3/31/634688011089115000-101.jpg" alt="Áo sơ mi cao cấp" width="120" height="120" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzxnjnvj/ao-so-mi-cao-cap.html" title="">Áo sơ mi cao cấp</a>
+
+			</h3>
+			<p class="price">220.000đ</p>
+		</div>
+
+		<div class="col-140 " onmouseout="this.className='col-140';" onmouseover="this.className='col-140 bggray';">
+			<a href="http://nava.vn/p-wuzbxkjhu/ao-somi-tre-trung-dt21.html" class="img-140" title="Áo somi trẻ trung DT21 - 195.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/8/20/634810245063373750-381.jpg" alt="Áo somi trẻ trung DT21" width="120" height="120" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzbxkjhu/ao-somi-tre-trung-dt21.html" title="">Áo somi trẻ trung DT21</a>
+				&nbsp;
+				<img width="18px" height="7px" class="img" alt="" src="http://static.nava.vn/nava_shop/res/images/new.gif" />
+			</h3>
+			<p class="price">195.000đ</p>
+		</div>
+
+		<div class="col-140 " onmouseout="this.className='col-140';" onmouseover="this.className='col-140 bggray';">
+			<a href="http://nava.vn/p-wyzqvyuio/sale-10-nhan-dip-le-ao-so-mi-nam-phong-cach-ms-23.html" class="img-140" title="Sale 10% Nhân dịp Lễ Áo sơ mi nam phong cách MS 23 - 150.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2011/10/31/634556749487392500-599.jpg" alt="Sale 10% Nhân dịp Lễ Áo sơ mi nam phong cách MS 23" width="120" height="120" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wyzqvyuio/sale-10-nhan-dip-le-ao-so-mi-nam-phong-cach-ms-23.html" title="">Sale 10% Nhân dịp Lễ Áo sơ mi nam phong cách MS 23</a>
+
+			</h3>
+			<p class="price">150.000đ</p>
+		</div>
+
+		<div class="col-140 " onmouseout="this.className='col-140';" onmouseover="this.className='col-140 bggray';">
+			<a href="http://nava.vn/p-wylmspokv/sale-10-nhan-dip-le-ao-so-mi-nam-phong-cach-ms-22.html" class="img-140" title="Sale 10% Nhân dịp Lễ Áo sơ mi nam phong cách MS 22 - 150.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2011/10/20/634547007223338750-166.jpg" alt="Sale 10% Nhân dịp Lễ Áo sơ mi nam phong cách MS 22" width="120" height="120" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wylmspokv/sale-10-nhan-dip-le-ao-so-mi-nam-phong-cach-ms-22.html" title="">Sale 10% Nhân dịp Lễ Áo sơ mi nam phong cách MS 22</a>
+
+			</h3>
+			<p class="price">150.000đ</p>
+		</div>
+
+		<div class="col-140  last " onmouseout="this.className='col-140';" onmouseover="this.className='col-140 bggray';">
+			<a href="http://nava.vn/p-wuzbkhfsl/quan-lung-the-thao-nam-tui-hop-ma-nl0013-den.html" class="img-140" title="Quần lửng thể thao nam túi hộp Mã: NL0013 - ĐEN - 170.000đ">
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/8/8/634800185444183884-452.jpg" alt="Quần lửng thể thao nam túi hộp Mã: NL0013 - ĐEN" width="120" height="120" />
+			</a>
+			<h3>
+				<a href="http://nava.vn/p-wuzbkhfsl/quan-lung-the-thao-nam-tui-hop-ma-nl0013-den.html" title="">Quần lửng thể thao nam túi hộp Mã: NL0013 - ĐEN</a>
+
+			</h3>
+			<p class="price">170.000đ</p>
+		</div>
+
+		<br class="clr" />
+
+	</div>
+
+	<div id="newcate_4" class="pdshop bycate" style="display:none;"></div>
+
+	<div id="newcate_5" class="pdshop bycate" style="display:none;"></div>
+
+	<div id="newcate_6" class="pdshop bycate" style="display:none;"></div>
+
+	<div id="newcate_58" class="pdshop bycate" style="display:none;"></div>
+
+</div>
+                
+      </div>
+
+      <!-- Top Product Hot -->    
+
+      <div class="col-250">
+                <div class="show-case">
+	<h2 class="title-case">
+		<span>TOP 10 SẢN PHẨM</span>
+	</h2>
+	<ul>
+
+		<li onmouseout="this.className=' ';" onmouseover="this.className='bgli';">
+			<a href="http://nava.vn/p-wuzvvihbr/moc-khoa-dau-cam-xuc.html" class="img-top" title="Móc khoá đậu cảm xúc - 29.000đ">
+				<span class="top">1</span>
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/6/15/634753713757762500-540.jpg" alt="Móc khoá đậu cảm xúc" width="90" height="90" border="0" />
+			</a>
+			<h4>
+				<a href="http://nava.vn/p-wuzvvihbr/moc-khoa-dau-cam-xuc.html" title="">Móc khoá đậu cảm xúc</a>
+			</h4>
+			<p class="price">29.000đ</p>
+			<br class="clr" />
+		</li>
+
+		<li onmouseout="this.className=' ';" onmouseover="this.className='bgli';">
+			<a href="http://nava.vn/p-wyzatcnjj/goi-handmade-goi-tinh-yeu.html" class="img-top" title="Gối Handmade - Gối tình yêu - 195.000đ">
+				<span class="top">2</span>
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/1/9/634617047278205000-854.jpg" alt="Gối Handmade - Gối tình yêu" width="90" height="90" border="0" />
+			</a>
+			<h4>
+				<a href="http://nava.vn/p-wyzatcnjj/goi-handmade-goi-tinh-yeu.html" title="">Gối Handmade - Gối tình yêu</a>
+			</h4>
+			<p class="price">195.000đ</p>
+			<br class="clr" />
+		</li>
+
+		<li onmouseout="this.className=' ';" onmouseover="this.className='bgli';">
+			<a href="http://nava.vn/p-wuzblndgw/s22-so-mi-vai-bong-tay-lo.html" class="img-top" title="S22-sơ mi vai bồng tay lỡ - 180.000đ">
+				<span class="top">3</span>
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/8/17/634807967703842500-563.jpg" alt="S22-sơ mi vai bồng tay lỡ" width="90" height="90" border="0" />
+			</a>
+			<h4>
+				<a href="http://nava.vn/p-wuzblndgw/s22-so-mi-vai-bong-tay-lo.html" title="">S22-sơ mi vai bồng tay lỡ</a>
+			</h4>
+			<p class="price">180.000đ</p>
+			<br class="clr" />
+		</li>
+
+		<li onmouseout="this.className=' ';" onmouseover="this.className='bgli';">
+			<a href="http://nava.vn/p-wyzqvyzlm/ao-so-mi-nam-phong-cach-ms-24.html" class="img-top" title="Áo sơ mi nam phong cách MS 24 - 150.000đ">
+				<span class="top">4</span>
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2011/10/31/634556751155361250-576.jpg" alt="Áo sơ mi nam phong cách MS 24" width="90" height="90" border="0" />
+			</a>
+			<h4>
+				<a href="http://nava.vn/p-wyzqvyzlm/ao-so-mi-nam-phong-cach-ms-24.html" title="">Áo sơ mi nam phong cách MS 24</a>
+			</h4>
+			<p class="price">150.000đ</p>
+			<br class="clr" />
+		</li>
+
+		<li onmouseout="this.className=' ';" onmouseover="this.className='bgli';">
+			<a href="http://nava.vn/p-wuzbzbulo/hx230-nuoc-hoa-hong-lancome.html" class="img-top" title="HX230-Nước hoa hồng lancome - 250.000đ">
+				<span class="top">5</span>
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/8/16/634807301971498750-372.jpg" alt="HX230-Nước hoa hồng lancome" width="90" height="90" border="0" />
+			</a>
+			<h4>
+				<a href="http://nava.vn/p-wuzbzbulo/hx230-nuoc-hoa-hong-lancome.html" title="">HX230-Nước hoa hồng lancome</a>
+			</h4>
+			<p class="price">250.000đ</p>
+			<br class="clr" />
+		</li>
+
+		<li onmouseout="this.className=' ';" onmouseover="this.className='bgli';">
+			<a href="http://nava.vn/p-wyjlqyuwg/nuoc-hoa-cool-water-woman-100ml.html" class="img-top" title="Nước hoa Cool Water woman 100ml - 190.000đ">
+				<span class="top">6</span>
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2011/5/9/634405303170951250-584.jpg" alt="Nước hoa Cool Water woman 100ml" width="90" height="90" border="0" />
+			</a>
+			<h4>
+				<a href="http://nava.vn/p-wyjlqyuwg/nuoc-hoa-cool-water-woman-100ml.html" title="">Nước hoa Cool Water woman 100ml</a>
+			</h4>
+			<p class="price">190.000đ</p>
+			<br class="clr" />
+		</li>
+
+		<li onmouseout="this.className=' ';" onmouseover="this.className='bgli';">
+			<a href="http://nava.vn/p-wuzxqeitp/cau-pha-le-phong-thuy-duc-tron-deu-cho-nhung-gia-dinh-theo-xu-huong-phong-thuy.html" class="img-top" title="Cầu Pha lê phong thủy đúc tròn đều | Cho những gia đình theo xu hướng phong thủy - 270.000đ">
+				<span class="top">7</span>
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/2/26/634658720592463750-897.jpg" alt="Cầu Pha lê phong thủy đúc tròn đều | Cho những gia đình theo xu hướng phong thủy" width="90" height="90" border="0" />
+			</a>
+			<h4>
+				<a href="http://nava.vn/p-wuzxqeitp/cau-pha-le-phong-thuy-duc-tron-deu-cho-nhung-gia-dinh-theo-xu-huong-phong-thuy.html" title="">Cầu Pha lê phong thủy đúc tròn đều | Cho ...</a>
+			</h4>
+			<p class="price">270.000đ</p>
+			<br class="clr" />
+		</li>
+
+		<li onmouseout="this.className=' ';" onmouseover="this.className='bgli';">
+			<a href="http://nava.vn/p-wyzorzskv/quan-jeans-nhap-khau.html" class="img-top" title="Quần jeans nhập khẩu - 359.000đ">
+				<span class="top">8</span>
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2011/12/27/634606141683613750-473.jpg" alt="Quần jeans nhập khẩu" width="90" height="90" border="0" />
+			</a>
+			<h4>
+				<a href="http://nava.vn/p-wyzorzskv/quan-jeans-nhap-khau.html" title="">Quần jeans nhập khẩu</a>
+			</h4>
+			<p class="price">359.000đ</p>
+			<br class="clr" />
+		</li>
+
+		<li onmouseout="this.className=' ';" onmouseover="this.className='bgli';">
+			<a href="http://nava.vn/p-wuzbdpzod/samsung-galaxy-note-n7000.html" class="img-top" title="Samsung galaxy Note N7000 - 5.400.000đ">
+				<span class="top">9</span>
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/7/31/634793407503793750-604.jpg" alt="Samsung galaxy Note N7000" width="90" height="90" border="0" />
+			</a>
+			<h4>
+				<a href="http://nava.vn/p-wuzbdpzod/samsung-galaxy-note-n7000.html" title="">Samsung galaxy Note N7000</a>
+			</h4>
+			<p class="price">5.400.000đ</p>
+			<br class="clr" />
+		</li>
+
+		<li onmouseout="this.className=' ';" onmouseover="this.className='bgli';">
+			<a href="http://nava.vn/p-wuzctqfti/day-chuyen-ngan-chu-cho-lun-c201.html" class="img-top" title="Dây chuyền ngắn chú chó lùn C201 - 60.000đ">
+				<span class="top">10</span>
+				<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/4/6/634693331360880416-793.jpg" alt="Dây chuyền ngắn chú chó lùn C201" width="90" height="90" border="0" />
+			</a>
+			<h4>
+				<a href="http://nava.vn/p-wuzctqfti/day-chuyen-ngan-chu-cho-lun-c201.html" title="">Dây chuyền ngắn chú chó lùn C201</a>
+			</h4>
+			<p class="price">60.000đ</p>
+			<br class="clr" />
+		</li>
+
+	</ul>
+</div>      </div>
+
+      <!-- End Top Product Hot -->    
+      <br class="clr" />    
+    </div>
+
+    <!-- End Main Content -->
+        <div class="wpage">
+            <!-- Tag Group -->
+
+<h3 class="tag-title">DANH MỤC SẢN PHẨM HOT</h3>
+<div class="tag_group">
+
+	<div class="row_tag hline">
+
+		<div class="tag vline">
+			<h3>
+				<img src="http://static.nava.vn/nava_shop/res/images/space.gif" width="20" height="20" class="ico_type1" />
+				<a class="lk1" href="http://nava.vn/c1/thoi-trang.html" >Thời trang</a>
+			</h3>
+
+			<h4>
+				<a href="http://nava.vn/sc9/thoi-trang-nu.html" >Thời trang nữ</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc8/thoi-trang-nam.html" >Thời trang nam</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc10/thoi-trang-tre-em.html" >Thời trang trẻ em</a>
+			</h4>
+		</div>
+
+		<div class="tag vline">
+			<h3>
+				<img src="http://static.nava.vn/nava_shop/res/images/space.gif" width="20" height="20" class="ico_type2" />
+				<a class="lk2" href="http://nava.vn/c2/phu-kien-thoi-trang.html" >Phụ kiện thời trang</a>
+			</h3>
+
+			<h4>
+				<a href="http://nava.vn/sc13/trang-suc.html" >Trang sức</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc14/giay-dep.html" >Giày dép</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc19/dong-ho-mat-kinh.html" >Đồng hồ - Mắt kính</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc12/tui-xach-day-nit.html" >Túi xách - Dây nịt</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc20/me-be.html" >Mẹ & Bé</a>
+			</h4>
+		</div>
+
+		<div class="tag last">
+			<h3>
+				<img src="http://static.nava.vn/nava_shop/res/images/space.gif" width="20" height="20" class="ico_type5" />
+				<a class="lk5" href="http://nava.vn/c5/dien-may-ky-thuat-so.html" >Điện máy-Kỹ thuật số</a>
+			</h3>
+
+			<h4>
+				<a href="http://nava.vn/sc32/ky-thuat-so.html" >Kỹ thuật số</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc35/dien-thoai-chinh-hang.html" >Điện thoại chính hãng</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc64/dien-thoai-tq.html" >Điện thoại - TQ</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc37/laptop-phu-kien.html" >Laptop - Phụ kiện</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc36/may-tinh.html" >Máy tính</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc33/dien-may-gia-dung.html" >Điện máy - Gia dụng</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc38/thiet-bi-van-phong.html" >Thiết bị văn phòng</a>
+			</h4>
+		</div>
+
+		<br class="clr" />
+
+	</div>
+
+	<div class="row_tag ">
+
+		<div class="tag vline">
+			<h3>
+				<img src="http://static.nava.vn/nava_shop/res/images/space.gif" width="20" height="20" class="ico_type3" />
+				<a class="lk3" href="http://nava.vn/c3/lam-dep.html" >Làm đẹp</a>
+			</h3>
+
+			<h4>
+				<a href="http://nava.vn/sc21/cham-soc-mat.html" >Chăm sóc mặt</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc23/trang-diem.html" >Trang điểm</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc15/nuoc-hoa.html" >Nước hoa</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc22/cham-soc-than-the.html" >Chăm sóc thân thể</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc24/cham-soc-toc.html" >Chăm sóc tóc</a>
+			</h4>
+		</div>
+
+		<div class="tag vline">
+			<h3>
+				<img src="http://static.nava.vn/nava_shop/res/images/space.gif" width="20" height="20" class="ico_type4" />
+				<a class="lk4" href="http://nava.vn/c4/qua-tang-do-choi.html" >Quà tặng-Đồ chơi</a>
+			</h3>
+
+			<h4>
+				<a href="http://nava.vn/sc26/luu-niem.html" >Lưu niệm</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc27/do-choi-dieu-khien.html" >Đồ chơi điều khiển</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc28/do-choi-lap-ghep.html" >Đồ chơi lắp ghép</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc25/hoa.html" >Hoa</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc31/do-choi-khac.html" >Đồ chơi khác</a>
+			</h4>
+		</div>
+
+		<div class="tag last">
+			<h3>
+				<img src="http://static.nava.vn/nava_shop/res/images/space.gif" width="20" height="20" class="ico_type6" />
+				<a class="lk6" href="http://nava.vn/c6/bat-dong-san-noi-that.html" >Bất động sản-Nội thất</a>
+			</h3>
+
+			<h4>
+				<a href="http://nava.vn/sc39/nha-dat-cho-thue.html" >Nhà đất cho thuê</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc40/nha-dat-ban.html" >Nhà đất bán</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc41/noi-that-gia-dinh.html" >Nội thất gia đình</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc45/noi-that-van-phong.html" >Nội thất văn phòng</a>
+			</h4>
+			|
+			<h4>
+				<a href="http://nava.vn/sc44/vat-lieu-xay-dung.html" >Vật liệu xây dựng</a>
+			</h4>
+		</div>
+
+		<br class="clr" />
+
+	</div>
+
+</div>
+
+<!-- End Tag Group -->      <!-- Showcase New Product -->
+
+<div class="blk-main">
+	<div class="title-selling">
+		<h3>
+			<a href="http://shop.nava.vn/c1/thoi-trang.html" title="">SẢN PHẨM MỚI</a>
+		</h3>
+		<ul>
+
+			<li>
+				<a id="#new11" href="http://shop.nava.vn/c1/thoi-trang.html" title="Thời trang"  class="active" >Thời trang</a>
+			</li>
+
+			<li>|</li>
+
+			<li>
+				<a id="#new12" href="http://shop.nava.vn/c2/phu-kien-thoi-trang.html" title="Phụ kiện thời trang" >Phụ kiện thời trang</a>
+			</li>
+
+			<li>|</li>
+
+			<li>
+				<a id="#new13" href="http://shop.nava.vn/c3/lam-dep.html" title="Làm đẹp" >Làm đẹp</a>
+			</li>
+
+			<li>|</li>
+
+			<li>
+				<a id="#new17" href="http://shop.nava.vn/c4/qua-tang-do-choi.html" title="Quà tặng-Đồ chơi" >Quà tặng-Đồ chơi</a>
+			</li>
+
+			<li>|</li>
+
+			<li>
+				<a id="#new18" href="http://shop.nava.vn/c5/dien-may-ky-thuat-so.html" title="Điện máy-Kỹ thuật số" >Điện máy-Kỹ thuật số</a>
+			</li>
+
+		</ul>
+	</div>
+
+	<div class="bg1">
+
+		<div class="bg2 min" id="new11_c">
+
+			<div class="col-140 " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wyzodqejz/dam-nu-dw60.html" class="img-140" title="Đầm nữ DW60 - 989.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2011/12/29/634607799275020000-758.jpg" alt="Đầm nữ DW60" width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wyzodqejz/dam-nu-dw60.html" title="">Đầm nữ DW60</a>
+				</h3>
+				<p class="price">989.000đ</p>
+			</div>
+
+			<div class="col-140 " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wuzbupqgs/ao-thun-body-hang-chat-form-cuc-chuan-gia-cuc-re.html" class="img-140" title="Áo thun BODY hàng Chất - form cực chuẩn - giá cực rê - 79.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/7/9/634774605255778750-871.jpg" alt="Áo thun BODY hàng Chất - form cực chuẩn - giá cực rê" width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wuzbupqgs/ao-thun-body-hang-chat-form-cuc-chuan-gia-cuc-re.html" title="">Áo thun BODY hàng Chất - form cực chuẩn - giá cực rê</a>
+				</h3>
+				<p class="price">79.000đ</p>
+			</div>
+
+			<div class="col-140 " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wuzbagffa/dam-ngan-soc-ngang-ms-117.html" class="img-140" title="Đầm ngắn sọc ngang MS 117 - 220.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/7/19/634782726691281977-505.jpg" alt="Đầm ngắn sọc ngang MS 117" width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wuzbagffa/dam-ngan-soc-ngang-ms-117.html" title="">Đầm ngắn sọc ngang MS 117</a>
+				</h3>
+				<p class="price">220.000đ</p>
+			</div>
+
+			<div class="col-140 " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wuzvzivka/ao-thun-nam-phong-cach-cuc-ki-tre-trung-va-nang-dong.html" class="img-140" title="Áo thun nam phong cách cực kì trẻ trung và năng động - 160.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/6/6/634745883407666517-997.jpg" alt="Áo thun nam phong cách cực kì trẻ trung và năng động" width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wuzvzivka/ao-thun-nam-phong-cach-cuc-ki-tre-trung-va-nang-dong.html" title="">Áo thun nam phong cách cực kì trẻ trung và năng động</a>
+				</h3>
+				<p class="price">160.000đ</p>
+			</div>
+
+			<div class="col-140 " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wuzbetpeb/quan-lo-qt5.html" class="img-140" title="Quần lỡ -  QT5 - 190.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/7/2/634768238069046250-526.jpg" alt="Quần lỡ -  QT5" width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wuzbetpeb/quan-lo-qt5.html" title="">Quần lỡ -  QT5</a>
+				</h3>
+				<p class="price">190.000đ</p>
+			</div>
+
+			<div class="col-140  last " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wuzbuxctf/ao-so-mi-nam-quan-kaki-nam.html" class="img-140" title="Áo sơ mi nam, quần kaki nam - 165.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/7/10/634775351283122500-197.jpg" alt="Áo sơ mi nam, quần kaki nam" width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wuzbuxctf/ao-so-mi-nam-quan-kaki-nam.html" title="">Áo sơ mi nam, quần kaki nam</a>
+				</h3>
+				<p class="price">165.000đ</p>
+			</div>
+
+			<div class="col-140 " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wuzbxfkqn/dam-ong-du-tiec-de-thuong-ma-da1827-den.html" class="img-140" title="Đầm ống dự tiệc dễ thương Mã: DA1827 - đen - 280.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/8/19/634809795693217500-649.jpg" alt="Đầm ống dự tiệc dễ thương Mã: DA1827 - đen" width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wuzbxfkqn/dam-ong-du-tiec-de-thuong-ma-da1827-den.html" title="">Đầm ống dự tiệc dễ thương Mã: DA1827 - đen</a>
+				</h3>
+				<p class="price">280.000đ</p>
+			</div>
+
+			<div class="col-140 " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wuzvgphfa/ao-vai-bong-han-quoc.html" class="img-140" title="Áo vải bóng hàn quốc !!! - 180.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/7/31/634793224111918750-652.jpg" alt="Áo vải bóng hàn quốc !!!" width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wuzvgphfa/ao-vai-bong-han-quoc.html" title="">Áo vải bóng hàn quốc !!!</a>
+				</h3>
+				<p class="price">180.000đ</p>
+			</div>
+
+			<div class="col-140 " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wuzbxdmfz/dam-dao-pho-body-goi-cam-ma-da0667-trang.html" class="img-140" title="Đầm dạo phố body gợi cảm Mã: DA0667 - trắng - 200.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/8/19/634809745485561250-419.jpg" alt="Đầm dạo phố body gợi cảm Mã: DA0667 - trắng" width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wuzbxdmfz/dam-dao-pho-body-goi-cam-ma-da0667-trang.html" title="">Đầm dạo phố body gợi cảm Mã: DA0667 - trắng</a>
+				</h3>
+				<p class="price">200.000đ</p>
+			</div>
+
+			<div class="col-140 " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wuzbhlhux/dam-xinh-di-bien-ms-163.html" class="img-140" title="Đầm xinh đi biển - MS 163 - 350.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/8/1/634794131918574848-873.jpg" alt="Đầm xinh đi biển - MS 163" width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wuzbhlhux/dam-xinh-di-bien-ms-163.html" title="">Đầm xinh đi biển - MS 163</a>
+				</h3>
+				<p class="price">350.000đ</p>
+			</div>
+
+			<div class="col-140 " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wuzvdidcm/ao-khoac-cardigan-cuc-dinh-voi-gia-cuc-re.html" class="img-140" title="Áo khoác Cardigan cực đỉnh với giá cực rẻ. - 145.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/5/25/634735553457828750-119.jpg" alt="Áo khoác Cardigan cực đỉnh với giá cực rẻ." width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wuzvdidcm/ao-khoac-cardigan-cuc-dinh-voi-gia-cuc-re.html" title="">Áo khoác Cardigan cực đỉnh với giá cực rẻ.</a>
+				</h3>
+				<p class="price">145.000đ</p>
+			</div>
+
+			<div class="col-140  last " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wuzbethcl/so-mi-sm3.html" class="img-140" title="Sơ - mi SM3 - 280.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/7/2/634768242389983750-386.jpg" alt="Sơ - mi SM3" width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wuzbethcl/so-mi-sm3.html" title="">Sơ - mi SM3</a>
+				</h3>
+				<p class="price">280.000đ</p>
+			</div>
+
+			<div class="col-140 " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wuzxgfiqv/ao-thun-nam-phong-cach-ms-42.html" class="img-140" title="Áo thun nam phong cách MS 42 - 160.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/3/19/634677534344228750-150.jpg" alt="Áo thun nam phong cách MS 42" width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wuzxgfiqv/ao-thun-nam-phong-cach-ms-42.html" title="">Áo thun nam phong cách MS 42</a>
+				</h3>
+				<p class="price">160.000đ</p>
+			</div>
+
+			<div class="col-140 " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wuzbgxrto/ao-12eal04.html" class="img-140" title="Áo 12EAL04 - 145.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/7/30/634792619856918750-492.jpg" alt="Áo 12EAL04" width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wuzbgxrto/ao-12eal04.html" title="">Áo 12EAL04</a>
+				</h3>
+				<p class="price">145.000đ</p>
+			</div>
+
+			<div class="col-140 " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wuzvnknaq/bo-suu-tap-he-2012.html" class="img-140" title="Bộ sưu tập hè 2012 !!! - 160.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/6/22/634759632719535000-686.jpg" alt="Bộ sưu tập hè 2012 !!!" width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wuzvnknaq/bo-suu-tap-he-2012.html" title="">Bộ sưu tập hè 2012 !!!</a>
+				</h3>
+				<p class="price">160.000đ</p>
+			</div>
+
+			<div class="col-140 " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wuzbyythh/ao-thun-gorillaz.html" class="img-140" title="Áo thun Gorillaz - 100.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/7/6/634771948323591250-303.jpg" alt="Áo thun Gorillaz" width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wuzbyythh/ao-thun-gorillaz.html" title="">Áo thun Gorillaz</a>
+				</h3>
+				<p class="price">100.000đ</p>
+			</div>
+
+			<div class="col-140 " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wuzbjtdgz/quan-jeans-skinny-nam-phong-cach-moi.html" class="img-140" title="Quần jeans skinny nam phong cách mới - 350.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/8/2/634795152199922500-799.jpg" alt="Quần jeans skinny nam phong cách mới" width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wuzbjtdgz/quan-jeans-skinny-nam-phong-cach-moi.html" title="">Quần jeans skinny nam phong cách mới</a>
+				</h3>
+				<p class="price">350.000đ</p>
+			</div>
+
+			<div class="col-140  last " onmouseout="javascript:bgcolorout(this);" onmouseover="javascript:bgcolor(this);">
+				<a href="http://nava.vn/p-wuzbeqyfz/bo-suu-tap-ao-thun-han-quoc-dep-doc-la.html" class="img-140" title="Bộ sưu tập áo thun Hàn Quốc đẹp, độc, lạ - 120.000đ">
+					<img src="http://shop.gonct.info/nava_shop/images/product/thumb/2012/7/1/634767701339671250-548.jpg" alt="Bộ sưu tập áo thun Hàn Quốc đẹp, độc, lạ" width="120" height="120" />
+				</a>
+				<h3>
+					<a href="http://nava.vn/p-wuzbeqyfz/bo-suu-tap-ao-thun-han-quoc-dep-doc-la.html" title="">Bộ sưu tập áo thun Hàn Quốc đẹp, độc, lạ</a>
+				</h3>
+				<p class="price">120.000đ</p>
+			</div>
+
+			<br class="clr"></div>
+
+		<div class="bg2 min" id="new12_c" style="display:none;"></div>
+
+		<div class="bg2 min" id="new13_c" style="display:none;"></div>
+
+		<div class="bg2 min" id="new17_c" style="display:none;"></div>
+
+		<div class="bg2 min" id="new18_c" style="display:none;"></div>
+
+	</div>
+</div>
+
+<!-- End Showcase New Product -->
+    </div>
+    
+    <input type="hidden" name="formAction" id="formAction" value=""/>
+  </form>
+  <!--End Content--> 
+</div>
+
+<!-- Footer -->    
+<div class="footer">
+    <div class="wfooter">
+  <p>
+    <a id="setHomepage" href="javascript:;" title="Đặt Nava làm trang chủ">
+      <img src="http://static.nava.vn/nava_shop/res/images/space.gif" alt="Đặt Nava làm trang chủ" width="1" height="1" align="absbottom" class="homepage" />    
+      Đặt Nava làm trang chủ
+    </a>
+    <a href="http://nava.vn/huong-dan?exp=0&pid=19" target="_blank" title="Trợ giúp">
+      <img src="http://static.nava.vn/nava_shop/res/images/space.gif" alt="Trợ giúp" width="1" height="1" align="absbottom" class="help"/>    
+      Trợ giúp
+    </a>
+    <a href="http://nava.vn/thoa-thuan-su-dung.html" target="_blank" title="Thỏa thuận sử dụng">
+      <img src="http://static.nava.vn/nava_shop/res/images/space.gif" alt="Thỏa thuận sử dụng" width="1" height="1" align="absbottom" class="agree" />    
+      Thỏa thuận sử dụng
+    </a>
+    <a href="http://nava.vn/quy-che.html" target="_blank" title="Quy chế">Quy chế</a>
+    <a href='http://nava.vn/sitemap.html'>Sitemap</a>
+  </p>
+  <div class="contact">
+    <h4 class="logof">
+      <a href="http://nctcorp.vn/" title="NCT Corporation" target="_blank">NCT Corporation</a>
+    </h4>
+    <img src="http://static.nava.vn/nava_shop/res/images/space.gif" alt="Hotline" width="1" height="1" border="0" class="ico-hotline" /> <strong>Hotline:</strong>
+    <span>(84.8) 3 868 7979(Ext:200-201)</span>
+    <br />    
+    Email:
+    <a href="mailto:Nava@nct.vn" >Nava@nct.vn</a>
+  </div>
+  <br class="clr" />    
+</div></div>
+<div class="footertag">
+  <div class="tagclound">
+  <div class="tag">
+    <a href='http://nava.vn'>Nava.vn</a> |
+    <a href='http://hot.nava.vn'>Hot Nava</a> |
+    <a href='http://mall.nava.vn'>Mall Nava</a> |
+    <a href='http://shop.nava.vn'>Shop Nava</a> |
+    <a href='http://shop.nava.vn/c1/thoi-trang.html'>Thời trang</a> |
+    <a href='http://shop.nava.vn/c5/dien-may-ky-thuat-so.html'>Kỹ thuật số</a> |
+    <a href='http://mall.nava.vn/c34/qua-tang-do-choi.html'>Quà tặng</a> |
+    <a href='http://shop.nava.vn/c4/qua-tang-do-choi.html'>Đồ chơi</a> |
+    <a href='http://mall.nava.vn/c37/nuoc-hoa-my-pham.html'>Nước hoa</a> |
+    <a href='http://shop.nava.vn/c3/lam-dep.html'>Mỹ phẩm</a> |
+    <a href='http://shop.nava.vn/sc39/nha-dat-cho-thue.html'>Nhà đất cho thuê</a> |
+    <a href='http://shop.nava.vn/sc40/nha-dat-ban.html'>Nhà đất bán</a> |
+    <a href='http://shop.nava.vn/sc52/am-thuc.html'>Ẩm thực</a> |
+    <a href='http://shop.nava.vn/sc48/y-te-suc-khoe.html'>Y tế</a> |
+    <a href='http://shop.nava.vn/sc48/y-te-suc-khoe.html'>Sức khỏe</a> |
+    <a href='http://shop.nava.vn/sc46/du-lich-vui-choi.html'>Du lịch</a> |
+    <a href='http://shop.nava.vn/sc53/o-to.html'>Ô tô</a> |
+    <a href='http://shop.nava.vn/sc53/o-to.html'>Xe hơi</a> |
+    <a href='http://shop.nava.vn/sc54/xe-may.html'>Xe máy</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=%C3%A1o%20%C4%91%E1%BA%A7m'>Áo đầm</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=%C3%A1o%20thun'>Áo thun</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=%C3%A1o%20s%C6%A1%20mi'>Áo sơ mi</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=jeans'>Jeans</a> |
+    <a href='http://shop.nava.vn/sc35/dien-thoai.html'>Điện thoại</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=Ba%20l%C3%B4'>Ba lô</a> |
+    <a href='http://shop.nava.vn/sc37/laptop-phu-kien.html'>Laptop</a> |
+    <a href='http://shop.nava.vn/tim-kiem.html?tukhoa=Canon&t=1'>Canon</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=%C3%A1o%20l%C3%B3t'>Áo lót</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=qu%E1%BA%A7n%20l%C3%B3t'>Quần lót</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=d%C3%A2y%20chuy%E1%BB%81n'>Dây chuyền</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=gi%C3%A0y%20th%E1%BB%83%20thao'>Giày thể thao</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=m%E1%BA%AFt%20k%C3%ADnh'>Mắt kính</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=%C4%91%E1%BB%93ng%20h%E1%BB%93'>Đồng hồ</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=th%E1%BA%AFt%20l%C6%B0ng'>Thắt lưng</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=k%C3%ADnh%20gi%C3%A3n%20tr%C3%B2ng'>Kính giãn tròng</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=chocolate'>Chocolate</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=hoa%20g%E1%BA%A5u%20b%C3%B4ng'>Hoa gấu bông</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=khung%20h%C3%ACnh'>Khung hình</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=tai%20nghe'>Tai nghe</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=b%C3%A0n%20ph%C3%ADm'>Bàn phím</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=%C4%91%E1%BA%A7u%20%C4%91%E1%BB%8Dc%20th%E1%BA%BB'>Đầu đọc thẻ</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=th%E1%BA%BB%20nh%E1%BB%9B'>Thẻ nhớ</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=%E1%BB%95%20c%E1%BB%A9ng'>Ổ cứng</a> |
+    <a href='http://mall.nava.vn/a202/may-tinh-bang.html'>iPad</a> |
+    <a href='http://mall.nava.vn/tim-kiem.html?tk=usb'>USB</a>
+  </div>
+  <div class="logo-tmdt">
+    <img src="http://id.nava.vn/resource/images/licensed.gif" alt="Sàn giao dịch thương mại điện tử Nava" title="" />
+  </div>
+</div>  <br class="clr" />    
+</div>
+<!-- End Footer -->    
+</body>
+</html>

@@ -8,7 +8,6 @@
 bin/
 tmp/
 backup/
-images/2012/
 nbproject/
 *.tmp
 *.bak
@@ -164,6 +163,7 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
-/images
+/images/products
+/images/shops
 /nbproject
 /backup
