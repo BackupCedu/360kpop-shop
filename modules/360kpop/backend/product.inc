@@ -110,11 +110,10 @@ class product {
         static $cache = array();
         
         if(empty($cache[$pid])) {
-            $query = ' SELECT n.nid, n.vid, n.uid, n.type, n.title, n.created, n.changed, n.views, n.comment,';
+            $query = ' SELECT p.*, n.nid, n.vid, n.uid, n.type, n.title, n.created, n.changed, n.views, n.comment,';
             $query.= ' r.cid, r.alias, r.body, r.teaser, r.metadesc, r.metakey, r.metadata, r.image,';
             $query.= ' c.title AS cate_title, c.alias as cate_alias,';
-            $query.= ' u.name,';
-            $query.= ' p.*';
+            $query.= ' u.name';
             $query.= ' FROM {node} n';
             $query.= ' INNER JOIN {users} u ON u.uid = n.uid';
             $query.= ' INNER JOIN {node_revisions} r ON r.nid = n.nid AND n.vid = r.vid';
@@ -184,11 +183,10 @@ class product {
      * @todo Lay danh sach cac product theo filter
      */
     public static function getProducts($filter = array(), $offset = 0, $limit = 20 , $order = null, $option = array()) {
-        $query = ' SELECT n.nid, n.vid, n.uid, n.type, n.title, n.created, n.changed, n.views, n.comment, n.status,';
+        $query = ' SELECT p.*, n.nid, n.vid, n.uid, n.type, n.title, n.created, n.changed, n.views, n.comment, n.status,';
         $query.= ' r.cid, r.alias, r.body, r.teaser, r.metadesc, r.metakey, r.metadata, r.image,';
         $query.= ' c.title AS cate_title, c.alias as cate_alias,';
-        $query.= ' u.name,';
-        $query.= ' p.*';
+        $query.= ' u.name';
         $query.= ' FROM {node} n';
         $query.= ' INNER JOIN {users} u ON u.uid = n.uid';
         $query.= ' INNER JOIN {node_revisions} r ON r.nid = n.nid AND n.vid = r.vid';

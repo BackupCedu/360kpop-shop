@@ -7,8 +7,31 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-
+/**
+ * @todo class Category
+ * @todo Helper function for Category module
+ * @add 2012/08/30 
+ *  Change category container to Content type
+ */
 class category {
+    /**
+     * @todo Get content type 
+     * @todo Remove Container
+     */
+    public static function getContentTypes() {
+        $types = array();
+        $list = node_get_types();
+
+        foreach($list as $k => $t) {
+            $t->linkView = url('admin/category/type/' . $t->type);
+            $t->linkEdit = url('admin/category/' . $t->type . '/edit');
+            $t->linkDelete = url('admin/category/' . $t->type . '/delete');
+            $t->linkAdd = url('admin/category/type/' . $t->type . '/add');
+            $types[] = $t;
+        }
+
+        return $types;
+    }
     /**
      * @todo Category Container Helper Function
      */

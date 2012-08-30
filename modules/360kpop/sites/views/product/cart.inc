@@ -57,7 +57,6 @@
 </div>
 
 <input type="hidden" id="node" name="node" value=""/>
-<input type="submit" id="submit" value="Thanh toán"/>
 
 <script>
 

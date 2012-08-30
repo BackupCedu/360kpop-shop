@@ -194,7 +194,7 @@ function category_get_return() {
 
 function category_type_page() {
     $data = array();
-    $data['list'] = category::getContainers();
+    $data['types'] = category::getContentTypes();
 
     return render(dirname(__FILE__) . '/views/type/list.inc', $data, false);
 }
