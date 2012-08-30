@@ -1,0 +1,188 @@
+<?php
+
+/**
+ * Implementation of hook_install().
+ */
+function upload_install() {
+    // Create table. The upload table might have been created in the Drupal 5
+    // to Drupal 6 upgrade, and was migrated from the file_revisions table. So
+    // in this case, there is no need to create the table, it is already there.
+    // db_query('DROP TABLE files');
+    // db_query('DROP TABLE files_relation');
+    if (!db_table_exists('files')) {
+        drupal_install_schema('upload');
+    }
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function upload_uninstall() {
+    // Remove tables.
+    drupal_uninstall_schema('upload');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function upload_schema() {
+    $schema['files'] = array(
+        'description' => 'Stores uploaded file information and table associations.',
+        'fields' => array(
+            'fid' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'auto_increment' => TRUE,
+                'description' => 'Primary Key: The {files}.fid.',
+            ),
+            'uid' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => 0,
+                'description' => 'Primary Key: The {user}.uid associated with the uploaded file.',
+            ),
+            'name' => array(
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+                'description' => 'The filename of the uploaded file.',
+            ),
+            'path' => array(
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+                'description' => 'The filepath of the uploaded file.',
+            ),
+            'size' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => 0,
+                'description' => 'The file size of file in bytes.',
+            ),
+            'type' => array(
+                'type' => 'varchar',
+                'length' => 50,
+                'not null' => TRUE,
+                'default' => '',
+                'description' => 'The file type of the uploaded file.',
+            ),
+            'link' => array(
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+                'description' => 'The file URL of the uploaded file.',
+            ),
+            'alternate' => array(
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+                'description' => 'Alternate of the uploaded file.',
+            ),
+            'description' => array(
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+                'description' => 'Description of the uploaded file.',
+            ),
+            'params' => array(
+                'type' => 'varchar',
+                'length' => 2048,
+                'not null' => TRUE,
+                'default' => '',
+                'description' => 'The params of file settings.',
+            ),
+            'list' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => 0,
+                'size' => 'tiny',
+                'description' => 'Whether the file should be visibly listed on the node: yes(1) or no(0).',
+            ),
+            'created' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => 0,
+                'description' => 'The time uploaded file.',
+            ),
+            'status' => array(
+                'type' => 'int',
+                'unsigned' => FALSE,
+                'not null' => TRUE,
+                'default' => 1,
+                'size' => 'tiny',
+                'description' => 'The file status : Published(1) or Unpublished(0).',
+            ),
+        ),
+        'primary key' => array('fid'),
+        'unique keys' => array(
+            'path' => array('path')
+        ),
+        'indexes' => array(
+            'uid' => array('uid'),
+            'type' => array('type'),
+            'created' => array('created'),
+            'status' => array('status'),
+        ),
+    );
+    
+    $schema['files_relation'] = array(
+        'description' => 'Stores uploaded file mapping with node.',
+        'fields' => array(
+            'fid' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'description' => 'Primary Key: The {files}.fid.',
+            ),
+            'nid' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => 0,
+                'description' => 'The {node}.nid associated with the uploaded file.',
+            ),
+            'module' => array(
+                'type' => 'varchar',
+                'length' => 50,
+                'not null' => TRUE,
+                'default' => '',
+                'description' => 'The file type let you know what module use this file.',
+            ),
+            'weight' => array(
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => 0,
+                'size' => 'tiny',
+                'description' => 'Weight of this upload in relation to other uploads in this node.',
+            ),
+            'status' => array(
+                'type' => 'int',
+                'unsigned' => FALSE,
+                'not null' => TRUE,
+                'default' => 1,
+                'size' => 'tiny',
+                'description' => 'The file status : Published(1) or Unpublished(0).',
+            ),
+        ),
+        'primary key' => array('fid','nid','module'),
+        'indexes' => array(
+            'fid' => array('fid'),
+            'nid' => array('nid'),
+            'module' => array('module'),
+            'status' => array('status'),
+        ),
+    );
+
+    return $schema;
+}
+

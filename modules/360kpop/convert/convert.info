@@ -1,0 +1,5 @@
+; $Id$
+name = Convert joomla to drupal
+description = Convert Joomla shop to Drupal shop
+package = 360™ Package
+core = 6.x

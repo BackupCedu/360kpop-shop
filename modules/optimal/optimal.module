@@ -1,0 +1,167 @@
+<?php
+
+/**
+ * @file optimal.module
+ * TODO: Enter file description here.
+ */
+
+/**
+ * Implementation of hook_menu().
+ */
+function optimal_menu() {
+    // This is the minimum information you can provide for a menu item.
+    $items['admin/optimal'] = array(
+        'title' => 'Optimal drupal system',
+        'page callback' => 'optimal_overview',
+        'page arguments' => array(2),
+        'access arguments' => array('access administration pages'),
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
+}
+
+function optimal_overview($task = NULL) {
+    $result = 'No task select';
+    
+    $root = realpath(dirname(__FILE__) . '/../..');
+    
+    // Delete not use module
+    if($task == 'module') {
+        $modules = optimal_module_clear();
+
+        module_disable($modules);
+
+        $list = array();
+
+        $dir = realpath(dirname(__FILE__) . '/..');
+
+        foreach($modules as $module) {
+            $path = $dir . '\\' . $module;
+            deleteDir($path);
+            $list[] = 'Deleted ' . $path;
+        }
+        
+        $result = implode('<br />', $list);
+    } else 
+    // Delete not use table
+    if($task == 'db') {
+        $list = array();
+        $tables = optimal_database_clear();
+        
+        ob_start();
+        // Delete table
+        foreach($tables as $table) {
+            $table = "{$table}";
+            if(db_table_exists($table)) {
+                $query = "DROP TABLE $table";
+                db_query($query);
+                $list[] = $query;
+            }
+        }
+        
+        $error = ob_get_contents();
+        
+        ob_end_clean();
+        
+        // Update file path.inc
+        $dir = dirname(__FILE__) . '/update';
+        copy($dir . '/path.inc', $root . '/includes/path.inc');
+        
+        $result = implode('<br />', $list) . '<br />' . $error;
+    } else 
+    if($task == 'theme') {
+        $themes = optimal_theme_clear();
+
+        $list = array();
+
+        $dir = $root . '\themes';
+
+        foreach($themes as $theme) {
+            $path = $dir . '\\' . $theme;
+            deleteDir($path);
+            $list[] = 'Deleted ' . $path;
+        }
+        
+        $result = implode('<br />', $list);
+    } else
+    if($task == 'all') {
+        $list = array();
+        $list[] = optimal_overview('module');
+        $list[] = optimal_overview('theme');
+        $list[] = optimal_overview('file');
+        $list[] = optimal_overview('db');
+        
+        $result = implode('<br />', $list);
+    } else 
+    if($task == 'file') {
+        //drupal_clear_css_cache();
+        //drupal_clear_js_cache();
+        
+        $dir = dirname(__FILE__) . '/update';
+        copy($dir . '/common.inc', $root . '/includes/common.inc');
+    }
+    
+    return $result;
+}
+
+/**
+ * @todo Delete Directory entry file and sub folder
+ */
+function deleteDir($path) {
+    return is_file($path) ? @unlink($path) : array_map(__FUNCTION__, glob($path . '/*')) == @rmdir($path);
+}
+
+/**
+ * @todo Module list to delete
+ */
+function optimal_module_clear() {
+    return array(
+        'aggregator',
+        'blog',
+        'blogapi',
+        'book',
+        'color',
+        'comment',
+        'contact',
+        'dblog',
+        'forum',
+        'locale',
+        'openid',
+        'path',
+        'ping',
+        'poll',
+        //'profile',
+        'search',
+        'update',
+        'syslog',
+        'throttle',
+        'upload',
+        'trigger',
+        'translation',
+        'tracker',
+        'statistics',
+        'help',
+        'taxonomy',
+    );
+}
+
+/**
+ * @todo Database table to delete
+ */
+function optimal_database_clear() {
+    return array(
+        'url_alias'
+    );
+}
+
+/**
+ * @todo Themes list to delete
+ */
+function optimal_theme_clear() {
+    return array(
+        'bluemarine',
+        'chameleon',
+        'pushbutton',
+    );
+}

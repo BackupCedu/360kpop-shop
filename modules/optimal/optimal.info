@@ -1,0 +1,6 @@
+; $Id$
+name = Optimal
+description = Drupal system optimal, delete unuse modules, themes, database table and more ..
+package = 360™ Package
+core = 6.x
+version = 6.x

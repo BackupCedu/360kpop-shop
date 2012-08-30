@@ -1,0 +1,50 @@
+<?php
+/**
+ * @file convert.module
+ * TODO: Enter file description here.
+ */
+
+/**
+ * Implementation of hook_menu().
+ */
+function convert_menu() { 
+  // Craw data from
+  $items['admin/convert'] = array(
+    'title' => 'TODO: Enter menu item title',
+    'description' => 'TODO: Enter description',
+    'page callback' => 'convert_overview',
+    'page arguments' => array(2),
+    'access arguments' => array('access administration pages'),
+    'file' => 'convert.inc',
+    'type' => MENU_CALLBACK,
+  );
+  // OPTIONAL: Fill in additional static menu items
+
+  return $items;
+}
+
+function convert_overview($task = NULL) {
+  ob_start();
+
+  switch($task) {
+    case 'craw' :
+      convert::craw();
+    break;
+    case 'run' :
+      convert::run();
+    break;
+    case 'cate' :
+      convert::category();
+    break;
+    case 'var' :
+      variable_set('image_server_path','D:/xampp/htdocs/360kpop-shop-images');
+      variable_set('image_server_domain','http://img.360kpopshop.com');
+    break;
+  }
+
+  $contents = ob_get_contents();
+  ob_end_clean();
+
+  return $contents;
+}
+

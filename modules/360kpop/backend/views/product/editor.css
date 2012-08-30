@@ -1,0 +1,69 @@
+/* 
+    Document   : editor
+    Created on : 22-08-2012, 17:43:06
+    Author     : user
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.editor-tools {
+    height: 30px;
+    width: 95%;
+    padding: 0 10px;
+    margin-bottom: 2px;
+}
+.editor-tools .item {
+    height: 22px;
+    font: 13px/18px Arial,Helvetica,sans-serif normal;
+    margin: 5px 5px 0 0;
+    padding: 4px 5px 2px;
+    float: right;
+    cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    -webkit-border-top-right-radius: 3px;
+    -webkit-border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    background-color: #F1F1F1;
+    border-color: #DFDFDF #DFDFDF #CCC;
+    color: #999;
+}
+.editor-tools .active {
+    border-color: #CCC #CCC #E9E9E9;
+    background-color: #E9E9E9;
+    font-weight: bold;
+    color: #333;
+}
+.editor-tools a {
+    text-decoration: none;
+}
+.editor-tools a:hover {
+    color: red;
+}
+
+.teaser-button {
+    position: absolute;
+    height: 30px;
+    right: 219px;
+    top: 11px; 
+}
+
+#edit-teaser-include-wrapper {
+    position: absolute;
+    right: 317px;
+    top: 13px;
+}
+
+/**
+ * @todo Style for Prepend Button Width
+ */
+
+input.prepend-button {
+    width: 93% !important;
+}
+input.append-button {
+    position: absolute;
+    right: 15px;
+    width: 55px !important;
+}

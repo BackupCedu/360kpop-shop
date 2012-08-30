@@ -1,0 +1,31 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * TODO: Enter file description here.
+ */
+
+/**
+ * Implementation of hook_schema().
+ */
+function data_schema() {
+	// define data table : {data}, {data_relation}
+}
+
+
+/**
+ * Implementation of hook_install().
+ */
+function data_install() {
+	// install data table : {data}, {data_relation}
+}
+
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function data_uninstall() {
+	// uninstall data table : {data}, {data_relation}
+}
+

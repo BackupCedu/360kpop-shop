@@ -1,0 +1,295 @@
+<?php
+
+/**
+ * @version     $Id: controller.php 21020 2011-03-27 06:52:01Z MrGem $
+ * @package	PHP
+ * @subpackage	module
+ * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @license	GNU General Public License version 2 or later; see LICENSE.txt
+ */
+
+include('category.inc');
+include('nested.inc');
+
+function category_menu() {
+    $items = array();
+    
+    /**
+    * @name TYPE
+    */
+    
+    // Menu: List category container
+    $items['admin/category'] = array(
+        'title' => 'Category',
+        'description' => 'Manage category type of your content.',
+        'page callback' => 'category_type_page',
+        'access arguments' => array('Category type View'),
+        'weight' => -100,
+    );
+    
+    // Task: Default task for list all container
+    $items['admin/category/list'] = array(
+        'title' => 'Category types',
+        'type' => MENU_DEFAULT_LOCAL_TASK,
+        'weight' => -10,
+    );
+    
+    // Task: Add contrainer
+    $items['admin/category/add'] = array(
+        'title' => 'Add category type',
+        'description' => 'Add new category container.',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('category_type', 'add', NULL), //form,type,id
+        'access arguments' => array('Category type Add'),
+        'file' => 'views/type/form.inc',
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -9,
+    );
+    
+    // Task: Edit contrainer
+    $items['admin/category/%/edit'] = array(
+        'title' => 'Edit category type',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('category_type', 'edit', 2), //form,type,id
+        'access arguments' => array('Category type Edit'),
+        'file' => 'views/type/form.inc',
+        'type' => MENU_CALLBACK,
+    );
+    
+    // Task: Delete contrainer
+    $items['admin/category/%/delete'] = array(
+        'title' => 'Delete category type',
+        'page callback' => 'category_type_delete',
+        'page arguments' => array(2), //type
+        'access arguments' => array('Category type Delete'),
+        'type' => MENU_CALLBACK,
+    );
+    
+    $containers = category::getContainers();
+    
+    foreach($containers as $item) :
+        
+    // Menu: List all category of container
+    $items['admin/category/type/' . $item->type] = array(
+        'title' => $item->name,
+        'description' => $item->description,
+        'page callback' => 'category_list_page',
+        'page arguments' => array(3), //container
+        'access arguments' => array('Category View'),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -8,
+    );
+    
+    // Task: default
+    $items['admin/category/type/' . $item->type . '/list'] = array(
+        'title' => $item->name . ' categories',
+        'type' => MENU_DEFAULT_LOCAL_TASK,
+        'weight' => -10,
+    );
+    
+    // Task: Add new category to container
+    $items['admin/category/type/' . $item->type . '/add'] = array(
+        'title' => 'Add ' . $item->name . ' category',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('category_form', 'add', 3, NULL), //form,task,type,cateId
+        'access arguments' => array('Category Add'),
+        'file' => 'views/category/form.inc',
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -9,
+    );
+    // Task: Edit category
+    $items['admin/category/type/' . $item->type . '/%/edit'] = array(
+        'title' => 'Edit ' . $item->name . ' category',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('category_form', 'edit', 3, 4), //form,task,type,cateId
+        'access arguments' => array('Category Edit'),
+        'file' => 'views/category/form.inc',
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -8,
+    );
+    // Task: Delete category
+    $items['admin/category/type/' . $item->type . '/%/delete'] = array(
+        'title' => 'Delete ' . $item->name . ' category',
+        'page callback' => 'category_delete',
+        'page arguments' => array(3, 4), //type,cate
+        'access arguments' => array('Category Delete'),
+        'type' => MENU_CALLBACK,
+    );    
+    
+    endforeach;
+    
+    // Task: Rebuild module
+    $items['admin/category/build'] = array(
+        'title' => 'Rebuild Category Module',
+        'page callback' => 'category_rebuild_page',
+        'access arguments' => array('Category View'),
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
+}
+
+function category_perm() {
+    return array(
+        'Category type View',
+        'Category type Add',
+        'Category type Edit',
+        'Category type Delete',
+        'Category View',
+        'Category Add',
+        'Category Edit',
+        'Category Delete'
+    );
+}
+
+function category_form_alter(&$form, $form_state, $form_id) {
+    if (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] .'_node_form' == $form_id) {
+        // Them select category
+        $node = &$form['#node'];
+        $type = category::getContainerByNodeType($node->type);
+
+        if($type) { 
+            $cates = array();
+            $list = nested::getCategories($type->type);
+            $list = $list ? $list : array();
+            foreach ($list as $item) {
+                $tmp = str_repeat('- ', $item->level) . $item->title;
+                $cates[$item->cid] = $tmp;
+            }
+
+            // TODO : Add category textfield
+            $form['cid'] = array(
+                '#type' => 'select',
+                '#title' => t('Category'),
+                '#default_value' => isset($node->cid) ? $node->cid : session::get('category_default_' . $node->type, ''),
+                '#options' => $cates,
+                '#description' => t('Lựa chọn danh mục. %example.', array('%example' => 'Ví dụ: Star')),
+                '#attributes' => array('class' => 'menu-title-select'),
+                '#weight' => -4
+            );
+        }
+    }
+}
+
+/**
+ * @todo    Thiet dat link return (ref) cho cac module khac
+ * @param   $link   string  link redirect sau khi hoan thanh tac vu
+ */
+function category_set_return($link = NULL) {
+    if($link) {
+        $_SESSION['ref'] = $link;
+    } else {
+        if(isset($_SESSION['ref'])) {
+            unset($_SESSION['ref']);
+        }
+    }
+}
+
+/**
+ * @todo    Lay link return cua module thiet dat
+ */
+function category_get_return() {
+    return (isset($_SESSION['ref']) ? $_SESSION['ref'] : NULL);
+}
+
+function category_type_page() {
+    $data = array();
+    $data['list'] = category::getContainers();
+
+    return render(dirname(__FILE__) . '/views/type/list.inc', $data, false);
+}
+
+function category_type_delete($type) {
+    $container = category::getContainer($type);
+
+    if ($container) {
+        category::deleteContainer($type);
+        menu_rebuild();
+        drupal_set_message(t('Delete the category type %name success !..', array('%name' => $container->name)));
+    } else {
+        drupal_set_message(t('The container does not exist, deleted fails !..'));
+    }
+    drupal_goto('admin/category/list');
+}
+
+/**
+ * @todo    Thay doi Order cua Category
+ * @param   $type   Loai category
+ * @param   $cid    Category id
+ * @param   $op     up | down
+ */
+function category_order($type, $cid, $op) {
+    $con = category::getContainer($type);
+    $ref = category_get_return($con->module);
+    if($op == 'up') {
+        nested::moveUp($cid);
+    }
+    
+    if($op == 'down') {
+        nested::moveDown($cid);
+    }
+    if($ref) {
+        drupal_goto($ref);
+    } else {
+        drupal_goto('admin/category/type/' . $type);
+    }
+}
+
+function category_list_page($type, $ref = NULL) {
+
+    // Neu la thay doi order cua category
+    $ref = $ref ? $ref : router::getString('ref', NULL);
+    $op = router::getString('op');
+    $cid = router::getInt('cid');
+
+    // Kiem tra co ref
+    category_set_return($ref);
+    
+    if($op) {
+        category_order($type, $cid, $op);
+    }
+    
+    $con = category::getContainer($type);
+
+    if(!$con) {
+        drupal_set_message('The category type ' . $type .' is not existed.', 'error');
+        drupal_goto('admin/category');
+    }
+    
+    $data = array();
+    $data['type'] = $type;
+    $data['ref'] = $ref;
+    $data['action'] = url('admin/category/type/' . $type);
+    $data['container'] = $con;
+    $data['categories'] = category::getContainerCategories($type);
+
+    return render(dirname(__FILE__) . '/views/category/list.inc', $data, false);
+}
+
+function category_delete($type, $nid) {
+    $node = nested::getNode($nid);
+
+    if ($node) {
+        nested::deleteNode($nid);
+        drupal_set_message(t('Delete the category %title success !..', array('%title' => $node->title)));
+    } else {
+        drupal_set_message(t('The category does not exist, deleted fails !..'));
+    }
+    
+    
+    $con = category::getContainer($type);
+    $ref = category_get_return($con->module);
+    
+    if($ref) {
+        drupal_goto($ref);
+    } else {
+        drupal_goto('admin/category/type/' . $type);
+    }
+}
+
+function category_rebuild_page() {
+    module_disable(array('category'));
+    module_enable(array('category'));
+    menu_rebuild();
+    return '';
+}

@@ -1,0 +1,23 @@
+{
+	"folders":
+	[
+		{
+			"path": "includes"
+		},
+		{
+			"path": "modules"
+		},
+		{
+			"path": "blocks"
+		},
+		{
+			"path": "themes"
+		},
+		{
+			"path": "css"
+		},
+		{
+			"path": "js"
+		}
+	]
+}

@@ -1,0 +1,220 @@
+<?php
+
+/**
+ * @file mart.install
+ * TODO: Enter file description here.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function mart_install() {
+    //drupal_install_schema('mart');
+    
+    // Update lại node_revisions schema cache do thay doi struct cua bang
+    drupal_get_schema('{node_revisions}', TRUE);
+    
+    // Fix : node_revisions
+    db_query('ALTER TABLE  {node} ADD  `views` INT UNSIGNED NOT NULL COMMENT  \'The node page views\' AFTER  `changed`');
+    db_query('ALTER TABLE  {node_revisions} ADD  `cid` INT UNSIGNED NOT NULL COMMENT  \'The category id\' AFTER  `uid`');
+    db_query('ALTER TABLE  {node_revisions} ADD  `alias` VARCHAR( 255 ) NOT NULL AFTER  `title`');
+    db_query('ALTER TABLE  {node_revisions} ADD  `image` VARCHAR( 255 ) NOT NULL AFTER  `teaser`');
+    db_query('ALTER TABLE  {node_revisions} ADD  `metadesc` TEXT NOT NULL AFTER  `image`');
+    db_query('ALTER TABLE  {node_revisions} ADD  `metakey` TEXT NOT NULL AFTER  `metadesc`');
+    db_query('ALTER TABLE  {node_revisions} ADD  `metadata` TEXT NOT NULL AFTER  `metakey`');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function mart_uninstall() {
+    //drupal_uninstall_schema('mart');
+}
+
+/**
+ * Implementation of hook_schema().
+ * @todo Bo sung them cac truong vao bang {node_revisions}
+ * Ho tro truy van node::load se load them cac field nay
+ * cid, alias, image, metadesc, metakey, metadata
+ */
+function mart_schema() {
+    $schema = array();
+    /**
+     * @todo Khai bao struct bang {node_revisions} sau khi da bo sung them cac field mo rong
+     * Dung de node query them cac field cua node_revisions khi load
+     * Khong su dung cho muc dich cai dat.
+     * Viec thay doi struct cua revisions duoc thuc hien o function mart_install
+     */
+    $schema['node_revisions'] = array(
+        'description' => 'Stores information about each saved version of a {node}.',
+        'fields' => array(
+            'nid' => array(
+                'description' => 'The {node} this version belongs to.',
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => 0),
+            'vid' => array(
+                'description' => 'The primary identifier for this version.',
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE),
+            'uid' => array(
+                'description' => 'The {users}.uid that created this version.',
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => 0),
+            'cid' => array(
+                'description' => 'The {users}.cid that created this version.',
+                'type' => 'int',
+                'not null' => TRUE),
+            'title' => array(
+                'description' => 'The title of this version.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => ''),
+            'alias' => array(
+                'description' => 'The alias of this version.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => ''),
+            'body' => array(
+                'description' => 'The body of this version.',
+                'type' => 'text',
+                'not null' => TRUE,
+                'size' => 'big'),
+            'teaser' => array(
+                'description' => 'The teaser of this version.',
+                'type' => 'text',
+                'not null' => TRUE,
+                'size' => 'big'),
+            'image' => array(
+                'description' => 'The title of this version.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => ''),
+            'metadesc' => array(
+                'description' => 'The log entry explaining the changes in this version.',
+                'type' => 'text',
+                'not null' => TRUE),
+            'metakey' => array(
+                'description' => 'The log entry explaining the changes in this version.',
+                'type' => 'text',
+                'not null' => TRUE),
+            'metadata' => array(
+                'description' => 'The log entry explaining the changes in this version.',
+                'type' => 'text',
+                'not null' => TRUE),
+            'log' => array(
+                'description' => 'The log entry explaining the changes in this version.',
+                'type' => 'text',
+                'not null' => TRUE,
+                'size' => 'big'),
+            'timestamp' => array(
+                'description' => 'A Unix timestamp indicating when this version was created.',
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => 0),
+            'format' => array(
+                'description' => "The input format used by this version's body.",
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => 0)
+        ),
+        'indexes' => array(
+            'nid' => array('nid'),
+            'uid' => array('uid')
+        ),
+        'primary key' => array('vid'),
+    );
+    /**
+     * @todo Khai bao cac ban du lieu mo rong khac
+     */
+    /*
+    $schema['products'] = array(
+        'fields' => array(
+            'vid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'nid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'color' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, 'default' => ''),
+            'quantity' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+        ),
+        'primary key' => array('vid', 'nid'),
+    );
+    $schema['product_type'] = array(
+        'fields' => array(
+            'vid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'nid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'color' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, 'default' => ''),
+            'quantity' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+        ),
+        'primary key' => array('vid', 'nid'),
+    );
+    $schema['product_field'] = array(
+        'fields' => array(
+            'vid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'nid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'color' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, 'default' => ''),
+            'quantity' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+        ),
+        'primary key' => array('vid', 'nid'),
+    );
+    $schema['product_field_data'] = array(
+        'fields' => array(
+            'vid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'nid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'color' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, 'default' => ''),
+            'quantity' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+        ),
+        'primary key' => array('vid', 'nid'),
+    );
+    $schema['file'] = array(
+        'fields' => array(
+            'vid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'nid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'color' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, 'default' => ''),
+            'quantity' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+        ),
+        'primary key' => array('vid', 'nid'),
+    );
+    $schema['file_mapping'] = array(
+        'fields' => array(
+            'vid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'nid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'color' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, 'default' => ''),
+            'quantity' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+        ),
+        'primary key' => array('vid', 'nid'),
+    );
+    $schema['orders'] = array(
+        'fields' => array(
+            'vid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'nid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'color' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, 'default' => ''),
+            'quantity' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+        ),
+        'primary key' => array('vid', 'nid'),
+    );
+    $schema['order_product'] = array(
+        'fields' => array(
+            'vid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'nid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'color' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, 'default' => ''),
+            'quantity' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+        ),
+        'primary key' => array('vid', 'nid'),
+    );
+    $schema['order_comment'] = array(
+        'fields' => array(
+            'vid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'nid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+            'color' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, 'default' => ''),
+            'quantity' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+        ),
+        'primary key' => array('vid', 'nid'),
+    );
+     */
+    return $schema;
+}

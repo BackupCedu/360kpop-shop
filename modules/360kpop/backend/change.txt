@@ -1,0 +1,15 @@
+2012.08.16
+    - Add {node} field: views for page view counter
+    - Add product extra fields at table::product
+    - Add table::product Hook node API : add/edit/delete
+    - Add product type fields
+    - Add product type hook node api
+    - Add product type admin
+2012.07.25
+    - Module base
+        + Install
+    - Add: database
+    - Category
+    - Post form
+    - View form ?
+    - Convert module

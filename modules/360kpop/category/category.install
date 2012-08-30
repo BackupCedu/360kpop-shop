@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file mart.install
+ * TODO: Enter file description here.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function category_install() {
+    if (!db_table_exists('category')) {
+        drupal_install_schema('category');
+    }
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function category_uninstall() {
+    drupal_uninstall_schema('category');
+}
+
+/**
+ * Implementation of hook_schema().
+ * @todo Bo sung them cac truong vao bang {node_revisions}
+ * Ho tro truy van node::load se load them cac field nay
+ * cid, alias, image, metadesc, metakey, metadata
+ */
+function category_schema() {
+    $schema = array();
+    return $schema;
+}

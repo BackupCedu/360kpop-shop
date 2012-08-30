@@ -1,0 +1,10 @@
+name = Categories
+description = Module quản lý và hiển thị block các danh mục.
+package = 360™ Package
+version = VERSION
+core = 6.x
+
+; Information added by drupal.org packaging script on 2012-05-03
+version = "6.x"
+project = "360™ KPOP"
+datestamp = "1336004021"

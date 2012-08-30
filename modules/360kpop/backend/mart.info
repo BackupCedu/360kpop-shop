@@ -1,0 +1,6 @@
+; $Id$
+name = Product backend
+description = The <strong>Backend</strong> module allows you control <strong>Mart</strong> compoment : Product, Product Type, Category, Order, Comment, ... and more.
+package = 360™ Package
+core = 6.x
+version = "6.x"

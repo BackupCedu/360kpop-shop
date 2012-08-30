@@ -1,0 +1,6 @@
+; $Id$
+name = Node Extend
+description = The <strong>Node Extend</strong> defined node product data type, node hook, change node form.
+package = 360™ Package
+core = 6.x
+version = "6.x"

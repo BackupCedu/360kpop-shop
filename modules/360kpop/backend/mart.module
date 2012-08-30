@@ -1,0 +1,1223 @@
+<?php
+
+/**
+ * @file mart.module
+ * TODO: Enter file description here.
+ */
+
+include('product.inc');
+include('mart.page.inc');
+
+/**
+ * Implementation of hook_menu().
+ */
+function mart_menu() {
+    // Menu: Liet ke danh sach cac kieu san pham
+    $items['admin/product'] = array(
+        'title' => 'Product',
+        'description' => 'Manage your site\'s product.',
+        'page callback' => 'product_list_page',
+        'access arguments' => array('Product View'),
+        'weight' => -99,
+    );
+    // Task: types default
+    $items['admin/product/list'] = array(
+        'title' => 'List product',
+        'type' => MENU_DEFAULT_LOCAL_TASK,
+        'weight' => -10,
+    );
+    // Task: add product
+    $items['admin/product/add'] = array(
+        'title' => 'Add Product',
+        'page callback' => 'product_add_page',
+        //'page callback' => 'drupal_get_form',
+        //'page arguments' => array('product_form', 'add', NULL), // func,task,pid
+        'access arguments' => array('Product Add'),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -9,
+        'file' => 'views/product/form.inc',
+    );
+    // Task: edit product
+    $items['admin/product/%/edit'] = array(
+        'title' => 'Edit Product',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('product_form', 'edit', 2),   // func,task,pid
+        'access arguments' => array('Product Edit', 2),         // task, pid
+        'access callback' => 'product_access',
+        'type' => MENU_CALLBACK,
+        'file' => 'views/product/form.inc',
+    );
+    // Task: delete product
+    $items['admin/product/%/delete'] = array(
+        'title' => 'Edit Product',
+        'page callback' => 'product_delete_page',
+        'page arguments' => array(2),
+        'access arguments' => array('Product Delete', 2),       // task, pid
+        'access callback' => 'product_access',
+        'type' => MENU_CALLBACK,
+    );
+    
+    // Menu: categories manager
+    $items['admin/product/category'] = array(
+        'title' => 'Categories',
+        'page callback' => 'product_categories_page',
+        'page arguments' => array('product'),
+        'access arguments' => array('Product category View'),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -7,
+    );
+    
+    // Task: types default
+    $items['admin/product/category/list'] = array(
+        'title' => 'List categories',
+        'type' => MENU_DEFAULT_LOCAL_TASK,
+        'weight' => -10,
+    );
+    
+    // Task: add category
+    $items['admin/product/category/add'] = array(
+        'title' => 'Add category',
+        'page callback' => 'product_categories_add',
+        'access arguments' => array('Product category Add'),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -9,
+    );
+
+    // Menu: Liet ke danh sach cac kieu san pham
+    $items['admin/product/types'] = array(
+        'title' => 'Product types',
+        'description' => 'Manage your product types.',
+        'page callback' => 'product_types_list_page',
+        'access arguments' => array('Product type View'),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -8,
+    );
+    // Task: types default
+    $items['admin/product/types/list'] = array(
+        'title' => 'List product types',
+        'type' => MENU_DEFAULT_LOCAL_TASK,
+        'weight' => -10,
+    );
+    // Task: add type
+    $items['admin/product/types/add'] = array(
+        'title' => 'Add product type',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('product_type_form', 'add', NULL), //func,type,nid
+        'access arguments' => array('Product type Add'),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -9,
+        'file' => 'views/type/form.inc',
+    );
+    // Task: add type
+    $items['admin/product/types/%/edit'] = array(
+        'title' => 'Edit product type',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('product_type_form', 'edit', 3), //func,task,type
+        'access arguments' => array('Product type Edit'),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -9,
+        'file' => 'views/type/form.inc',
+    );
+    // Task: Danh sac cac truong su dung trong cac kieu san pham
+    $items['admin/product/types/%/fields'] = array(
+        'title' => 'Fields',
+        'description' => 'View all product fields.',
+        'page callback' => 'product_types_fields_page',
+        'page arguments' => array(3), //type
+        'access arguments' => array('Product type View'),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -8,
+    );
+    
+    // Task: Danh sac cac truong su dung trong cac kieu san pham
+    $items['admin/product/types/%/fields/add'] = array(
+        'title' => 'Add field',
+        'description' => 'Add new field to product type.',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('product_field_form', 'add', 3), //form, type, product type
+        'access arguments' => array('Product type Add'),
+        'type' => MENU_LOCAL_TASK,
+        'file' => 'views/type/field.form.inc',
+        'weight' => -8,
+    );
+    
+    // Task: Danh sac cac truong su dung trong cac kieu san pham
+    $items['admin/product/types/%/fields/%'] = array(
+        'title' => 'Edit field',
+        'description' => 'Edit field of product type.',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('product_field_form', 'edit', 3, 5), //form, type, product type, field name
+        'access arguments' => array('Product type Edit'),
+        'type' => MENU_LOCAL_TASK,
+        'file' => 'views/type/field.form.inc',
+        'weight' => -8,
+    );
+    
+    // Task: Danh sac cac truong su dung trong cac kieu san pham
+    $items['admin/product/types/%/delete'] = array(
+        'title' => 'Product type delete',
+        'page callback' => 'product_types_delete',
+        'page arguments' => array(3), //type
+        'access arguments' => array('Product type Delete'),
+    );
+
+    // Menu : product comments
+    $items['admin/product/comment'] = array(
+        'title' => 'Comments',
+        'description' => 'Manage your product comments.',
+        'page callback' => 'product_comment_list_page',
+        'access arguments' => array('Product type View'),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -6,
+    );
+
+    // Menu : product tag
+    $items['admin/product/tag'] = array(
+        'title' => 'Tags',
+        'description' => 'Manage your product tags.',
+        'page callback' => 'product_tag_list_page',
+        'access arguments' => array('Product tag View'),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -6,
+    );
+
+    // Task: types default
+    $items['admin/product/tag/list'] = array(
+        'title' => 'List tags',
+        'type' => MENU_DEFAULT_LOCAL_TASK,
+        'weight' => -10,
+    );
+
+    // Task: add type
+    $items['admin/product/tag/add'] = array(
+        'title' => 'Add tag',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('product_tag_form', 'add', NULL), //func,type,nid
+        'access arguments' => array('Product tag Add'),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -9,
+        'file' => 'views/tag/form.inc',
+    );
+    
+    // Task: add type
+    $items['admin/product/tag/%/edit'] = array(
+        'title' => 'Edit tag',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('product_tag_form', 'edit', 3), //func,type,nid
+        'access arguments' => array('Product tag Edit'),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -8,
+        'file' => 'views/tag/form.inc',
+    );
+    
+    // Menu : product orders
+    $items['admin/product/order'] = array(
+        'title' => 'Orders',
+        'description' => 'Manage your product orders.',
+        'page callback' => 'product_order_list_page',
+        'access arguments' => array('Product order View'),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -5,
+    );
+
+    // Task: clear cache
+    $items['admin/product/build'] = array(
+        'title' => 'Product Build',
+        'description' => 'Rebuild Product Module Registry.',
+        'page callback' => 'product_build_page',
+        'access arguments' => array('Product View'),
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function mart_perm() {
+    return array(
+        'Product order View',
+        'Product order Update',
+        'Product order Delete',
+        'Product type View',
+        'Product type Add',
+        'Product type Edit',
+        'Product type Delete',
+        'Product comment View',
+        'Product comment Edit',
+        'Product comment Delete',
+        'Product tag View',
+        'Product tag Edit Any',
+        'Product tag Edit Own',
+        'Product tag Delete Any',
+        'Product tag Delete Own',
+        'Product category View',
+        'Product category Add',
+        'Product category Edit',
+        'Product category Delete',
+        'Product View',
+        'Product Add',
+        'Product Edit Any',
+        'Product Edit Own',
+        'Product Delete Any',
+        'Product Delete Own',
+    );
+}
+
+/**
+ * @todo Dinh nghia node::type product
+ *
+ */
+function mart_node_info() {
+    return array(
+        'product' => array(
+            'name' => 'Product',
+            'module' => 'mart',
+            'description' => t('Kiểu dữ liệu <em>Product</em> cho phép tạo các sản phẩm thuộc các loại <em>Album, Mỹ phẩm, Phụ kiện ...</em>, mỗi loại sản phẩm có những thuộc tính khác nhau, thể hiện đầy đủ dữ liệu của mỗi loại sản phẩm.'),
+            'help' => '',
+            'has_title' => TRUE,
+            'title_label' => 'Title',
+            'has_body' => TRUE,
+            'body_label' => 'Body',
+            'min_word_count' => '',
+            'locked' => '',
+        ),
+    );
+}
+
+/**
+ * @todo Kiem tra quyen truy cap node
+ */
+function mart_access($op, $node, $account) {
+    global $user;
+
+    if ($op == 'create') {
+        return user_access('Product Add', $account);
+    }
+
+    if ($op == 'update') {
+        if (user_access('Product Edit Any', $account) || (user_access('Product Edit Own', $account) && ($account->uid == $node->uid))) {
+            return TRUE;
+        }
+    }
+
+    if ($op == 'delete') {
+        if (user_access('Product Delete Any', $account) || (user_access('Product Delete Own', $account) && ($account->uid == $node->uid))) {
+            return TRUE;
+        }
+    }
+}
+
+/**
+ * Implementation of hook_form().
+ */
+function mart_form(&$node, $form_state) {
+    // Check if ref exist
+    $ref = router::getString('destination');
+    
+    if($ref) {
+        session::set('product_ref', $ref);
+    }
+    
+    // The site admin can decide if this node type has a title and body, and how
+    // the fields should be labeled. We need to load these settings so we can
+    // build the node form correctly.
+    $type = node_get_types('type', $node);
+
+    // TODO: Load product supplier
+    if($node->nid && empty($node->supplier)) {
+        $filter = array();
+        $filter['type'] = data::Quote('supplier');
+        $filter['nid'] = $node->nid;
+        $node->supplier = dataExtend::getNodeData($filter, true);
+    }
+
+    // Them cac kieu node tren thanh tab second
+    
+    // Lay danh sach cac kieu san pham
+    $list = product::getProductTypes('type,name');
+    
+    // Lay phan tu dau tien cua danh sach de lam phan tu mac dinh
+    $first = current($list);
+    
+    // Kieu san pham hien tai dang tao
+    $current = arg(3) ? arg(3) : session::get('product_default_type', $first ? $first->type : '');
+
+    // Them danh sach cac kieu san pham len tren second tabs
+    $markup = '<ul class="tabs secondary">';
+
+    foreach ($list as $slug => $item) {
+        $class = ($slug == $current) ? ' class="active"' : '';
+        $markup .= '<li' . $class . '><a href="' . url('node/add/product/' . $slug) . '">' . $item->name . '</a></li>';
+    }
+
+    $markup .= '</ul>';
+
+    $form['box'] = array(
+        '#type' => 'markup',
+        '#prefix' => '<div id="box" class="product-buttons">',
+        '#suffix' => '</div>',
+        '#value' => $markup,
+        '#weight' => -10,
+    );
+
+    $form['title'] = array(
+        '#type' => 'textfield',
+        '#title' => check_plain($type->title_label),
+        '#required' => TRUE,
+        '#default_value' => $node->title,
+        '#weight' => -4,
+    );
+
+    $form['body_field'] = node_body_field($node, $type->body_label, $type->min_word_count);
+
+    // TODO : Add provider field autocomplete
+    $form['supplier'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Supplier'),
+        '#default_value' => isset($node->supplier) ? $node->supplier : '',
+        '#description' => t('Nhà cung cấp hoặc sản xuất sản phẩm, các giá trị cách nhau bởi dấu phẩy. %example', array('%example' => 'Ví dụ: CTY ABC...')),
+        '#autocomplete_path' => 'data/supplier/autocomplete',
+        '#maxlength' => 1024,
+        '#weight' => 1.1
+    );
+    
+    // TODO : Add metadata
+    $form['basic'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Product Basic'),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE, // Open or Close
+        '#tree' => TRUE,
+        '#weight' => 1.1,
+        '#attributes' => array('class' => 'node-item-form'),
+    );
+
+    $form['basic']['saleoff'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Bán giảm giá'),
+        '#default_value' => isset($node->saleoff) ? $node->saleoff : 0,
+        '#description' => t('Sản phẩm được bán giảm giá <strong>Bật/Tắt</strong> ...'),
+    );
+    
+    $form['basic']['special'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Sản phẩm đặc biệt'),
+        '#default_value' => isset($node->special) ? $node->special : 0,
+        '#description' => t('Bản phẩm đặc biệt dùng trong đợt khuyến mại <strong>Bật/Tắt</strong> ...'),
+    );
+    
+    $form['basic']['sku'] = array(
+        '#type' => 'textfield',
+        '#title' => t('SKU'),
+        '#default_value' => isset($node->sku) ? $node->sku : '',
+        '#description' => t('Mã số sản phẩm, dùng phân biệt các loại sản phẩm với nhau. %example', array('%example' => 'Ví dụ: AL123A, MP45C ...')),
+    );
+    
+    $form['basic']['guid'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Reference'),
+        '#default_value' => isset($node->guid) ? $node->guid : '',
+        '#description' => t('Thông tin sản phẩm từ nhà sản xuất hoặc một nguồn nào đó. %example', array('%example' => 'Ví dụ: http://tiki.vn/google-nexus-7.html')),
+    );
+    
+    $form['basic']['price'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Giá'),
+        '#default_value' => isset($node->price) ? $node->price : 0,
+        '#description' => t('Giá treo sản phẩm trên shop, đối với sản phẩm giảm giá, giá shop là giá chưa được giảm. %example', array('%example' => 'Ví dụ: 150.000 Đ ...')),
+    );
+
+    $form['basic']['sell'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Giá bán ra'),
+        '#default_value' => isset($node->sell) ? $node->sell : 0,
+        '#description' => t('Giá bán ra, giá bán sản phẩm cho khách, nếu không nhập sẽ có giá trị bằng <strong>Giá</strong>. %example', array('%example' => 'Ví dụ: 140.000 Đ ...')),
+    );
+
+    $form['basic']['cost'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Giá mua vào'),
+        '#default_value' => isset($node->cost) ? $node->cost : 0,
+        '#description' => t('Giá mua vào, chi phí thực tế của sản phẩm. %example', array('%example' => 'Ví dụ: 110.000 Đ ...')),
+    );
+    
+    $form['basic']['weight'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Trọng lượng'),
+        '#default_value' => isset($node->weight) ? $node->weight : 0,
+        '#description' => t('Trọng lượng sản phẩm, sử dụng để tính cước vận chuyển sản phẩm. %example', array('%example' => 'Ví dụ: 150g ...')),
+    );
+    
+    $form['basic']['amount'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Số lượng'),
+        '#default_value' => isset($node->amount) ? $node->amount : 1,
+        '#description' => t('Số lượng sản phẩm còn trong kho. %example', array('%example' => 'Ví dụ: 100')),
+    );
+    
+    $form['basic']['unit'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Đơn vị'),
+        '#default_value' => isset($node->unit) ? $node->unit : '',
+        '#description' => t('Đơn vị tính của sản phẩm. %example', array('%example' => 'Ví dụ: cái, chiếc, kg ...')),
+    );
+    
+    $form['basic']['publish'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Publish product'),
+        '#default_value' => isset($node->publish) ? date('H:i:j d-m-Y',$node->publish) : date('H:i:j d-m-Y'),
+        '#description' => t('Thời gian công khai sản phẩm, đăng sản phẩm lên shop, mặc định là thời điểm tạo sản phẩm. %example', array('%example' => 'Ví dụ: 09:30:00 20-11-2012')),
+    );
+    
+    $form['basic']['unpublish'] = array(
+        '#type' => 'textfield',
+        '#title' => t('UnPublish product'),
+        '#default_value' => isset($node->unpublish) ? date('H:i:j d-m-Y',$node->unpublish) : '',
+        '#description' => t('Là thời gian gỡ sản phẩm khỏi shop, người dùng sẽ không xem được thông tin sản phẩm. %example', array('%example' => 'Ví dụ: 09:30:00 20-11-2013')),
+    );
+    
+    $form['basic']['startdate'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Thời gian bắt đầu bán giảm giá'),
+        '#default_value' => isset($node->startdate) ? date('H:i:j d-m-Y',$node->startdate) : '',
+        '#description' => t('Thời gian công khai bài viết, mặc định là thời điểm tạo bài viết. %example', array('%example' => 'Ví dụ: 09:30:00 20-11-2012')),
+    );
+    
+    $form['basic']['enddate'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Thời gian kết thúc bán giảm giá'),
+        '#default_value' => isset($node->enddate) ? date('H:i:j d-m-Y',$node->enddate) : '',
+        '#description' => t('Thời gian công khai bài viết, mặc định là thời điểm tạo bài viết. %example', array('%example' => 'Ví dụ: 09:30:00 20-11-2012')),
+    );
+    
+    // TODO : Add product ship fieldset
+    $form['ship'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Shipping'),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+        '#tree' => TRUE,
+        '#weight' => 1.3,
+        '#attributes' => array('class' => 'node-item-form'),
+    );
+    
+    $form['ship']['shipable'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Vận chuyển'),
+        '#default_value' => isset($node->shipable) ? $node->shipable : 1,
+        '#description' => t('Sản phẩm có thể vận chuyển đến tận nơi <strong>Bật/Tắt</strong> ...'),
+    );
+
+    $form['ship']['shiptime'] = array(
+        '#type' => 'select',
+        '#title' => t('Thời gian vận chuyển'),
+        '#default_value' => isset($node->shiptime) ? $node->shiptime : '1 week',
+        '#options' => array(
+            '' => 'Use Global',
+            '1-3 days' => 'Từ 1-3 ngày',
+            '3-5 days' => 'Từ 3-5 ngày',
+            '5-7 days' => 'Từ 5-7 ngày',
+            '1 week' => 'Khoảng 1 tuần',
+            '1-2 weeks' => 'Từ 1-2 tuần',
+        ),
+        '#description' => t('Thời gian cần thiết để vận chuyển sản phẩm tới khách hàng. %example', array('%example' => 'Ví dụ: 150g ...')),
+    );
+    
+    $form['ship']['shipmethod'] = array(
+        '#type' => 'select',
+        '#title' => t('Hình thức vận chuyển'),
+        '#default_value' => isset($node->shipmethod) ? $node->shipmethod : 'Gửi qua đường Bưu điện',
+        '#options' => array(
+            '' => 'Use Global',
+            'Gửi qua đường Bưu điện' => 'Gửi qua đường Bưu điện',
+            'Chuyển phát nhanh tín thành' => 'Chuyển phát nhanh tín thành',
+            'Chuyển phát nhanh Viettel' => 'Chuyển phát nhanh Viettel',
+            'Chuyển phát nhanh Bưu điện' => 'Chuyển phát nhanh Bưu điện',
+            'Chuyển phát nhanh 24h' => 'Chuyển phát nhanh 24h',
+        ),
+        '#description' => t('Phương thức vận chuyển sản phẩm nếu có. %example', array('%example' => 'Ví dụ: chuyển phát nhanh, chuyển phát qua bưu điện ...')),
+    );
+    
+    $form['ship']['shipprice'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Phí vận chuyển'),
+        '#default_value' => isset($node->shipprice) ? $node->shipprice : '50000',
+        '#description' => t('Phí vận chuyển được tính dựa vào trọng lượng sản phẩm. %example', array('%example' => 'Ví dụ: 50.000 VNĐ.')),
+    );
+    
+    $form['ship']['shipweight'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Trọng lượng vận chuyển'),
+        '#default_value' => isset($node->shipweight) ? $node->shipweight : '',
+        '#description' => t('Trọng lượng vận chuyển, là trọng lượng sử dụng để tính cước vận chuyển sản phẩm. %example', array('%example' => 'Ví dụ: 150g ...')),
+    );
+    
+    // TODO : Thong tin mo rong cua tung loai san pham
+    
+    // TODO : Step 1 - Load product type fields option
+    
+    $productType = $list[$current];
+    
+    // TODO : Step 2 - Load product type fields
+    $fields = product::getProductTypeFields($current);
+
+    // TODO : Step 4 - Add product type fields to form
+    $form['extra'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Product Advanced - <strong>' . $productType->name . '</strong>'),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+        '#tree' => TRUE,
+        '#weight' => 1.2,
+        '#attributes' => array('class' => 'node-item-form'),
+    );
+    
+    if(count($fields) > 0) {        
+        foreach ($fields as $key => $value) {
+            $form['extra'][$key] = array(
+                '#type' => $value->fieldtype,
+                '#title' => $value->title,
+                '#weight' => $value->weight,
+                '#default_value' => isset($node->extra->{$key}) ? $node->extra->{$key} : '',
+                '#description' => $value->description,
+            );
+        }
+    }
+
+    // TODO : Store some need variable
+    $form['class'] = array(
+        '#type' => 'hidden',
+        '#default_value' => $current,
+    );
+
+    // TODO : Add script for Product Supplier
+    $form['scriptSupplier'] = array(
+        '#type' => 'markup',
+        '#value' => data_trigger('supplier', $node->nid, 'button-supplier-add'),
+        '#tree' => true,
+    );
+
+    return $form;
+}
+
+/**
+ * @todo Them cac truong nhap lieu vao node form
+ */
+function mart_form_alter(&$form, &$form_state, $form_id) {
+    global $user;
+    global $queries;
+    global $debug;
+
+    if (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] .'_node_form' == $form_id) {
+        // Thay đổi nhập liệu node form
+        $node = &$form['#node'];
+
+        // Neu tao node moi
+        if(!$node->nid) {
+            // Su dung session de luu node id lan cuoi da luu
+            // Tranh truong hop tao nhieu node draft lang phi id
+            $node->nid = session::get('nid', NULL);
+            
+            $created = false;
+
+            // Neu co session:nid kiem tra xem node co ton tai hay da bi xoa | edit
+            if($node->nid > 0) {
+                // Kiem tra node co ton tai
+                $clone = node_load($node->nid);
+
+                // Neu node ton tai va trang thai khac -1 => node da duoc edit, tao moi.
+                if(!$clone || $clone->status != -1) {
+                    $created = true;
+                } else {
+                    // Lay thong so cua node
+                    $node = $clone;
+                }
+            } else {
+                $created = true;
+            }
+            // Tao draft moi
+            if($created) {
+                $node->nid = NULL;
+                product::createNode($node);
+                // Neu co node moi tao ra
+                if($node->nid) {
+                    session::set('nid', $node->nid);
+                }
+            }
+            // Luu cac thong so cua node vao form
+            $form['nid']['#value'] = $node->nid;
+            $form['vid']['#value'] = $node->vid;
+            $form_state['values']['nid'] = $node->nid;
+            $form_state['values']['vid'] = $node->vid;
+        } else {
+            // Load cac tags cua node
+            $filter = array();
+            $filter['type'] = data::Quote('tag');
+            $filter['nid'] = $node->nid;
+            $node->tags = dataExtend::getNodeData($filter, true);
+        }
+
+        // Kiem tra de remove Draft title
+        $node->title = (isset($node->title) && $node->title != 'Draft') ? $node->title : '';
+        $node->alias = (isset($node->alias) && $node->alias != 'draft') ? $node->alias : '';
+
+        // Thay doi metadata
+        $node->metadata = unserialize($node->metadata);
+   
+        // Fix menu weight
+        $form['title']['#weight'] = -6;
+        $form['title']['#default_value'] = $node->title;
+        $form['menu']['#weight'] = 0;
+        // TODO : Add alias textfield
+        $form['alias'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Alias'),
+            '#description' => t('Tên định danh, dùng tạo URL cho bài viết, được tạo tự động nếu không nhập. %example.', array('%example' => 'Ví dụ: san-pham-noi-bat-trong-thang')),
+            '#default_value' => isset($node->alias) ? $node->alias : '',
+            '#weight' => -4.5
+        );
+
+        // TODO : Add image field
+        $form['image'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Featured Image'),
+            '#default_value' => isset($node->image) ? $node->image : '',
+            '#description' => t('Ảnh đại diện bài viết. %example', array('%example' => 'Ví dụ: http://img.360kpop.com/2012/07/boa.jpg')),
+            '#weight' => -3
+        );
+        
+        // TODO : Add tag field autocomplete
+        $form['tags'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Tags'),
+            '#default_value' => isset($node->tags) ? $node->tags : '',
+            '#description' => t('Tag được dùng để liên kết các bài viết cùng nội dung, các giá trị cách nhau bởi dấu phẩy. %example', array('%example' => 'Ví dụ: Junio, BoA ...')),
+            '#autocomplete_path' => 'data/tag/autocomplete',
+            '#maxlength' => 1024,
+            '#weight' => 1
+        );
+
+        // TODO : Add metadata
+        $form['meta'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Meta data'),
+            '#collapsible' => TRUE,
+            '#collapsed' => TRUE,
+            '#tree' => TRUE,
+            '#weight' => 2,
+            '#attributes' => array('class' => 'node-item-form'),
+        );
+        $form['meta']['desc'] = array(
+            '#type' => 'textarea',
+            '#title' => t('Meta description'),
+            '#default_value' => isset($node->metadesc) ? $node->metadesc : '',
+            '#rows' => 1,
+            '#description' => t('Miêu tả ngắn gọn nội dung bài viết, được tạo tự động nếu không nhập. %example', array('%example' => 'Ví dụ: Phân loại danh mục sản phẩm, phân loại danh mục tin tức ...')),
+        );
+
+        $form['meta']['keywords'] = array(
+            '#type' => 'textarea',
+            '#title' => t('Meta keywords'),
+            '#default_value' => isset($node->metakey) ? $node->metakey : '',
+            '#rows' => 1,
+            '#description' => t('Từ khóa hỗ trợ máy tìm kiếm, được tạo tự động nếu không nhập. %example', array('%example' => 'Ví dụ: Phân loại danh mục sản phẩm, phân loại danh mục tin tức ...')),
+        );
+
+        $form['meta']['author'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Meta author'),
+            '#default_value' => isset($node->metadata->author) ? $node->metadata->author : '360kpop.com',
+            '#description' => t('Tác giả của bài viết. %example', array('%example' => 'Ví dụ: Admin, Bom ...')),
+        );
+
+        $form['meta']['robots'] = array(
+            '#type' => 'select',
+            '#title' => t('Meta robots'),
+            '#default_value' => isset($node->metadata->robots) ? $node->metadata->robots : '',
+            '#options' => array(
+                '' => 'Use Global',
+                'index, follow' => 'Index, Follow',
+                'noindex, follow' => 'No index, follow',
+                'index, nofollow' => 'Index, No follow',
+                'noindex, nofollow' => 'No index, no follow',
+            ),
+            '#description' => t('Chỉ định chế độ robots tìm kiếm. %example.', array('%example' => 'Ví dụ: Index, Follow')),
+            '#attributes' => array('class' => 'menu-title-select'),
+        );
+        
+        // TODO: Remove Preview Button
+        unset($form['buttons']['preview']);
+
+        $form['buttons']['submit']['#submit'] = array('mart_form_submit');
+
+        // TODO: Them nut Save & Close
+        $form['buttons']['close'] = array(
+            '#type' => 'submit',
+            '#value' => 'Save & Close',
+            '#submit' => array('mart_form_submit'),
+            '#weight' => 6,
+        );
+
+        // TODO: Them nut Save & New
+        $form['buttons']['new'] = array(
+            '#type' => 'submit',
+            '#value' => 'Save & New',
+            '#submit' => array('mart_form_submit'),
+            '#weight' => 7,
+        );
+
+        // TODO: Them nut Cancel
+        $form['buttons']['cancel'] = array(
+            '#type' => 'submit',
+            '#value' => 'Cancel',
+            '#validate' => array('mart_form_cancel'),
+            '#weight' => 30,
+        );
+        
+        /**
+         * @todo Javascript set Focus o nhap title cua form
+         */
+        $form['scriptFocus'] = array(
+            '#type' => 'markup',
+            '#value' => '<script>$(function() { $("#edit-title").focus(); });</script>',
+            '#weight' => 30,
+            '#tree' => true,
+        );
+        
+        // TODO: Javascript cho nut Uploader
+        $form['scriptUploader'] = array(
+            '#type' => 'markup',
+            '#value' => upload_trigger($node->nid, 'content-upload'),
+            '#weight' => 40,
+            '#tree' => true,
+        );
+
+        // TODO : Javascript cho nut Add Supplier
+        $form['scriptTags'] = array(
+            '#type' => 'markup',
+            '#value' => data_trigger('tag', $node->nid, 'button-tag-add'),
+            '#weight' => 50,
+            '#tree' => true,
+        );
+
+        /**
+         * @todo Add editor to body field
+         * @todo Add editor javascript
+         * @todo Add editor library javascript
+         */
+        
+        drupal_add_js('js/editor/tiny_mce.js', 'editor');
+        drupal_add_js('js/editor.js', 'editor');
+        drupal_add_js(drupal_get_path('module', 'mart') . '/views/product/editor.js');
+        drupal_add_css(drupal_get_path('module', 'mart') . '/views/product/editor.css');
+
+        //trace($form);die();
+    }
+}
+
+function mart_form_submit($form, &$form_state) {
+    global $user;
+    global $debug;
+    global $queries;
+
+    $node = node_form_submit_build_node($form, $form_state);
+    $insert = empty($node->nid);
+    
+    node_save($node);
+
+    //$debug['queries'] = $queries;
+    //$debug['formSubmit'] = $form;
+    //$debug['formSubmitState'] = $form_state;
+
+    // TODO: Store log message to watchdog
+    $link = l(t('view'), 'node/' . $node->nid);
+    $args = array('@type' => $node->type, '%title' => $node->title);
+    $text = array('@type' => node_get_types('name', $node), '%title' => $node->title);
+
+    if ($insert) {
+        watchdog('content', '@type: added %title.', $args, WATCHDOG_NOTICE, $link);
+        drupal_set_message(t('@type %title has been created.', $text));
+    } else {
+        watchdog('content', '@type: updated %title.', $args, WATCHDOG_NOTICE, $link);
+        drupal_set_message(t('@type %title has been updated.', $text));
+    }
+    if ($node->nid) {
+        unset($form_state['rebuild']);
+        $form_state['nid'] = $node->nid;
+        $form_state['redirect'] = 'node/' . $node->nid;
+    } else {
+        drupal_set_message(t('The post could not be saved.'), 'error');
+    }
+    
+    // Add extract code for redirect
+    $op = isset($form_state['values']['op']) ? $form_state['values']['op'] : '';
+    $cid = isset($form_state['values']['cid']) ? $form_state['values']['cid'] : NULL;
+    $type = isset($form_state['values']['type']) ? $form_state['values']['type'] : '';
+    $class = isset($form_state['values']['class']) ? $form_state['values']['class'] : NULL;
+
+    // TODO: Insert tags
+    if(false == empty($node->tags)) {
+        dataExtend::insertDataList('tag', $node->nid, $node->tags);
+    }
+    // TODO: Insert product supplier
+    if(false == empty($node->supplier)) {
+        dataExtend::insertDataList('supplier', $node->nid, $node->supplier);
+    }
+    
+    // Sau khi da submit node form, xoa session::nid
+    session::del('nid');
+
+    if ($op == 'Save') {
+        // set variable for next add category
+        session::set('category_default_' . $type, $cid);
+        if($class) {
+            session::set('product_default_type', $class);
+        }
+        // Nếu save node thành công redirect tới edit node
+        // Không sử dụng rebuild => sẽ tạo node mới
+        // $form_state['rebuild'] = TRUE;
+        if ($node->nid) {
+            $form_state['redirect'] = 'node/' . $node->nid . '/edit';
+        }
+    } else 
+    if ($op == 'Save & New') {
+        // set variable for next add category
+        session::set('category_default_' . $type, $cid);
+        if($class) {
+            session::set('product_default_type', $class);
+        }
+        // set redirect path
+        $form_state['redirect'] = 'node/add/' . $type;
+    } else {
+        // delete variable
+        session::del('product_default_type');
+        session::del('category_default_' . $type);
+        // redirect to next page
+        $ref = session::get('product_ref', router::getString('destination', 'admin/content/node'));
+        
+        $form_state['redirect'] = $ref;
+    }
+
+    // Xoa destination de execute redirect
+    unset($_REQUEST['destination']);
+}
+/**
+ * @todo Form cancel event
+ */
+function mart_form_cancel($form, &$form_state) {
+    $type = trim($form_state['values']['type']);
+   
+    // clear message
+    drupal_get_messages('error');
+    
+    $ref = session::get('product_ref', router::getString('destination', 'admin/content/node'));
+    
+    // clear registry variable
+    // session::del('nid'); //Khong xoa
+    session::del('product_ref');
+    session::del('product_default_type');
+    session::del('category_default_' . $type);
+
+    drupal_goto($ref);
+}
+/**
+ * Implementation of hook_validate().
+ *
+ * Our "quantity" field requires a number to be entered. This hook lets
+ * us ensure that the user entered an appropriate value before we try
+ * inserting anything into the database.
+ *
+ * Errors should be signaled with form_set_error().
+ */
+function mart_validate($node, &$form) {
+    /**
+     * @todo Kiem tra du lieu nhap vao
+     */
+        
+    $basic = (Object) $node->basic;
+    $ship = (Object) $node->ship;
+
+    if (!is_numeric ($basic->price)) {
+        form_set_error('basic][price', t('Giá sản phẩm phải là số.'));
+    }
+    if (!is_numeric ($basic->cost)) {
+        form_set_error('basic][cost', t('Giá mua vào phải là số.'));
+    }
+    if (!is_numeric ($basic->sell)) {
+        form_set_error('basic][sell', t('Giá bán ra phải là số.'));
+    }
+    if (!is_numeric ($basic->weight)) {
+        form_set_error('basic][weight', t('Trọng lượng sản phẩm phải là số.'));
+    }
+    if (!is_numeric ($basic->amount)) {
+        form_set_error('basic][amount', t('Số lượng sản phẩm phải là số.'));
+    }
+    if (!is_numeric ($ship->shipprice)) {
+        form_set_error('ship][shipprice', t('Phí vận chuyển phải là số.'));
+    }
+}
+
+/**
+ * Implementation of hook_insert().
+ */
+function mart_insert($node) {
+    // TODO: Process and Insert Tag to {data}
+
+    // TODO: Insert data to {products}
+    $product = new stdClass();
+    $product->nid = $node->nid;
+    $product->vid = $node->vid;
+    $product->uid = $node->uid;
+    $product->cid = $node->cid;
+    $product->sku = $node->basic['sku'];
+    $product->saleoff = $node->basic['saleoff'];
+    $product->special = $node->basic['special'];
+    $product->class = $node->class;
+    $product->price = $node->basic['price'];
+    $product->sell = empty($node->basic['sell']) ? $product->price : $node->basic['sell'];
+    $product->cost = $node->basic['cost'];
+    $product->guid = $node->basic['guid'];
+    $product->image = $node->image;
+    $product->weight = $node->basic['weight'];
+    $product->amount = $node->basic['amount'];
+    $product->unit = $node->basic['unit'];
+    $product->publish = $node->basic['publish'] ? strtotime("{$node->basic['publish']}") : 0;
+    $product->unpublish = $node->basic['unpublish'] ? strtotime("{$node->basic['unpublish']}") : 0;
+    $product->startdate = $node->basic['startdate'] ? strtotime("{$node->basic['startdate']}") : 0;
+    $product->enddate = $node->basic['enddate'] ? strtotime("{$node->basic['enddate']}") : 0;
+    $product->shipable = $node->ship['shipable'];
+    $product->shiptime = $node->ship['shiptime'];
+    $product->shipweight = $node->ship['shipweight'];
+    $product->shipprice = $node->ship['shipprice'];
+    $product->shipmethod = $node->ship['shipmethod'];
+    
+    data::insertObject('{products}', $product);
+
+    // TODO: Insert data to {product_field_data}
+    $fields    = isset($node->extra) ? $node->extra : array();
+
+    product::storeProductFiledData($node, $fields, false);
+}
+
+/**
+ * Implementation of hook_update().
+ */
+function mart_update($node) {
+    //trace($node);
+    // if this is a new node or we're adding a new revision,
+    if ($node->revision) {
+        mart_insert($node);
+    } else {
+        // TODO: Update {product}
+        $product = new stdClass();
+        $product->vid = $node->vid;
+        $product->cid = $node->cid;
+        $product->sku = $node->basic['sku'];
+        $product->saleoff = $node->basic['saleoff'];
+        $product->special = $node->basic['special'];
+        $product->class = $node->class;
+        $product->price = $node->basic['price'];
+        $product->sell = empty($node->basic['sell']) ? $product->price : $node->basic['sell'];
+        $product->cost = $node->basic['cost'];
+        $product->guid = $node->basic['guid'];
+        $product->image = $node->image;
+        $product->weight = $node->basic['weight'];
+        $product->amount = $node->basic['amount'];
+        $product->unit = $node->basic['unit'];
+        $product->publish = $node->basic['publish'] ? strtotime("{$node->basic['publish']}") : 0;
+        $product->unpublish = $node->basic['unpublish'] ? strtotime("{$node->basic['unpublish']}") : 0;
+        $product->startdate = $node->basic['startdate'] ? strtotime("{$node->basic['startdate']}") : 0;
+        $product->enddate = $node->basic['enddate'] ? strtotime("{$node->basic['enddate']}") : 0;
+        $product->shipable = $node->ship['shipable'];
+        $product->shiptime = $node->ship['shiptime'];
+        $product->shipweight = $node->ship['shipweight'];
+        $product->shipprice = $node->ship['shipprice'];
+        $product->shipmethod = $node->ship['shipmethod'];
+
+        data::insertObject('{products}', $product);
+        
+        // TODO: Update {product_field_data}
+        // TODO: Insert data to {product_field_data}
+        $fields    = isset($node->extra) ? $node->extra : array();
+
+        product::storeProductFiledData($node, $fields, true);
+    }
+}
+
+/**
+ * Implementation of hook_delete().
+ */
+function mart_delete(&$node) {
+    // TODO: Delete {products}
+    product::deleteProduct($node->nid);
+    // TODO: Delete {product_field_data}
+    product::deleteFieldData($node->nid);
+    // TODO: Delete product supplier / tag / ... from data extend
+    dataExtend::deleteNodeData($node->nid);
+}
+
+/**
+ * Implementation of hook_load().
+ */
+function mart_load($node) {
+    global $debug;
+    global $queries;
+    // TODO: Load product basic fields from table {products}
+    $products = db_fetch_object(db_query('SELECT * FROM {products} WHERE vid = %d', $node->vid));
+    // TODO: Load product extra fields from table {product_field_data}
+    $extra = product::getProductFieldData($node->nid, $node->vid);
+    $append = new stdClass();
+
+    foreach($extra as $key => $value) {
+        $append->{$key} = $value->data;
+    }
+
+    $products->extra = $append ? $append : NULL;
+
+    return $products;
+}
+
+/**
+ * Implementation of hook_view().
+ */
+function mart_view($node, $teaser = FALSE, $page = FALSE) {
+    // TODO: Insert additional code (call to theme functions, etc.) to execute when viewing a node, for example:
+    // $node = node_prepare($node, $teaser);
+    // $node->content['myfield'] = array(
+    //   '#value' => theme('node_example_order_info', $node),
+    //   '#weight' => 1,
+    // );
+
+    return $node;
+}
+
+/**
+ * Implementation of hook_nodeapi().
+ *
+ * We will implement several node API operations here. This hook allows us to
+ * act on all major node operations, so we can manage our additional data
+ * appropriately.
+ */
+function mart_nodeapi(&$node, $op, $teaser, $page) {
+    switch ($op) {
+        case 'presave':
+            // trace($node);
+            // Add alias
+            if(empty($node->alias)) {
+                $node->alias = string::toAlias($node->title);
+            }
+            // Fix metadata
+            $meta = $node->meta;
+            $data = new stdClass();
+            $data->author = $meta['author'];
+            $data->robots = $meta['robots'];
+            $node->metadesc = isset($meta['desc']) ? $meta['desc'] : $node->title;
+            $node->metakey = isset($meta['keywords']) ? $meta['keyword'] : 'tag, keyword, ' . $node->title;
+            $node->metadata = serialize($data);
+            unset($node->meta);
+            break;
+    }
+}
+
+/**
+ * Implementation of hook_comment().
+ */
+function mart_comment(&$a1, $op) {
+
+}
+
+/**
+ * @todo Hook to change node schema struct
+ * @todo Support for node_load and node_save
+ */
+function mart_schema_alter(&$schema) {
+    // Thay doi cau truc cua table {node_revisions}
+    // Ho tro cho node_load va node_save
+    $schema['node_revisions'] = array(
+        'description' => 'Stores information about each saved version of a {node}.',
+        'fields' => array(
+            'nid' => array(
+                'description' => 'The {node} this version belongs to.',
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => 0),
+            'vid' => array(
+                'description' => 'The primary identifier for this version.',
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE),
+            'uid' => array(
+                'description' => 'The {users}.uid that created this version.',
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => 0),
+            'cid' => array(
+                'description' => 'The {users}.cid that created this version.',
+                'type' => 'int',
+                'not null' => TRUE),
+            'title' => array(
+                'description' => 'The title of this version.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => ''),
+            'alias' => array(
+                'description' => 'The alias of this version.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => ''),
+            'body' => array(
+                'description' => 'The body of this version.',
+                'type' => 'text',
+                'not null' => TRUE,
+                'size' => 'big'),
+            'teaser' => array(
+                'description' => 'The teaser of this version.',
+                'type' => 'text',
+                'not null' => TRUE,
+                'size' => 'big'),
+            'image' => array(
+                'description' => 'The title of this version.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => ''),
+            'metadesc' => array(
+                'description' => 'The log entry explaining the changes in this version.',
+                'type' => 'text',
+                'not null' => TRUE),
+            'metakey' => array(
+                'description' => 'The log entry explaining the changes in this version.',
+                'type' => 'text',
+                'not null' => TRUE),
+            'metadata' => array(
+                'description' => 'The log entry explaining the changes in this version.',
+                'type' => 'text',
+                'not null' => TRUE),
+            'log' => array(
+                'description' => 'The log entry explaining the changes in this version.',
+                'type' => 'text',
+                'not null' => TRUE,
+                'size' => 'big'),
+            'timestamp' => array(
+                'description' => 'A Unix timestamp indicating when this version was created.',
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => 0),
+            'format' => array(
+                'description' => "The input format used by this version's body.",
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => 0)
+        ),
+        'indexes' => array(
+            'nid' => array('nid'),
+            'uid' => array('uid')
+        ),
+        'primary key' => array('vid'),
+    );
+}

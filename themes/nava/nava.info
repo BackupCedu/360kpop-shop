@@ -1,0 +1,28 @@
+name = 360Kpop Nava
+description = This theme is Nava clone.
+version = VERSION
+core = 6.x
+engine = phptemplate
+
+; Style information
+stylesheets[all][] = style.css
+stylesheets[print][] = print.css
+
+; Regions information
+regions[topmenu] = Toolbar menu
+regions[mainmenu] = Main menu region
+
+regions[top] = Region Top full width
+regions[promote] = Region Promote full width
+regions[featured] = Region Featured Content
+regions[content] = Content
+regions[bottom] = Region Bottom region after Content
+regions[right] = Region Right sidebar
+regions[page] = Region Page before Footer
+regions[footer] = Region Footer
+
+; Information added by drupal.org packaging script on 2011-05-25
+version = "6.22"
+project = "drupal"
+datestamp = "1306357015"
+

@@ -1,0 +1,546 @@
+<?php
+
+/**
+ * @file mart.module
+ * TODO: Enter file description here.
+ */
+
+
+/**
+ * Implementation of hook_menu().
+ */
+function sites_menu() {
+    // Page: Home
+    $items['home'] = array(
+        'title' => 'Trang chủ',
+        'page callback' => 'sites_home',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    // Page: Home paging
+    $items['page/%'] = array(
+        'title' => 'Trang chủ',
+        'page callback' => 'sites_home',
+        'page arguments' => array(1),
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    // Page: rss.xml
+    $items['rss.xml'] = array(
+        'title' => 'RSS feed',
+        'page callback' => 'sites_rss',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    // Page: Category
+    $items['category/%'] = array(
+        'title' => 'Danh mục',
+        'page callback' => 'sites_category',
+        'page arguments' => array(1),
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    // Page: Category paging
+    $items['category/%/page/%'] = array(
+        'title' => 'Danh mục',
+        'page callback' => 'sites_category',
+        'page arguments' => array(1, 3),
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    // Page: Tags
+    $items['tag/%'] = array(
+        'title' => 'Tag',
+        'page callback' => 'sites_tag',
+        'page arguments' => array(1),
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    // Page: Tag paging
+    $items['tag/%/page/%'] = array(
+        'title' => 'Danh mục',
+        'page callback' => 'sites_tag',
+        'page arguments' => array(1, 3),
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    // Page: Search
+    $items['search/%'] = array(
+        'title' => 'Search',
+        'page callback' => 'sites_search',
+        'page arguments' => array(1),
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    // Page: Search paging
+    $items['search/%/page/%'] = array(
+        'title' => 'Search',
+        'page callback' => 'sites_search',
+        'page arguments' => array(1, 3), //search, page
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    // Page: Product comment add
+    $items['comment/%/add'] = array(
+        'title' => 'Comment ajax add',
+        'page callback' => 'sites_comment',
+        'page arguments' => array('add', 1),
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    // Page: Product comment list page
+    $items['comment/%/%'] = array(
+        'title' => 'Comment ajax list page',
+        'page callback' => 'sites_comment',
+        'page arguments' => array('list', 1, 2),
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    // Page: Product
+    $items['product/%'] = array(
+        'title' => 'Chi tiết sản phẩm',
+        'page callback' => 'sites_product',
+        'page arguments' => array(1),
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    // Page : Provide API to request data from server
+    $items['api/product'] = array(
+        'title' => 'TODO: Product API to Request data',
+        'page callback' => 'sites_api',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );    
+    // Page: Cart
+    $items['cart'] = array(
+        'title' => 'Giỏ hàng',
+        'page callback' => 'sites_cart',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    // Page: Cart/product/task = delete/add...
+    $items['cart/%/%'] = array(
+        'title' => 'Giỏ hàng',
+        'page callback' => 'sites_cart_process',
+        'page arguments' => array(1, 2), // nid, task={delete/add}
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    // Page: Moi xem gan day
+    $items['product/viewed'] = array(
+        'title' => 'Mới xem gần đây',
+        'page callback' => 'sites_viewed',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    return $items;
+}
+
+/**
+ * @todo Product API provide data for Ajax request
+ * @param string    $type   The type of api : product/article ...
+ * @param string    $task   The task of api : ...
+ * @return  html ajax content
+ */
+function sites_api() {
+    drupal_set_header('Content-Type: text/html');
+
+    // TODO : Begion api process
+
+    // API action support
+    $actionAccept = array(
+        'loadProductRelated'  => 1, // Sản phẩm liên quan
+        'loadProductNewest'   => 1, // Sản phẩm mới nhất
+        'loadProductHotest'   => 1, // Sản phẩm nổi bật nhất
+        'loadProductPromote'  => 1, // Sản phẩm khuyến mại
+        'loadProductSellOff'  => 1, // Sản phẩm bán giảm giá
+        'loadProductViewGrid' => 1, // Sản phẩm khi thay đổi chế độ view Grid
+        'loadProductViewList' => 1, // Sản phẩm khi thay đổi chế độ view List
+        'loadProductByFilter' => 1, // Sản phẩm khi thay đổi chế độ view List
+        'loadProductSticky'   => 1,
+    );
+
+    $file = ''; // Template to rendering data
+    $action = router::getString('action');
+    $params = router::getString('param');
+    $option = router::getString('option');
+
+    // Data container
+
+    $data     = array();
+    $filter   = array();
+    $products = array();
+
+    // Validate action
+    $action = isset($actionAccept[$action]) ? $action : NULL;
+
+    switch ($action) {
+        case 'loadProductRelated':
+            # code...
+            $nid = intval($params);
+            if($nid && $node = product::getProduct($nid)) { 
+                $file = 'related';
+                $filter['n.status'] = 1;
+                $filter['r.cid']    = $node->cid;
+                $filter['n.nid']    = array(
+                    'op' => '!=',
+                    'value' => $node->nid,
+                );
+                $products = product::getProducts($filter, 0, 15);
+                $data['product'] = $node;
+                $data['products'] = $products;
+            }
+            break;
+        case 'loadProductViewGrid':
+            # code...
+            $file = 'viewGrid';
+            $cid  = $params;
+            // Filter theo page
+            $filter['n.status'] = 1;
+            $filter['r.cid']    = $cid;
+
+            $offset = 0;    // Offset theo so trang
+            $limit  = 20;   // So product tren moi page
+
+            $pageCurrent = $option;
+            $pageCount   = product::getProductsCount($filter);
+            $pageTotal   = ceil($pageCount/$limit);
+
+            // Kiem tra page hien tai co hop le
+            $pageCurrent = ($pageCurrent > $pageTotal) ? $pageTotal : ($pageCurrent < 1 ? 1 : $pageCurrent);
+
+            // Tinh offset
+            $offset = ($pageCurrent - 1) * $limit;
+
+            $products = product::getProducts($filter, $offset, $limit);            
+            $data['products'] = $products;
+            break;
+        case 'loadProductByFilter':
+            # code...
+            $file = 'selloff';
+            $cid  = $params;
+
+            // Filter theo page
+            $filter['n.status'] = 1;
+
+            if($cid > 0) {
+                $filter['r.cid']    = $cid;
+            }
+
+            if($option == 'promote') {
+                $filter['n.promote'] = 1;
+                $products = product::getProducts($filter, 0, 12);
+            }
+
+            if($option == 'selloff') {
+                $products = product::getProducts($filter, 0, 12, NULL, array('selloff'=>1));
+            }
+            $data['products'] = $products;
+            break;
+        case 'loadProductNewest':
+            # code...
+            $file = 'newest';
+
+            $filter['n.status'] = 1;
+            $filter['r.cid'] = $params;
+
+            $data['products'] = product::getProducts($filter,0, 18);
+            break;
+        case 'loadProductSticky':
+            # code...
+            $file = 'sticky';
+            $filter['n.status'] = 1;
+            $filter['n.sticky'] = 1;
+
+            if($params) {
+                $filter['r.cid'] = $params;
+            }
+
+            $data['products'] = product::getProducts($filter,0, 15);
+            break;
+        default:
+            # code...
+            print 'Error';
+            break;
+    }
+
+    if($file) {
+        print render(dirname(__FILE__) . '/views/api/' . $file . '.inc', $data, false);
+    }
+
+    // TODO : End api process
+
+    die();
+}
+/**
+ * @todo Layout Home
+ */
+function sites_home($page = 1) {
+    $data = array();
+    $filter = array();
+    $filter['n.status'] = 1;
+    $filter['n.promote'] = 1;
+    
+    $result = array();    
+    $list = product::getProducts($filter);
+    // Gop theo tung nhom 4 bai viet
+    $count = 1;
+    $round = 1;
+    foreach($list as $item) {
+        if($count > 4) {
+            $round++;
+            $count=1;
+        }
+        $result[$round][] = $item;
+        $count++;
+    }
+    $data['products'] = $result;
+    return render(dirname(__FILE__) .'/views/product/home.inc', $data, false);
+}
+
+/**
+ * @todo Layout rss.xml
+ */
+function sites_rss($cid = NULL) {
+    return '';
+}
+
+/**
+ * @todo Layout Category
+ */
+function sites_category($cid, $page = 1) {
+    $data       = array();
+    $result     = array();
+    $filter     = array();
+    $breadcrumb = array();
+
+    // Get current category data
+
+    $category = category::getCategory($cid);
+
+    // Neu category khong ton tai, redirect to home
+    if(!$category) {
+        drupal_goto('');
+    }
+
+    $template = $category->level==1 ? 'parent' : 'children';
+    $template = 'category.' . $template . '.inc';
+
+    // Filter theo page
+    $filter['n.status'] = 1;
+    $filter['r.cid']    = $cid;
+
+    $offset = 0;    // Offset theo so trang
+    $limit  = 20;   // So product tren moi page
+
+    $pageCurrent = router::getInt('page', 1);
+    $pageCount   = product::getProductsCount($filter);
+    $pageTotal   = ceil($pageCount/$limit);
+
+    // Kiem tra page hien tai co hop le
+    $pageCurrent = ($pageCurrent > $pageTotal) ? $pageTotal : ($pageCurrent < 1 ? 1 : $pageCurrent);
+
+    // Tinh offset
+    $offset = ($pageCurrent - 1) * $limit;
+
+    $result = product::getProducts($filter, $offset, $limit);
+
+    // Đường dẫn pathway
+    $list = nested::getPath($cid, 0, $category->type);
+
+    foreach ($list as $item) {
+        $item->link   = url($item->alias);
+        $breadcrumb[] = $item;
+    }
+
+    drupal_set_breadcrumb($breadcrumb);
+
+    $data['category'] = $category;
+    $data['products'] = $result;
+    $data['page']     = $pageCurrent;
+    $data['total']    = $pageTotal;
+    $data['pages']    = page::getPaging($pageCurrent,$pageTotal,array(
+        'prevTitle'  => 'Trang trước', 
+        'nextTitle'  => 'Trang sau',
+        'firstTitle' => 'Trang đầu',
+        'lastTitle'  => 'Trang cuối',
+        'pageSpace'  => 4,
+        'pageNext'   => 1,
+        'pagePrev'   => 1,
+    ));
+
+    return render(dirname(__FILE__) .'/views/product/' . $template, $data, false);
+}
+
+/**
+ * @todo    Layout Product Detail
+ * @param   $pid    ma san pham
+ */
+function sites_product($pid) {
+    $product = product::getProduct($pid);
+    $fields  = product::getProductFieldData($pid);
+
+    if(!$product) {
+        drupal_goto('');
+    }
+
+    $data = array();
+    $data['product'] = $product;
+    $data['fields']  = $fields;
+
+    // Đường dẫn pathway
+
+    $list = nested::getPath($product->cid, 0, $product->type);
+    $breadcrumb = array();
+
+    foreach ($list as $item) {
+        $item->link   = url($item->alias);
+        $breadcrumb[] = $item;
+    }
+
+    drupal_set_breadcrumb($breadcrumb);
+
+    // Luu san pham vua xem
+    if(false == isset($_SESSION['products'])) {
+        $_SESSION['products'] = array();
+    }
+
+    // Thong tin luu vao session
+    $history = &$_SESSION['products'];
+
+    // Neu chua luu san pham vao session history
+    if(isset($history[$pid])) {
+        unset($history[$pid]);
+    }
+
+    // Get history data after get list
+    $products = array_reverse($history);
+    $products = array_slice($products, 0, 15);
+
+    $data['viewedProducts'] = $products;
+
+    // San pham cung category
+    $filter = array();
+    $filter['n.status'] = 1;
+    $filter['r.cid']    = $product->cid;
+    $filter['n.nid']    = array(
+        'op' => '!=',
+        'value' => $pid,
+    );
+
+    $data['categoryProducts'] = product::getProducts($filter, 0, 15);
+
+    $history[$pid] = new stdClass();
+    $history[$pid]->title = $data['product']->title;
+    $history[$pid]->price = $data['product']->price;
+    $history[$pid]->sell = $data['product']->sell;
+    $history[$pid]->image = $data['product']->image;
+    $history[$pid]->thumb = $data['product']->thumb;
+    $history[$pid]->link_view = $data['product']->link_view;
+    $history[$pid]->link_edit = $data['product']->link_edit;
+    $history[$pid]->link_user = $data['product']->link_user;
+    $history[$pid]->link_clear = $data['product']->clear;
+
+    return render(dirname(__FILE__) .'/views/product/product.inc', $data, false);
+}
+
+/**
+ * @todo    Layout Order
+ * @param   $step Buoc dat hang
+ */
+function sites_order($step = 1) {
+    return '';
+}
+
+/**
+ * @todo    Layout Ajax Comment Request
+ * @param   $op     add | list
+ * @param   $pid    ma san pham
+ * @param   $page   trang, chi dung cho op = list
+ */
+function sites_comment($op, $pid, $page = 1) {
+    if($op == 'add') {
+        
+    }
+    if($op == 'list') {
+        
+    }
+    return '';
+}
+
+/**
+ * @todo Layout Tag
+ * Hien thi tag
+ */
+function sites_tag($tid, $page = 1) {
+    return '';
+}
+
+/**
+ * @todo Layout Search
+ * Hien thi ket qua tim kiem
+ */
+function sites_search($keyword, $page = 1) {
+    return '';
+}
+
+/**
+ * @todo Layout Cart
+ * Hien thi danh sach san pham nguoi dung them vao gio hang
+ */
+function sites_cart() {
+    $nid  = router::getInt('node');
+    $task = router::getString('formAction');
+    $data = array();
+
+    $data['nid'] = $nid;
+
+    if(!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = array();
+    }
+
+    if($task == 'add' && $nid && $node = product::getProduct($nid)) {
+        $node->quantity = router::getInt('quantity', 1);
+        $node->quantity = $node->quantity > 0 ? $node->quantity : 1;
+
+        $total = str_replace('.','',$node->price) * $node->quantity;
+        
+        $clone = new stdClass();
+        $clone->nid = $node->nid;
+        $clone->title = $node->title;
+        $clone->price = $node->price;
+        $clone->sell = $node->sell;
+        $clone->image = $node->image;
+        $clone->thumb = $node->thumb;
+        $clone->quantity = $node->quantity;
+        $clone->link_view = $node->link_view;
+        $clone->link_edit = $node->link_edit;
+        $clone->link_user = $node->link_user;
+        $clone->link_clear = $node->clear;
+        $clone->total = $total;
+        $clone->payment = number_format ($total,0,',','.');
+
+        $_SESSION['cart'][$nid] = $clone;
+    } else {
+        unset($_SESSION['cart'][$nid]);
+    }
+
+    $data['products'] = $_SESSION['cart'];
+
+    return render(dirname(__FILE__) . '/views/product/cart.inc', $data, false);
+}
+
+/**
+ * @todo Layout Viewed
+ * Hien thi danh sach san pham nguoi dung moi xem
+ */
+function sites_viewed() {
+    return '';
+}
+
+/**
+ * @todo Product site rendering block helper function
+ */
+function renderProductBlock($products, $op = array()) {
+    return render(dirname(__FILE__) . '/views/product/block.inc', $product, false);
+}

@@ -1,0 +1,186 @@
+<?php
+
+// $Id$
+
+/**
+ * @file
+ * TODO: Enter file description here.
+ */
+
+include('data.inc');
+
+/**
+ * Implementation of hook_menu().
+ */
+function data_menu() {
+    // Task : add new data item
+    $items['data/%/add'] = array(
+        'title' => 'Add data item',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('data_form', 'add', 1, NULL), // form, task, type, did
+        'access arguments' => array('Data Add'),
+        'file' => 'views/form.inc',
+        'type' => MENU_CALLBACK,
+    );
+    // Task : edit data item
+    $items['data/%/%/edit'] = array(
+        'title' => 'Data edit item',
+        'description' => 'Edit a data item.',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('data_form', 'edit', 1, 2), // form, task, type, did
+        'access callback' => 'data_access',
+        'access arguments' => array('Data Edit', 1, 2),
+        'file' => 'views/form.inc',
+        'type' => MENU_CALLBACK, // One of MENU_NORMAL_ITEM / MENU_CALLBACK / MENU_SUGGESTED_ITEM / MENU_LOCAL_TASK / MENU_DEFAULT_LOCAL_TASK
+    );
+    // Task : delete data item, check own perm
+    $items['data/%/%/delete'] = array(
+        'title' => 'Data delete item',
+        'description' => 'Delete a data item',
+        'page callback' => 'data_delete',
+        'page arguments' => array(1, 2), // data alias or data name
+        'access callback' => 'data_access',
+        'access arguments' => array('Data Delete', 1, 2),
+        'type' => MENU_CALLBACK,
+    );
+    // Task : show data list for a type or all type
+    $items['data/%/list'] = array(
+        'title' => 'Data manager',
+        'description' => 'Show data list of a data type or all type.',
+        'page callback' => 'data_overview',
+        'page arguments' => array(1), // data type : tag ...
+        'access arguments' => array('Data View'),
+        'weight' => 0,
+        'type' => MENU_CALLBACK,
+    );
+    // Task : get autocomplete for item
+    $items['data/%/autocomplete'] = array(
+        'title' => 'Data autocomplete',
+        'description' => 'Data autocomplete for one item',
+        'page callback' => 'data_autocomplete',
+        'page arguments' => array(1), // data type : tag ...
+        'access arguments' => array('Data Add'),
+        'type' => MENU_CALLBACK,
+    );
+    // Task: Rebuild module
+    $items['data/build'] = array(
+        'title' => 'Rebuild Data Module',
+        'page callback' => 'data_rebuild',
+        'access arguments' => array('Data View'),
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
+}
+
+/**
+ * @todo Defined module perm
+ */
+function data_perm() {
+    return array(
+        'Data View',
+        'Data Add',
+        'Data Edit Own',
+        'Data Edit Any',
+        'Data Delete Own',
+        'Data Delete Any'
+    );
+}
+
+/**
+ * @todo Check user access perm
+ * @param string $op : Data Edit | Data Delete
+ */
+function data_access($op, $type, $did) {
+    global $user;
+
+    $data = dataExtend::getDataById($type,$did);
+
+    if ($op == 'Data Edit') {
+        if (user_access('Data Edit Any', $user) || (user_access('Data Edit Own', $user) && ($user->uid == $data->uid))) {
+            return true;
+        }    
+    } else
+    if ($op == 'Data Delete') {
+        if (user_access('Data Delte Any', $user) || (user_access('Data Delete Own', $user) && ($user->uid == $data->uid))) {
+            return true;
+        } 
+    }
+}
+
+/**
+ * @todo create trigger for data add
+ */
+function data_trigger($type, $post, $selector) {
+    $data = array();
+    $data['type'] = $type;
+    $data['post'] = $post;
+    $data['link'] = url('data/' . $type . '/add');
+    $data['selector'] = $selector;
+    return render(dirname(__FILE__) . '/views/trigger.inc', $data, false);
+}
+
+/**
+ * @todo  The data overview page
+ * @param string $type The type of data
+ * @example $type = tag / manufacture ...
+ */
+function data_overview($type = NULL) {
+    $data = array();
+}
+
+function data_autocomplete($type, $string = '') {
+    $list = explode(',', $string);
+    $last = trim(array_pop($list));
+
+    $matches = array();
+
+    if ($last != '') {
+        $last = mb_strtolower($last, 'UTF-8');
+
+        $query = " SELECT * FROM {data}";
+        $query.= " WHERE LOWER(name) LIKE '{$last}%'";
+        $query.= " AND type='$type'";
+        $query.= " ORDER BY name ASC LIMIT 10";
+
+        $result = db_query($query);
+
+        $prefix = count($list) ? implode(',', $list) . ',' : '';
+
+        while ($row = db_fetch_object($result)) {
+            $name = $row->name;
+            if (strpos($row->name, ',') !== FALSE || strpos($row->name, '"') !== FALSE) {
+                $name = '"' . str_replace('"', '""', $row->name) . '"';
+            }
+
+            $matches[$prefix . $name] = check_plain($row->name);
+        }
+    }
+
+    drupal_json($matches);
+}
+
+/**
+ * @todo Delete a data item
+ * @param string $data : is data name
+ * @example $data = 'Junior', 'Product'
+ */
+function data_delete($type, $item) {
+    $data = dataExtend::getDataById($item);
+    if ($data) {
+        db_query('DELETE FROM {data} WHERE did=' . $item);
+    } else {
+        drupal_set_message('The ' . $type . ' does not exists, please check again.');
+    }
+    drupal_goto('data/' . $type . '/list');
+}
+
+/**
+ * @todo Rebuild data module registry
+ */
+function data_rebuild() {
+    module_disable(array('data'));
+    module_enable(array('data'));
+    menu_rebuild();
+    return '';
+}

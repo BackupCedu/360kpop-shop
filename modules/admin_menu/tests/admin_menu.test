@@ -1,0 +1,341 @@
+<?php
+
+/**
+ * @file
+ * Tests for the Administration menu module.
+ */
+
+/**
+ * Base class for all administration menu web test cases.
+ */
+class AdminMenuWebTestCase extends DrupalWebTestCase {
+  protected $basePermissions = array(
+    'system' => 'access administration pages',
+    'admin_menu' => 'access administration menu',
+  );
+
+  function setUp() {
+    // Enable admin menu module and any other modules.
+    $modules = func_get_args();
+    $modules = isset($modules[0]) ? $modules[0] : $modules;
+    $modules[] = 'admin_menu';
+    parent::setUp($modules);
+
+    // Disable client-side caching.
+    variable_set('admin_menu_cache_client', FALSE);
+    // Disable Clean URLs to ensure drupal.org testbot compatibility.
+    variable_set('clean_url', 0);
+  }
+
+  /**
+   * Check that an element exists in HTML markup.
+   *
+   * @param $xpath
+   *   An XPath expression.
+   * @param array $arguments
+   *   (optional) An associative array of XPath replacement tokens to pass to
+   *   DrupalWebTestCase::buildXPathQuery().
+   * @param $message
+   *   The message to display along with the assertion.
+   * @param $group
+   *   The type of assertion - examples are "Browser", "PHP".
+   *
+   * @return
+   *   TRUE if the assertion succeeded, FALSE otherwise.
+   */
+  protected function assertElementByXPath($xpath, array $arguments = array(), $message, $group = 'Other') {
+    $elements = $this->xpath($xpath, $arguments);
+    return $this->assertTrue(!empty($elements[0]), $message, $group);
+  }
+
+  /**
+   * Check that an element does not exist in HTML markup.
+   *
+   * @param $xpath
+   *   An XPath expression.
+   * @param array $arguments
+   *   (optional) An associative array of XPath replacement tokens to pass to
+   *   DrupalWebTestCase::buildXPathQuery().
+   * @param $message
+   *   The message to display along with the assertion.
+   * @param $group
+   *   The type of assertion - examples are "Browser", "PHP".
+   *
+   * @return
+   *   TRUE if the assertion succeeded, FALSE otherwise.
+   */
+  protected function assertNoElementByXPath($xpath, array $arguments = array(), $message, $group = 'Other') {
+    $elements = $this->xpath($xpath, $arguments);
+    return $this->assertTrue(empty($elements), $message, $group);
+  }
+
+  /**
+   * Asserts that links appear in the menu in a specified trail.
+   *
+   * @param array $trail
+   *   A list of menu link titles to assert in the menu.
+   */
+  protected function assertLinkTrailByTitle(array $trail) {
+    $xpath = array();
+    $args = array();
+    $message = '';
+    foreach ($trail as $i => $title) {
+      $xpath[] = '/li/a[text()=:title' . $i . ']';
+      $args[':title' . $i] = $title;
+      $message .= ($i ? ' » ' : '') . check_plain($title);
+    }
+    $xpath = '//div[@id="admin-menu"]/div/ul' . implode('/parent::li/ul', $xpath);
+    $this->assertElementByXPath($xpath, $args, $message . ' link found.');
+  }
+
+  /**
+   * Asserts that no link appears in the menu for a specified trail.
+   *
+   * @param array $trail
+   *   A list of menu link titles to assert in the menu.
+   */
+  protected function assertNoLinkTrailByTitle(array $trail) {
+    $xpath = array();
+    $args = array();
+    $message = '';
+    foreach ($trail as $i => $title) {
+      $xpath[] = '/li/a[text()=:title' . $i . ']';
+      $args[':title' . $i] = $title;
+      $message .= ($i ? ' » ' : '') . check_plain($title);
+    }
+    $xpath = '//div[@id="admin-menu"]/div/ul' . implode('/parent::li/ul', $xpath);
+    $this->assertNoElementByXPath($xpath, $args, $message . ' link not found.');
+  }
+}
+
+/**
+ * Tests menu links depending on user permissions.
+ */
+class AdminMenuPermissionsTestCase extends AdminMenuWebTestCase {
+  public static function getInfo() {
+    return array(
+      'name' => 'Menu link access permissions',
+      'description' => 'Tests that menu links are displayed according to user permissions.',
+      'group' => 'Administration menu',
+    );
+  }
+
+  function setUp() {
+    parent::setUp(array('node', 'contact'));
+  }
+
+  /**
+   * Test that the links are added to the page (no JS testing).
+   */
+  function testPermissions() {
+    // Anonymous users should not see the menu.
+    $this->drupalGet('');
+    $this->assertNoElementByXPath('//div[@id="admin-menu"]', array(), t('Administration menu not found.'));
+
+    // Create a user who
+    // - can access content overview
+    // - cannot access drupal.org links
+    // - cannot administer Contact module
+    $permissions = $this->basePermissions + array(
+      'administer nodes',
+    );
+    $admin_user = $this->drupalCreateUser($permissions);
+    $this->drupalLogin($admin_user);
+
+    // Check that the user can see the admin links, but not the drupal links.
+    $this->assertElementByXPath('//div[@id="admin-menu"]', array(), 'Administration menu found.');
+    $this->assertElementByXPath('//div[@id="admin-menu"]//a[contains(@href, :path)]', array(':path' => 'admin/content'), 'Content link found.');
+    $this->assertNoElementByXPath('//div[@id="admin-menu"]//a[@href=:path]', array(':path' => 'http://drupal.org'), 'Icon » Drupal.org link not found.');
+    $this->assertNoElementByXPath('//div[@id="admin-menu"]//a[contains(@href, :path)]', array(':path' => 'admin/build/contact'), 'Structure » Contact link not found.');
+
+    // Create a user "reversed" to the above; i.e., who
+    // - cannot access content overview
+    // - can access drupal.org links
+    // - can administer Contact module
+    $permissions = $this->basePermissions + array(
+      'display drupal links',
+      'administer site-wide contact form',
+    );
+    $admin_user2 = $this->drupalCreateUser($permissions);
+    $this->drupalLogin($admin_user2);
+    $this->assertElementByXPath('//div[@id="admin-menu"]', array(), 'Administration menu found.');
+    // @todo Top-level category links are based on access administration pages
+    //   permission only.
+    //$this->assertNoElementByXPath('//div[@id="admin-menu"]//a[contains(@href, :path)]', array(':path' => 'admin/content'), 'Content link not found.');
+    $this->assertElementByXPath('//div[@id="admin-menu"]//a[@href=:path]', array(':path' => 'http://drupal.org'), 'Icon » Drupal.org link found.');
+    $this->assertElementByXPath('//div[@id="admin-menu"]//a[contains(@href, :path)]', array(':path' => 'admin/build/contact'), 'Structure » Contact link found.');
+  }
+}
+
+/**
+ * Tests appearance, localization, and escaping of dynamic links.
+ */
+class AdminMenuDynamicLinksTestCase extends AdminMenuWebTestCase {
+  public static function getInfo() {
+    return array(
+      'name' => 'Dynamic links',
+      'description' => 'Tests appearance, localization, and escaping of dynamic links.',
+      'group' => 'Administration menu',
+    );
+  }
+
+  function setUp() {
+    parent::setUp(array('node'));
+  }
+
+  /**
+   * Tests node type links.
+   */
+  function testNode() {
+    $type = $this->drupalCreateContentType(array('type' => 'article', 'name' => 'Article'));
+    // Create a content-type with special characters.
+    $type = $this->drupalCreateContentType(array('type' => 'special', 'name' => 'Cool & Special'));
+
+    $permissions = $this->basePermissions + array(
+      'administer content types',
+      'create article content',
+      'create special content',
+    );
+    $this->admin_user = $this->drupalCreateUser($permissions);
+    $this->drupalLogin($this->admin_user);
+
+    // Verify that dynamic links are displayed.
+    $this->drupalGet('');
+    $this->assertElementByXPath('//div[@id="admin-menu"]', array(), t('Administration menu found.'));
+    $this->assertElementByXPath('//div[@id="admin-menu"]//a[contains(@href, :path)]', array(':path' => 'admin/content/types'), "Structure » Content types link found.");
+
+    // Verify link title output escaping.
+    $this->assertNoRaw('Cool & Special');
+    $this->assertRaw(check_plain('Cool & Special'));
+
+    // Verify Manage content type links.
+    $links = array(
+      'admin/content/types/article' => 'Article',
+      'admin/content/types/special' => 'Cool & Special',
+    );
+    foreach ($links as $path => $title) {
+      $this->assertElementByXPath('//div[@id="admin-menu"]//a[contains(@href, :path) and text()=:title]', array(
+        ':path' => $path,
+        ':title' => $title,
+      ), "Structure » Content types » $title link found.");
+    }
+
+    // Verify Add content links.
+    $links = array(
+      'node/add/article' => 'Article',
+      'node/add/special' => 'Cool & Special',
+    );
+    foreach ($links as $path => $title) {
+      $this->assertElementByXPath('//div[@id="admin-menu"]//a[contains(@href, :path) and text()=:title]', array(
+        ':path' => $path,
+        ':title' => $title,
+      ), "Add content » $title link found.");
+    }
+  }
+
+  /**
+   * Tests Add content links.
+   */
+  function testNodeAdd() {
+    $type = $this->drupalCreateContentType(array('type' => 'article', 'name' => 'Article'));
+
+    // Verify that "Add content" does not appear for unprivileged users.
+    $permissions = $this->basePermissions + array(
+      'access content',
+    );
+    $this->web_user = $this->drupalCreateUser($permissions);
+    $this->drupalLogin($this->web_user);
+    $this->assertNoText(t('Create content'));
+
+    // Verify "Add content" appears below "Content" for administrative users.
+    $permissions = $this->basePermissions + array(
+      'administer nodes',
+      'access content',
+      'create article content',
+    );
+    $this->admin_user = $this->drupalCreateUser($permissions);
+    $this->drupalLogin($this->admin_user);
+    $this->assertLinkTrailByTitle(array(
+      t('Content management'),
+      t('Create content'),
+    ));
+
+    // Verify "Add content" appears on the top-level for regular users.
+    $permissions = $this->basePermissions + array(
+      'access content',
+      'create article content',
+    );
+    $this->web_user = $this->drupalCreateUser($permissions);
+    $this->drupalLogin($this->web_user);
+    $this->assertLinkTrailByTitle(array(
+      // @todo Top-level category links are based on access administration pages
+      //   permission only.
+      t('Content management'),
+      t('Create content'),
+    ));
+  }
+}
+
+/**
+ * Tests appearance of different types of links.
+ */
+class AdminMenuLinkTypesTestCase extends AdminMenuWebTestCase {
+  public static function getInfo() {
+    return array(
+      'name' => 'Link types',
+      'description' => 'Tests appearance of different types of links.',
+      'group' => 'Administration menu',
+    );
+  }
+
+  function setUp() {
+    parent::setUp(array('help'));
+
+    $permissions = module_invoke_all('perm');
+    $this->admin_user = $this->drupalCreateUser($permissions);
+    $this->drupalLogin($this->admin_user);
+  }
+
+  /**
+   * Tests appearance of different router item link types.
+   */
+  function testLinkTypes() {
+    // Verify that MENU_NORMAL_ITEMs appear.
+    $this->assertLinkTrailByTitle(array(
+      t('Site configuration'),
+      t('Site information'),
+    ));
+
+    // Verify that MENU_LOCAL_TASKs appear.
+    $this->assertLinkTrailByTitle(array(t('User management'), t('Permissions')));
+    $this->assertLinkTrailByTitle(array(t('Site building'), t('Themes'), t('Configure')));
+    $this->assertLinkTrailByTitle(array(t('Site building'), t('Modules'), t('Uninstall')));
+
+    // Verify that MENU_LOCAL_ACTIONs appear.
+    $this->assertLinkTrailByTitle(array(
+      t('User management'),
+      t('Users'),
+      t('Add user'),
+    ));
+
+    // Verify that MENU_DEFAULT_LOCAL_TASKs do NOT appear.
+    $this->assertNoLinkTrailByTitle(array(t('Site building'), t('Modules'), t('List')));
+    $this->assertNoLinkTrailByTitle(array(t('User management'), t('Users'), t('List')));
+    $this->assertNoLinkTrailByTitle(array(t('User management'), t('Users'), t('Permissions'), t('Permissions')));
+    $this->assertNoLinkTrailByTitle(array(t('Site building'), t('Themes'), t('List')));
+
+    // Verify that MENU_VISIBLE_IN_BREADCRUMB items (exact type) do NOT appear.
+    $this->assertNoLinkTrailByTitle(array(t('Site building'), t('Modules'), t('Uninstall'), t('Uninstall')));
+    $this->assertNoLinkTrailByTitle(array(t('Help'), 'admin_menu'));
+
+    // Verify that special "Index" link appears below icon.
+    // Note: admin_menu_menu_alter() hides this link entirely.
+    /*
+    $this->assertElementByXPath('//div[@id="admin-menu"]//a[contains(@href, :path) and text()=:title]', array(
+      ':path' => 'admin/by-module',
+      ':title' => t('By module'),
+    ), "Icon » Index link found.");
+    */
+  }
+}
+
