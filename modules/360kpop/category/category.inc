@@ -32,8 +32,12 @@ class category {
 
         return $types;
     }
+    public static function getContentType($type) {
+        return node_get_types($type);
+    }
     /**
      * @todo Category Container Helper Function
+     * @note unuse
      */
     public static function getContainers() {
         $containers = array();
@@ -210,7 +214,9 @@ class category {
 
         return $cates;
     }
-
+    /**
+     * @todo Get categories to build Parent cate for node form
+     */
     public static function getParentOptions($type, $nid = NULL) {
         $parents = array();
         $result = array();

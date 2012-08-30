@@ -65,9 +65,9 @@ function category_menu() {
         'type' => MENU_CALLBACK,
     );
     
-    $containers = category::getContainers();
+    $types = category::getContentTypes();
     
-    foreach($containers as $item) :
+    foreach($types as $item) :
         
     // Menu: List all category of container
     $items['admin/category/type/' . $item->type] = array(
@@ -249,7 +249,7 @@ function category_list_page($type, $ref = NULL) {
         category_order($type, $cid, $op);
     }
     
-    $con = category::getContainer($type);
+    $con = category::getContentType($type);
 
     if(!$con) {
         drupal_set_message('The category type ' . $type .' is not existed.', 'error');
