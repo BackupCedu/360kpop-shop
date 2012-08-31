@@ -39,7 +39,7 @@ $update_free_access = FALSE;
  * Base URL (optional).
  */
 
-$base_url = 'http://360.com';  // NO trailing slash!
+$base_url = 'http://localhost/360kpop-shop';  // NO trailing slash!
 
 /**
  * Variable overrides:
