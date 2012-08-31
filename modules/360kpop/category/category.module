@@ -38,10 +38,8 @@ function category_menu() {
     $items['admin/category/add'] = array(
         'title' => 'Add category type',
         'description' => 'Add new category container.',
-        'page callback' => 'drupal_get_form',
-        'page arguments' => array('category_type', 'add', NULL), //form,type,id
+        'page callback' => 'category_type_add',
         'access arguments' => array('Category type Add'),
-        'file' => 'views/type/form.inc',
         'type' => MENU_LOCAL_TASK,
         'weight' => -9,
     );
@@ -49,10 +47,9 @@ function category_menu() {
     // Task: Edit contrainer
     $items['admin/category/%/edit'] = array(
         'title' => 'Edit category type',
-        'page callback' => 'drupal_get_form',
-        'page arguments' => array('category_type', 'edit', 2), //form,type,id
+        'page callback' => 'category_type_edit',
+        'page arguments' => array(2), // type
         'access arguments' => array('Category type Edit'),
-        'file' => 'views/type/form.inc',
         'type' => MENU_CALLBACK,
     );
     
@@ -146,28 +143,26 @@ function category_form_alter(&$form, $form_state, $form_id) {
     if (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] .'_node_form' == $form_id) {
         // Them select category
         $node = &$form['#node'];
-        $type = category::getContainerByNodeType($node->type);
 
-        if($type) { 
-            $cates = array();
-            $list = nested::getCategories($type->type);
-            $list = $list ? $list : array();
-            foreach ($list as $item) {
-                $tmp = str_repeat('- ', $item->level) . $item->title;
-                $cates[$item->cid] = $tmp;
-            }
+        $cates = array();
+        $list = nested::getCategories($node->type);
+        $list = $list ? $list : array();
 
-            // TODO : Add category textfield
-            $form['cid'] = array(
-                '#type' => 'select',
-                '#title' => t('Category'),
-                '#default_value' => isset($node->cid) ? $node->cid : session::get('category_default_' . $node->type, ''),
-                '#options' => $cates,
-                '#description' => t('Lựa chọn danh mục. %example.', array('%example' => 'Ví dụ: Star')),
-                '#attributes' => array('class' => 'menu-title-select'),
-                '#weight' => -4
-            );
+        foreach ($list as $item) {
+            $tmp = str_repeat('- ', $item->level) . $item->title;
+            $cates[$item->cid] = $tmp;
         }
+
+        // TODO : Add category textfield
+        $form['cid'] = array(
+            '#type' => 'select',
+            '#title' => t('Category'),
+            '#default_value' => isset($node->cid) ? $node->cid : session::get('category_default_' . $node->type, ''),
+            '#options' => $cates,
+            '#description' => t('Lựa chọn danh mục. %example.', array('%example' => 'Ví dụ: Star')),
+            '#attributes' => array('class' => 'menu-title-select'),
+            '#weight' => -4
+        );
     }
 }
 
@@ -199,17 +194,16 @@ function category_type_page() {
     return render(dirname(__FILE__) . '/views/type/list.inc', $data, false);
 }
 
-function category_type_delete($type) {
-    $container = category::getContainer($type);
+function category_type_add() {
+    drupal_goto('admin/content/types/add');
+}
 
-    if ($container) {
-        category::deleteContainer($type);
-        menu_rebuild();
-        drupal_set_message(t('Delete the category type %name success !..', array('%name' => $container->name)));
-    } else {
-        drupal_set_message(t('The container does not exist, deleted fails !..'));
-    }
-    drupal_goto('admin/category/list');
+function category_type_edit($type) {
+    drupal_goto('admin/content/node-type/' . $type);
+}
+
+function category_type_delete($type) {
+    drupal_goto('admin/content/node-type/' . $type . '/delete');
 }
 
 /**
@@ -219,7 +213,7 @@ function category_type_delete($type) {
  * @param   $op     up | down
  */
 function category_order($type, $cid, $op) {
-    $con = category::getContainer($type);
+    $con = category::getContentType($type);
     $ref = category_get_return($con->module);
     if($op == 'up') {
         nested::moveUp($cid);
@@ -277,7 +271,7 @@ function category_delete($type, $nid) {
     }
     
     
-    $con = category::getContainer($type);
+    $con = category::getContentType($type);
     $ref = category_get_return($con->module);
     
     if($ref) {

@@ -827,6 +827,8 @@ category_form_alter	category_form_alter(${1:&\$form}, ${2:\$form_state}, ${3:\$f
 category_set_return	category_set_return(${1:\$link = NULL})
 category_get_return	category_get_return()
 category_type_page	category_type_page()
+category_type_add	category_type_add()
+category_type_edit	category_type_edit(${1:\$type})
 category_type_delete	category_type_delete(${1:\$type})
 category_order	category_order(${1:\$type}, ${2:\$cid}, ${3:\$op})
 category_list_page	category_list_page(${1:\$type}, ${2:\$ref = NULL})

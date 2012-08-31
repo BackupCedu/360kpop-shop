@@ -16,7 +16,7 @@ function category_form(&$data, $task, $type, $nid) {
     $node = NULL;
     $nid = intval($nid);
     
-    $container = category::getContainer($type);
+    $container = category::getContentType($type);
 
     // Kiểm tra $node trường hợp là Edit
     if ($task == 'edit') {
@@ -63,7 +63,7 @@ function category_form(&$data, $task, $type, $nid) {
         '#type' => 'textfield',
         '#title' => t('Featured Image'),
         '#default_value' => isset($node->image) ? $node->image : '',
-        '#description' => t('Ảnh đại diện bài viết. %example', array('%example' => 'Ví dụ: http://img.360kpop.com/2012/07/boa.jpg')),
+        '#description' => t('Ảnh đại diện category. %example', array('%example' => 'Ví dụ: http://img.360kpop.com/2012/07/boa.jpg')),
         '#weight' => -8
     );
 
