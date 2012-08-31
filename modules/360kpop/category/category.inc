@@ -86,7 +86,7 @@ class category {
         $container = self::getContentType($type);
 
         $categories = array();
-        $query = ' SELECT c.* FROM {category} AS c, {category_type} AS t';
+        $query = ' SELECT c.* FROM {category} AS c, {node_type} AS t';
         $query.= ' WHERE c.type=t.type AND c.type = ' . data::Quote($type);
         $query.= ' ORDER BY c.lft ASC';
         $result = db_query($query);
