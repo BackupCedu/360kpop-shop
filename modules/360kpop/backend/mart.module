@@ -613,7 +613,7 @@ function mart_form_alter(&$form, &$form_state, $form_id) {
     if (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] .'_node_form' == $form_id) {
         // Thay đổi nhập liệu node form
         $node = &$form['#node'];
-
+        $type = $node->type;
         // Neu tao node moi
         if(!$node->nid) {
             // Su dung session de luu node id lan cuoi da luu
@@ -646,6 +646,7 @@ function mart_form_alter(&$form, &$form_state, $form_id) {
                     session::set('nid', $node->nid);
                 }
             }
+            $node->type = $type;
             // Luu cac thong so cua node vao form
             $form['nid']['#value'] = $node->nid;
             $form['vid']['#value'] = $node->vid;

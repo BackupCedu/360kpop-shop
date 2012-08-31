@@ -32,9 +32,6 @@ class category {
 
         return $types;
     }
-    public static function getContentType($type) {
-        return node_get_types($type);
-    }
     /**
      * @todo Category Container Helper Function
      * @note unuse
@@ -59,16 +56,16 @@ class category {
     /**
      * @todo hook_form_alter Helper function
      */
-    public static function getContainerByNodeType($type) {
+    public static function getContentType($type) {
         static $cache = array();
         if(isset($cache[$type])) {
             return $cache[$type];
         } else {
-            $container = db_fetch_object(db_query('SELECT * FROM {category_type} WHERE node = ' . data::Quote($type)));
-            if($container) {
-                $cache[$type] = $container;
+            $result = db_fetch_object(db_query('SELECT * FROM {node_type} WHERE type = ' . data::Quote($type)));
+            if($result) {
+                $cache[$type] = $result;
             }
-            return $container;
+            return $result;
         }
     }    
     public static function getContainersByName() {
@@ -82,23 +79,11 @@ class category {
 
         return $types;
     }
-    public static function getContainer($type) {
-        static $cache = array();
-        if(isset($cache[$type])) {
-            return $cache[$type];
-        } else {
-            $container = db_fetch_object(db_query('SELECT * FROM {category_type} WHERE type = ' . data::Quote($type)));
-            if($container) {
-                $cache[$type] = $container;
-            }
-            return $container;
-        }
-    }
-    public static function deleteContainer($type) {
-        return db_query('DELETE FROM {category_type} WHERE type = ' . data::Quote($type));
+    public static function deleteContentType($type) {
+        return db_query('DELETE FROM {node_type} WHERE type = ' . data::Quote($type));
     }
     public static function getContainerCategories($type) {
-        $container = self::getContainer($type);
+        $container = self::getContentType($type);
 
         $categories = array();
         $query = ' SELECT c.* FROM {category} AS c, {category_type} AS t';

@@ -18,7 +18,7 @@ function category_type(&$data, $task, $type) {
     // Kiểm tra $item trường hợp là Edit
     if ($task == 'edit') {
         $title = 'Edit container';
-        $item = category::getContainer($type);
+        $item = category::getContentType($type);
         if (empty($item)) {
             drupal_set_message('The container does not exist, please check again.');
             drupal_goto('admin/category/list');
