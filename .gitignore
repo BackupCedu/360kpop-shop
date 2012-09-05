@@ -168,3 +168,6 @@ pip-log.txt
 /nbproject
 /backup
 /images/2012
+/*.sublime-workspace
+/*.sublime-project
+/*.sublime-projectcompletions
