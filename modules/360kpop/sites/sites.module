@@ -133,6 +133,25 @@ function sites_menu() {
         'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
+    /**
+     * @todo Page: Article section
+     */
+    // Page: Category
+    $items['news/category/%'] = array(
+        'title' => 'Danh mục',
+        'page callback' => 'sites_category',
+        'page arguments' => array(2),   //cid
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    // Page: Product
+    $items['article/%'] = array(
+        'title' => 'Chi tiết bài viết',
+        'page callback' => 'sites_article',
+        'page arguments' => array(1),
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
     return $items;
 }
 
