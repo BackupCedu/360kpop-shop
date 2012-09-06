@@ -18,7 +18,7 @@ if($cid) {
 	$filter['r.cid']    = $cid;
 }	
 
-$promotes = product::getProducts($filter, 0, 12);
+$promotes = node::getProducts($filter, 0, 12);
 
 ?>
 

@@ -6,412 +6,125 @@
  * and open the template in the editor.
  */
 
+global $dir;
+global $queries;
+global $base_url;
+
+$block = realpath($dir . '/' . path_to_theme() . '/blocks/');
+
 ?>
 
-<div class="listing-type-grid catalog-listing">
-	<div class="category-head">
-		<h1>Thường thức - Đời sống</h1>
-	</div>
-	<p class="category-description">Sách về thường thức - đời sống: nấu ăn, pha chế thức uống, làm vườn, nhà
-		cửa, phong thuỷ, nuôi dạy con, cắm hoa, đời sống vợ chồng, chăm sóc thai
-		kỳ</p>
-	<table class="pager" cellspacing="0">
-		<tbody>
-			<tr>
-				<!--<td nowrap>
-                            Các item 1 tới 24 của 839 tổng số                        </td>-->
-				<!-- View By -->
-				<td nowrap="">Xem như:
-					<strong>Lưới</strong>&nbsp;
-					<a href="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?mode=list">Danh sách</a>&nbsp;</td>
-				<td class="sort-by" nowrap="">Xếp theo
-					<select onchange="setLocation(this.value)">
-						<option value="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?dir=asc&amp;order=entity_id"
-						selected="selected">Mới nhập</option>
-						<option value="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?dir=asc&amp;order=position">Vị trí</option>
-						<option value="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?dir=asc&amp;order=name">Name</option>
-						<option value="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?dir=asc&amp;order=price">Giá</option>
-						<option value="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?dir=asc&amp;order=publication_date">Ngày xuất bản</option>
-					</select>
-					<a href="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?dir=asc&amp;order=entity_id"><img src="http://tiki.vn/skin/frontend/default/tiki/images/sort_desc_arrow.gif" alt="Xếp theo chiều tăng dần" class="v-middle"></a>
-				</td>
-				<td class="pages" nowrap="">
-					<table class="pager" cellspacing="0">
-						<tbody>
-							<tr>
-								<td class="pages">
-									<strong>Trang:</strong>
-									<ol>
-										<li>
-											<span class="on">1</span>
-										</li>
-										<li>
-											<a href="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?p=2">2</a>
-										</li>
-										<li>
-											<a href="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?p=3">3</a>
-										</li>
-										<li>
-											<a href="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?p=4">4</a>
-										</li>
-										<li>
-											<a href="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?p=5">5</a>
-										</li>
-										<li>
-											<a href="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?p=2"><img src="http://tiki.vn/skin/frontend/default/tiki/images/pager_arrow_right.gif" alt="Trang tiếp theo"></a>
-										</li>
-									</ol>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
-				<td class="a-right" nowrap="">Hiển thị
-					<select onchange="setLocation(this.value)">
-						<option value="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?limit=24"
-						selected="selected">24</option>
-						<option value="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?limit=36">36</option>
-						<option value="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?limit=48">48</option>
-					</select>trên trang</td>
-			</tr>
-		</tbody>
-	</table>
-	<div class="listing-type-grid catalog-listing">
-		<ul class="grid-row odd">
-			<li class="item first">
-				<p class="product-image" style="position: relative;">
-					<span class="slOf_flag">
-						<span class="slOf_sale">-10%</span>
-					</span>
-					<a href="http://tiki.vn/lam-giau-tu-mang-xa-hoi.html?ref=316c862c870c871"
-					title="Làm Giàu Từ Mạng Xã Hội">
-                                <img src="http://tiki.vn/media/catalog/product/cache/1/small_image/140x196/9df78eab33525d08d6e5fb8d27136e95/1/2/120711_mangxahoi.jpg" width="140" height="196" alt="Làm Giàu Từ Mạng Xã Hội" title="Làm Giàu Từ Mạng Xã Hội">
-                            </a>
-				</p>
-				<h2 class="product-name">
-					<a href="http://tiki.vn/lam-giau-tu-mang-xa-hoi.html?ref=316c862c870c871"
-					title="Làm Giàu Từ Mạng Xã Hội">
-                                Làm Giàu Từ Mạng Xã Hội                            </a>
-				</h2>
-				<!--Cover-->
-				<p class="cover-books">Bìa Mềm</p>
-				<!--End-->
-				<div class="price-box">
-					<span class="regular-price price">Đặt trước</span>
-					<div class="price-block">
-						<span class="special-price">
-							<span class="price" id="product-price-44626">62.100&nbsp;₫
-								<!--price43-->
-							</span>
-						</span>
-						<span class="old-price">
-							<span class="price" id="old-price-44626">69.000&nbsp;₫
-								<!--price39-->
-							</span>
-						</span>
-					</div>
-				</div>
-				<div class="points-prediction"></div>
-			</li>
-			<li class="item">
-				<p class="product-image" style="position: relative;">
-					<span class="slOf_flag">
-						<span class="slOf_sale">-10%</span>
-					</span>
-					<a href="http://tiki.vn/khach-hang-muon-mua-gi.html?ref=316c862c870c871"
-					title="Khách Hàng Muốn Mua Gì">
-                                <img src="http://tiki.vn/media/catalog/product/cache/1/small_image/140x196/9df78eab33525d08d6e5fb8d27136e95/1/2/120808_khachhang.jpg" width="140" height="196" alt="Khách Hàng Muốn Mua Gì" title="Khách Hàng Muốn Mua Gì">
-                            </a>
-				</p>
-				<h2 class="product-name">
-					<a href="http://tiki.vn/khach-hang-muon-mua-gi.html?ref=316c862c870c871"
-					title="Khách Hàng Muốn Mua Gì">
-                                Khách Hàng Muốn Mua Gì                            </a>
-				</h2>
-				<!--Cover-->
-				<p class="cover-books">Bìa Mềm</p>
-				<!--End-->
-				<div class="price-box">
-					<span class="regular-price price">Đặt trước</span>
-					<div class="price-block">
-						<span class="special-price">
-							<span class="price" id="product-price-44625">53.100&nbsp;₫
-								<!--price43-->
-							</span>
-						</span>
-						<span class="old-price">
-							<span class="price" id="old-price-44625">59.000&nbsp;₫
-								<!--price39-->
-							</span>
-						</span>
-					</div>
-				</div>
-				<div class="points-prediction"></div>
-			</li>
-			<li class="item">
-				<p class="product-image" style="position: relative;">
-					<span class="slOf_flag">
-						<span class="slOf_sale">-10%</span>
-					</span>
-					<a href="http://tiki.vn/nge-thuat-dam-phan.html?ref=316c862c870c871" title="Nghệ Thuật Đàm Phán">
-                                <img src="http://tiki.vn/media/catalog/product/cache/1/small_image/140x196/9df78eab33525d08d6e5fb8d27136e95/1/2/120711_damphan.jpg" width="140" height="196" alt="Nghệ Thuật Đàm Phán" title="Nghệ Thuật Đàm Phán">
-                            </a>
-				</p>
-				<h2 class="product-name">
-					<a href="http://tiki.vn/nge-thuat-dam-phan.html?ref=316c862c870c871" title="Nghệ Thuật Đàm Phán">
-                                Nghệ Thuật Đàm Phán                            </a>
-				</h2>
-				<!--Cover-->
-				<p class="cover-books">Bìa Mềm</p>
-				<!--End-->
-				<div class="price-box">
-					<div class="price-block">
-						<span class="special-price">
-							<span class="price" id="product-price-44623">48.600&nbsp;₫
-								<!--price43-->
-							</span>
-						</span>
-						<span class="old-price">
-							<span class="price" id="old-price-44623">54.000&nbsp;₫
-								<!--price39-->
-							</span>
-						</span>
-					</div>
-				</div>
-				<div class="points-prediction"></div>
-			</li>
-			<li class="item last">
-				<p class="product-image" style="position: relative;">
-					<span class="slOf_flag">
-						<span class="slOf_sale">-10%</span>
-					</span>
-					<a href="http://tiki.vn/ra-quyet-dinh-thong-minh.html?ref=316c862" title="Ra Quyết Định Thông Minh">
-                                <img src="http://tiki.vn/media/catalog/product/cache/1/small_image/140x196/9df78eab33525d08d6e5fb8d27136e95/1/2/120711_thongminh.jpg" width="140" height="196" alt="Ra Quyết Định Thông Minh" title="Ra Quyết Định Thông Minh">
-                            </a>
-				</p>
-				<h2 class="product-name">
-					<a href="http://tiki.vn/ra-quyet-dinh-thong-minh.html?ref=316c862" title="Ra Quyết Định Thông Minh">
-                                Ra Quyết Định Thông Minh                            </a>
-				</h2>
-				<!--Cover-->
-				<p class="cover-books">Bìa Mềm</p>
-				<!--End-->
-				<div class="price-box">
-					<div class="price-block">
-						<span class="special-price">
-							<span class="price" id="product-price-44622">45.000&nbsp;₫
-								<!--price43-->
-							</span>
-						</span>
-						<span class="old-price">
-							<span class="price" id="old-price-44622">50.000&nbsp;₫
-								<!--price39-->
-							</span>
-						</span>
-					</div>
-				</div>
-				<div class="points-prediction"></div>
-			</li>
-		</ul>
-		<ul class="grid-row last even">
-			<li class="item first">
-				<p class="product-image" style="position: relative;">
-					<span class="slOf_flag">
-						<span class="slOf_sale">-10%</span>
-					</span>
-					<a href="http://tiki.vn/phong-chong-ung-thu.html?ref=316c862c863" title="Phòng Chống Ung Thư">
-                                <img src="http://tiki.vn/media/catalog/product/cache/1/small_image/140x196/9df78eab33525d08d6e5fb8d27136e95/p/h/ph_ng_ch_ng_ung_th_.jpg" width="140" height="196" alt="Phòng Chống Ung Thư" title="Phòng Chống Ung Thư">
-                            </a>
-				</p>
-				<h2 class="product-name">
-					<a href="http://tiki.vn/phong-chong-ung-thu.html?ref=316c862c863" title="Phòng Chống Ung Thư">
-                                Phòng Chống Ung Thư                            </a>
-				</h2>
-				<!--Cover-->
-				<p class="cover-books">Bìa Mềm</p>
-				<!--End-->
-				<div class="price-box">
-					<div class="price-block">
-						<span class="special-price">
-							<span class="price" id="product-price-43437">108.000&nbsp;₫
-								<!--price43-->
-							</span>
-						</span>
-						<span class="old-price">
-							<span class="price" id="old-price-43437">120.000&nbsp;₫
-								<!--price39-->
-							</span>
-						</span>
-					</div>
-				</div>
-				<div class="points-prediction"></div>
-			</li>
-			<li class="item">
-				<p class="product-image" style="position: relative;">
-					<span class="slOf_flag">
-						<span class="slOf_sale">-10%</span>
-					</span>
-					<a href="http://tiki.vn/co-the-va-suc-khoe-con-nguoi.html?ref=316c862c866c873c885"
-					title="Cơ Thể Và Sức Khỏe Con Người">
-                                <img src="http://tiki.vn/media/catalog/product/cache/1/small_image/140x196/9df78eab33525d08d6e5fb8d27136e95/c/o/co-the-va-suc-khoe-con-nguoi.jpg" width="140" height="196" alt="Cơ Thể Và Sức Khỏe Con Người" title="Cơ Thể Và Sức Khỏe Con Người">
-                            </a>
-				</p>
-				<h2 class="product-name">
-					<a href="http://tiki.vn/co-the-va-suc-khoe-con-nguoi.html?ref=316c862c866c873c885"
-					title="Cơ Thể Và Sức Khỏe Con Người">
-                                Cơ Thể Và Sức Khỏe Con ...                            </a>
-				</h2>
-				<!--Cover-->
-				<p class="cover-books">Bìa Cứng</p>
-				<!--End-->
-				<div class="price-box">
-					<div class="price-block">
-						<span class="special-price">
-							<span class="price" id="product-price-43389">72.000&nbsp;₫
-								<!--price43-->
-							</span>
-						</span>
-						<span class="old-price">
-							<span class="price" id="old-price-43389">80.000&nbsp;₫
-								<!--price39-->
-							</span>
-						</span>
-					</div>
-				</div>
-				<div class="points-prediction"></div>
-			</li>
-			<li class="item">
-				<p class="product-image" style="position: relative;">
-					<span class="slOf_flag">
-						<span class="slOf_sale">-10%</span>
-					</span>
-					<a href="http://tiki.vn/cac-mon-dua-chua-do-nguoi-tron-cuon-hon-hop.html?ref=316c862c865"
-					title="Các Món Dưa Chua Đồ Nguội - Trộn Cuốn Hỗn Hợp">
-                                <img src="http://tiki.vn/media/catalog/product/cache/1/small_image/140x196/9df78eab33525d08d6e5fb8d27136e95/c/a/cac-mon-dua-chua-do-nguoi_1.jpg" width="140" height="196" alt="Các Món Dưa Chua Đồ Nguội - Trộn Cuốn Hỗn Hợp" title="Các Món Dưa Chua Đồ Nguội - Trộn Cuốn Hỗn Hợp">
-                            </a>
-				</p>
-				<h2 class="product-name">
-					<a href="http://tiki.vn/cac-mon-dua-chua-do-nguoi-tron-cuon-hon-hop.html?ref=316c862c865"
-					title="Các Món Dưa Chua Đồ Nguội - Trộn Cuốn Hỗn Hợp">
-                                Các Món Dưa Chua Đồ Nguội ...                            </a>
-				</h2>
-				<!--Cover-->
-				<p class="cover-books">Bìa Mềm</p>
-				<!--End-->
-				<div class="price-box">
-					<div class="price-block">
-						<span class="special-price">
-							<span class="price" id="product-price-43284">45.000&nbsp;₫
-								<!--price43-->
-							</span>
-						</span>
-						<span class="old-price">
-							<span class="price" id="old-price-43284">50.000&nbsp;₫
-								<!--price39-->
-							</span>
-						</span>
-					</div>
-				</div>
-				<div class="points-prediction"></div>
-			</li>
-			<li class="item last">
-				<p class="product-image" style="position: relative;">
-					<span class="slOf_flag">
-						<span class="slOf_sale">-10%</span>
-					</span>
-					<a href="http://tiki.vn/cac-mon-an-che-bien-tu-rong-bien-moi-la-va-bo-duong.html?ref=316c862c865"
-					title="Các Món Ăn Chế Biến Từ Rong Biển Mới Lạ &amp; Bổ Dưỡng">
-                                <img src="http://tiki.vn/media/catalog/product/cache/1/small_image/140x196/9df78eab33525d08d6e5fb8d27136e95/c/a/cac-mon-an-che-bien-tu-rong-bien_1.jpg" width="140" height="196" alt="Các Món Ăn Chế Biến Từ Rong Biển Mới Lạ &amp; Bổ Dưỡng" title="Các Món Ăn Chế Biến Từ Rong Biển Mới Lạ &amp; Bổ Dưỡng">
-                            </a>
-				</p>
-				<h2 class="product-name">
-					<a href="http://tiki.vn/cac-mon-an-che-bien-tu-rong-bien-moi-la-va-bo-duong.html?ref=316c862c865"
-					title="Các Món Ăn Chế Biến Từ Rong Biển Mới Lạ &amp; Bổ Dưỡng">
-                                Các Món Ăn Chế Biến Từ ...                            </a>
-				</h2>
-				<!--Cover-->
-				<p class="cover-books">Bìa Mềm</p>
-				<!--End-->
-				<div class="price-box">
-					<div class="price-block">
-						<span class="special-price">
-							<span class="price" id="product-price-42941">28.800&nbsp;₫
-								<!--price43-->
-							</span>
-						</span>
-						<span class="old-price">
-							<span class="price" id="old-price-42941">32.000&nbsp;₫
-								<!--price39-->
-							</span>
-						</span>
-					</div>
-				</div>
-				<div class="points-prediction"></div>
-			</li>
-		</ul>
-		<script type="text/javascript">
-		decorateGeneric($$('.grid-row'), ['last', 'odd', 'even']);
-		</script>
-	</div>
-	<div style="border-bottom:1px solid #e2e2e2;"></div>
-	<table class="pager" cellspacing="0">
-		<tbody>
-			<tr>
-				<!--<td nowrap>
-                            Các item 1 tới 24 của 839 tổng số                        </td>-->
-				<!-- View By -->
-				<td nowrap="">Xem như:
-					<strong>Lưới</strong>&nbsp;
-					<a href="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?mode=list">Danh sách</a>&nbsp;</td>
-				<td class="sort-by" nowrap="">Xếp theo
-					<select onchange="setLocation(this.value)">
-						<option value="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?dir=asc&amp;order=entity_id"
-						selected="selected">Mới nhập</option>
-						<option value="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?dir=asc&amp;order=position">Vị trí</option>
-						<option value="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?dir=asc&amp;order=name">Name</option>
-						<option value="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?dir=asc&amp;order=price">Giá</option>
-						<option value="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?dir=asc&amp;order=publication_date">Ngày xuất bản</option>
-					</select>
-					<a href="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?dir=asc&amp;order=entity_id"><img src="http://tiki.vn/skin/frontend/default/tiki/images/sort_desc_arrow.gif" alt="Xếp theo chiều tăng dần" class="v-middle"></a>
-				</td>
-				<td class="pages" nowrap="">
-					<table class="pager" cellspacing="0">
-						<tbody>
-							<tr>
-								<td class="pages">
-									<strong>Trang:</strong>
-									<ol>
-										<li>
-											<span class="on">1</span>
-										</li>
-										<li>
-											<a href="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?p=2">2</a>
-										</li>
-										<li>
-											<a href="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?p=3">3</a>
-										</li>
-										<li>
-											<a href="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?p=4">4</a>
-										</li>
-										<li>
-											<a href="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?p=5">5</a>
-										</li>
-										<li>
-											<a href="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?p=2"><img src="http://tiki.vn/skin/frontend/default/tiki/images/pager_arrow_right.gif" alt="Trang tiếp theo"></a>
-										</li>
-									</ol>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
-				<td class="a-right" nowrap="">Hiển thị
-					<select onchange="setLocation(this.value)">
-						<option value="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?limit=24" selected="selected">24</option>
-						<option value="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?limit=36">36</option>
-						<option value="http://tiki.vn/sach-truyen-tieng-viet/thuong-thuc-doi-song.html?limit=48">48</option>
-					</select>trên trang</td>
-			</tr>
-		</tbody>
-	</table>
+<!-- Block: Category::Slider -->
+<?php include $block . '/block.category.slide.php' ?>
+
+<div class="blk-main">
+
+  <div class="title-newshop">
+    <h3>
+
+      <a href="<?php echo $category->link ?>" title=""><?php echo $category->title ?></a>
+
+    </h3>
+  </div>
+
+  <div class="bg1">
+    <div class="bg2" id="brand">
+      <div class="select-pro">
+        <div class="skinned-select">
+          <input type="hidden" value="0" id="hid_region">
+          <div class="select-text">Nơi bán</div>
+          <select name="name">
+            <option value="0">Nơi bán</option>
+            <option value="58">TP HCM</option>
+            <option value="24">Hà Nội</option>
+            <option value="15">Đà Nẵng</option>
+          </select>
+        </div>
+        <span><input name="Submit" type="button" class="btn-view" value=""></span>
+        <a href="javascript:;" class="view1" onclick="product.viewGrid(this);"></a>
+        <a href="javascript:;" class="view2 ac2" onclick="product.viewList(this);"></a>
+      </div>
+
+      <div class="resultContent_List" id="viewList">
+        <?php foreach($nodes as $item) :?>
+        <?php $item->title = strip_tags($item->title) ?>
+        <div class="row-120">
+          <a href="<?php echo $item->link_view ?>" class="img-120" title="<?php echo $item->title ?> - <?php echo $item->price ?>đ">
+            <img src="<?php echo $item->thumb ?>" width="120" height="120" border="0" alt="<?php echo $item->title ?>">
+          </a>
+          <div class="txt-row120">
+            <h4>
+              <a href="<?php echo $item->link_view ?>"><?php echo $item->title ?></a>
+            </h4>
+            <?php echo $item->teaser ?>
+            <div class="shopname">
+              Có tại shop
+              <a class="vipshop" href="<?php echo $base_url ?>" title="">360Kpop</a>
+              <span class="update timeago" title="<?php echo date('d/m/Y H:i:j', $item->created) ?>">một ngày trước</span>
+            </div>
+            <span class="price"><?php echo $item->price ?>đ</span>
+          </div>
+          <br class="clr">
+        </div>
+        <?php endforeach ?>
+      </div>
+      <div class="resultContent_Grid" id="viewGrid"></div>
+      <br class="clr">
+    </div>
+    <p class="nav">
+      <?php foreach($pages as $key => $item) : ?>
+      <?php $item = (Object) $item ?>
+      <?php $type = $item->type ?>
+      <?php if($type == 'first') : ?>
+      <a extag="own" href="<?php echo $category->link . '?page=' . $item->page ?>" class="fpnl-page"><?php echo $item->title ?></a>
+      <?php elseif ($type == 'last') : ?>
+      <a extag="own" href="<?php echo $category->link . '?page=' . $item->page ?>" class="fpnl-page"><?php echo $item->title ?></a>
+      <?php elseif ($type == 'dir') : ?>
+      <a extag="own" href="<?php echo $category->link . '?page=' . $item->page ?>" class="fpnl-page"><?php echo $item->title ?></a>
+      <?php elseif ($type == 'current') : ?>
+      <span class="current-none"><?php echo $item->title ?></span>
+      <?php elseif ($type == 'sep') : ?>
+      <span>...</span>
+      <?php else : ?>
+      <a class="lbk-page" extag="own" href="<?php echo $category->link . '?page=' . $item->page ?>"><?php echo $item->title ?></a>
+      <?php endif ?>
+      <?php endforeach ?>
+    </p>
+  </div>
 </div>
+
+<script>
+var product = {
+  viewList: function(obj) {
+    $('#viewGrid').hide();
+    $('#viewList').show();
+  },
+  viewGrid: function(obj) {
+    var content = $('#viewGrid').html();
+    var height  = $('#viewList').height() - 20;
+    var param   = new Object();
+    $('#viewList').hide();
+    if(content.length == 0) {
+        // Html please wait
+        html = "<div style='padding-top:20px;text-align:center;width:695px;height:"+height+"px;'>";
+        html+= "<img src='" + GLOBAL_BASE_URL + "images/nava/loading_big.gif'>";
+        html+= "<br class='clr'>";
+        html+= "</div>";
+        // Change target data state
+        $('#viewGrid').html(html);
+        $('#viewGrid').show();
+        // Data post to server
+        param.action = 'loadProductViewGrid';
+        param.param  = <?php echo $category->cid ?>;
+        param.option = <?php echo $page ?>;
+        // Post data to server and get respond
+        $.post(GLOBAL_BASE_URL + 'api/product', param, function(data) {
+            $('#viewGrid').html(data);
+            $('#viewGrid').show();
+        });
+    } else {
+      $('#viewGrid').show();
+    }
+  }
+}
+</script>

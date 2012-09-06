@@ -46,7 +46,7 @@ $block = realpath($dir . '/' . path_to_theme() . '/blocks/');
       </div>
 
       <div class="resultContent_List" id="viewList">
-        <?php foreach($products as $item) :?>
+        <?php foreach($nodes as $item) :?>
         <?php $item->title = strip_tags($item->title) ?>
         <div class="row-120">
           <a href="<?php echo $item->link_view ?>" class="img-120" title="<?php echo $item->title ?> - <?php echo $item->price ?>đ">

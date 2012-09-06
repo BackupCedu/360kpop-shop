@@ -39,7 +39,7 @@ $update_free_access = FALSE;
  * Base URL (optional).
  */
 
-$base_url = 'http://localhost/360kpop-shop';  // NO trailing slash!
+// $base_url = 'http://localhost/360kpop-shop';  // NO trailing slash!
 
 /**
  * Variable overrides:
@@ -56,32 +56,40 @@ $conf = array(
  */
 
 function custom_url_rewrite_inbound(&$result, $path, $path_language) {
-    global $user, $base_url;
+    global $user;
+    global $debug;
+    global $base_url;
+    global $registry;
     
     // rewrite for category
     if (preg_match('|^([a-zA-Z0-9\-]+)$|ism', $path, $matches)) {
         $alias = check_plain($matches[1]);
-        $cate = db_fetch_object(db_query('SELECT cid FROM {category} WHERE alias = ' . data::Quote($alias)));
+        $cate = db_fetch_object(db_query('SELECT * FROM {category} WHERE alias = ' . data::Quote($alias)));
         if ($cate) {
+            $cate->link = $base_url . '/' . $cate->alias;
+            $registry['category'] = $cate;
             $result = 'category/' . $cate->cid;
-        }
-    }
-    if (preg_match('/^([a-zA-Z\-]+)\/page\/(\d+)$/ism', $path, $matches)) {
-        $alias = $matches[1];
-        $page = $matches[2];
-        $cate = db_fetch_object(db_query('SELECT cid FROM {category} WHERE alias = ' . data::Quote($alias)));
-        if ($cate) {
-            $result = 'category/' . $cate->cid . '/' . $page;
         }
     }
     // rewrite for product
     if (preg_match('|^(.*)/(.*)-(\d+)\.html$|ism', $path, $matches)) {
-        $result = 'product/' . $matches[3];
+        $alias = check_plain($matches[1]);
+        $cate = db_fetch_object(db_query('SELECT * FROM {category} WHERE alias = ' . data::Quote($alias)));
+        if ($cate) {
+            $cate->link = $base_url . '/' . $cate->alias;
+            $registry['category'] = $cate;
+        } else {
+            // Redirect to homepage
+            header('location:' . $base_url, TRUE, 302);
+            exit;
+        }
+        $result = 'post/' . $matches[3];
     }
     
     // check for user access admin panel
     if (preg_match('|^admin(/{0,1}.*)|ism', $path, $matches)) {
         if ($user->uid == 0) {
+            // Redirect to login page
             header('location:' . $base_url . '/user/login?ref=admin' . $matches[1] . '&sys=news', TRUE, 302);
             exit;
         }

@@ -16,7 +16,7 @@ if($first) {
 	$filter['r.cid'] = $first->children . ',' . $first->cid;
 }
 
-$products = product::getProducts($filter,0, 18);
+$products = node::getProducts($filter,0, 18);
 
 ?>
 <div class="blk-main">

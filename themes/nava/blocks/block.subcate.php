@@ -4,7 +4,7 @@ if (arg(0) == 'category') {
     $cid = arg(1);
 } else
 if (arg(0) == 'product') {
-    $product = product::getProduct(arg(1));
+    $product = node::getProduct(arg(1));
     if ($product) {
         $cid = $product->cid;
     }

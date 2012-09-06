@@ -24,7 +24,7 @@ if($cid) {
 	$filter['r.cid']    = $cid;
 }	
 
-$products = product::getProducts($filter, 0, 15);
+$products = node::getProducts($filter, 0, 15);
 
 ?>
 <div class="blk-main lazyLoad">

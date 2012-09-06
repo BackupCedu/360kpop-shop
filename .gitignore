@@ -168,5 +168,11 @@ pip-log.txt
 /nbproject
 /backup
 /images/2012
+<<<<<<< HEAD
 /*.sublime-project
 /*.sublime-workspace
+=======
+/*.sublime-workspace
+/*.sublime-project
+/*.sublime-projectcompletions
+>>>>>>> e6a59e196cb2dcd94bc704d0ac1b47876cb77c46
