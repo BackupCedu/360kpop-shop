@@ -6,7 +6,7 @@ $filter['n.status'] = 1;
 
 $order = 'n.views DESC';
 
-$products = product::getProducts($filter, 0, 10, $order);
+$products = node::getProducts($filter, 0, 10, $order);
 
 ?>
 

@@ -19,15 +19,15 @@ function product_field_form(&$data, $task, $type, $name = NULL) {
 
     // Kiểm tra có phải xóa item
     if(arg(6) == 'delete') {
-        product::deleteProductField($name);
+        node::deleteProductField($name);
         drupal_goto('admin/product/types/' . $type . '/fields');
     }
     
     // Kiểm tra $item trường hợp là Edit
     if ($task == 'edit') {
         $title = 'Edit product field';
-        $item = product::getProductType($type);
-        $field = product::getProductTypeField($name);
+        $item = node::getProductType($type);
+        $field = node::getProductTypeField($name);
         if (empty($item)) {
             drupal_set_message(t('You do not select product type, please select one at !link and try again.', array('!link' => l(t('List product types'), 'admin/product/types/' . $type . '/fields'))));
             return $form;
@@ -193,7 +193,7 @@ function product_field_form_validate($form, &$form_state) {
     // Work out what the type was before the user submitted this form
     $name = trim($form_state['values']['field']['name']);
 
-    $fields = product::getProductTypeFields($type);
+    $fields = node::getProductTypeFields($type);
 
     if (isset($fields[$name]) && $name != $old) {
         form_set_error('name', t('Tên trường <em>%field</em> đã tồn tại.', array('%field' => $name)));

@@ -1,17 +1,17 @@
 <?php 
 $cates = array();
 $cateArray = category::getCategories('product');
-foreach($categories as $key => $item) {
-	// Lay subs cate
-	$subs = $item->list;
-	// Chia subs thanh 3 cot
-	$count = count($subs);
-	// So phan tu moi cot
-	$size = ceil($count/3);
-	// Xoa khoi mang
-	unset($item->list);
-	$cates[$key] = $item;
-	$cates[$key]->list = array_chunk($subs, $size, true);
+foreach($cateArray as $key => $item) {
+    // Lay subs cate
+    $subs = $item->list;
+    // Chia subs thanh 3 cot
+    $count = count($subs);
+    // So phan tu moi cot
+    $size = ceil($count/3);
+    // Xoa khoi mang
+    unset($item->list);
+    $cates[$key] = $item;
+    $cates[$key]->list = array_chunk($subs, $size, true);
 }
 ?>
 

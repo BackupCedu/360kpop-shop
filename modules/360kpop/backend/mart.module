@@ -5,7 +5,7 @@
  * TODO: Enter file description here.
  */
 
-include('product.inc');
+include('node.inc');
 include('mart.page.inc');
 
 /**
@@ -336,7 +336,7 @@ function mart_form(&$node, $form_state) {
     // Them cac kieu node tren thanh tab second
     
     // Lay danh sach cac kieu san pham
-    $list = product::getProductTypes('type,name');
+    $list = node::getProductTypes('type,name');
     
     // Lay phan tu dau tien cua danh sach de lam phan tu mac dinh
     $first = current($list);
@@ -561,7 +561,7 @@ function mart_form(&$node, $form_state) {
     $productType = $list[$current];
     
     // TODO : Step 2 - Load product type fields
-    $fields = product::getProductTypeFields($current);
+    $fields = node::getProductTypeFields($current);
 
     // TODO : Step 4 - Add product type fields to form
     $form['extra'] = array(
@@ -640,7 +640,7 @@ function mart_form_alter(&$form, &$form_state, $form_id) {
             // Tao draft moi
             if($created) {
                 $node->nid = NULL;
-                product::createNode($node);
+                node::createNode($node);
                 // Neu co node moi tao ra
                 if($node->nid) {
                     session::set('nid', $node->nid);
@@ -999,7 +999,7 @@ function mart_insert($node) {
     // TODO: Insert data to {product_field_data}
     $fields    = isset($node->extra) ? $node->extra : array();
 
-    product::storeProductFiledData($node, $fields, false);
+    node::storeProductFiledData($node, $fields, false);
 }
 
 /**
@@ -1043,7 +1043,7 @@ function mart_update($node) {
         // TODO: Insert data to {product_field_data}
         $fields    = isset($node->extra) ? $node->extra : array();
 
-        product::storeProductFiledData($node, $fields, true);
+        node::storeProductFiledData($node, $fields, true);
     }
 }
 
@@ -1052,9 +1052,9 @@ function mart_update($node) {
  */
 function mart_delete(&$node) {
     // TODO: Delete {products}
-    product::deleteProduct($node->nid);
+    node::deleteProduct($node->nid);
     // TODO: Delete {product_field_data}
-    product::deleteFieldData($node->nid);
+    node::deleteFieldData($node->nid);
     // TODO: Delete product supplier / tag / ... from data extend
     dataExtend::deleteNodeData($node->nid);
 }
@@ -1068,7 +1068,7 @@ function mart_load($node) {
     // TODO: Load product basic fields from table {products}
     $products = db_fetch_object(db_query('SELECT * FROM {products} WHERE vid = %d', $node->vid));
     // TODO: Load product extra fields from table {product_field_data}
-    $extra = product::getProductFieldData($node->nid, $node->vid);
+    $extra = node::getProductFieldData($node->nid, $node->vid);
     $append = new stdClass();
 
     foreach($extra as $key => $value) {

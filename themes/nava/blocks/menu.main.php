@@ -6,7 +6,7 @@ if (arg(0) == 'category') {
     $cid = arg(1);
 } else
 if (arg(0) == 'product') {
-    $product = product::getProduct(arg(1));
+    $product = node::getProduct(arg(1));
     if ($product) {
         $cid = $product->cid;
     }
@@ -14,7 +14,9 @@ if (arg(0) == 'product') {
 
 $active = 0;
 $column = 6;
-$categories = category::getCategories('product');
+
+$products = category::getCategories('product');
+$news = category::getCategories('article');
 
 // Cart count
 
@@ -24,7 +26,7 @@ $categories = category::getCategories('product');
     <li>
         <h1><a class="ico-home" href="<?php echo url() ?>">Trang chủ</a></h1>
     </li>
-    <?php foreach ($categories as $key => $cate) : ?>
+    <?php foreach ($products as $key => $cate) : ?>
     <?php $subs   = $cate->list ?>
     <?php $class  = $cate->active ? ' class="active"' : ''?>
     <?php $active = $cate->active ? 1 : $active ?>
@@ -53,6 +55,19 @@ $categories = category::getCategories('product');
     <?php endforeach ?>
     <li>
         <a class="c" href="javascript:;">News</a>
+        <div class="sub subid-news">
+            <ul>
+                <li class='subtitle'>
+                    <a href="javascript:;">Danh mục tin tức</a>
+                </li>
+                <?php foreach ($news as $item) : ?>
+                <?php $class = $item->cid == $cid ? ' class="active"' : ''?>
+                <li<?php echo $class ?>>
+                    <a href="<?php echo $item->link ?>" ><?php echo $item->title ?></a>
+                </li>
+                <?php endforeach ?>
+            </ul>
+        </div>
     </li>
     <li>
         <a class="c" href="javascript:;">Forum</a>

@@ -12,7 +12,7 @@ $filter = array();
 $filter['n.status'] = 1;
 $filter['r.cid']    = $cid;
 $order = 'n.views DESC';
-$products = product::getProducts($filter, 0, 10, $order);
+$products = node::getProducts($filter, 0, 10, $order);
 
 ?>
 <div class="show-case mb-10">

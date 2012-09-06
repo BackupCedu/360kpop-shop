@@ -9,7 +9,7 @@
  * and open the template in the editor.
  */
 
-class product {
+class node {
     /**
      * @todo Product Type Helper Function
      */
@@ -182,7 +182,7 @@ class product {
     /**
      * @todo Lay danh sach cac product theo filter
      */
-    public static function getProducts($filter = array(), $offset = 0, $limit = 20 , $order = null, $option = array()) {
+    public static function getNodes($filter = array(), $offset = 0, $limit = 20 , $order = null, $option = array()) {
         $query = ' SELECT p.*, n.nid, n.vid, n.uid, n.type, n.title, n.created, n.changed, n.views, n.comment, n.status,';
         $query.= ' r.cid, r.alias, r.body, r.teaser, r.metadesc, r.metakey, r.metadata, r.image,';
         $query.= ' c.title AS cate_title, c.alias as cate_alias,';
@@ -192,7 +192,7 @@ class product {
         $query.= ' INNER JOIN {node_revisions} r ON r.nid = n.nid AND n.vid = r.vid';
         $query.= ' LEFT JOIN {products} p ON p.vid = n.vid';
         $query.= ' LEFT JOIN {category} c ON c.cid = r.cid';
-        $query.= ' WHERE n.type=' . data::Quote('product');
+        $query.= ' WHERE 1';
         
         $cid = isset($filter['r.cid']) ? $filter['r.cid'] : null;
         
@@ -248,12 +248,114 @@ class product {
         
         return $products;
     }
+    public static function getProducts($filter = array(), $offset = 0, $limit = 20 , $order = null, $option = array()) {
+        $query = ' SELECT p.*, n.nid, n.vid, n.uid, n.type, n.title, n.created, n.changed, n.views, n.comment, n.status,';
+        $query.= ' r.cid, r.alias, r.body, r.teaser, r.metadesc, r.metakey, r.metadata, r.image,';
+        $query.= ' c.title AS cate_title, c.alias as cate_alias,';
+        $query.= ' u.name';
+        $query.= ' FROM {node} n';
+        $query.= ' INNER JOIN {users} u ON u.uid = n.uid';
+        $query.= ' INNER JOIN {node_revisions} r ON r.nid = n.nid AND n.vid = r.vid';
+        $query.= ' LEFT JOIN {products} p ON p.vid = n.vid';
+        $query.= ' LEFT JOIN {category} c ON c.cid = r.cid';
+        $query.= ' WHERE 1';
+        
+        $cid = isset($filter['r.cid']) ? $filter['r.cid'] : null;
+        
+        if ($cid) {
+            $query.= " AND r.cid IN (" . $cid . ")";
+            unset($filter['r.cid']);
+        }
+        
+        if ($filter) {
+            foreach($filter as $k => $v) {
+                if(is_array($v) && isset($v['op']) && isset($v['value'])) {
+                    $op = $v['op'];
+                    $value = $v['value'];
+                    $key = isset($v['key']) ? $v['key'] : $k;
+                    $key = strpos($key,'.') ? $key : 'n.' . $key;
+                    $query.= " AND $key $op $value";
+                } else {
+                    $k = strpos($k,'.') ? $k : 'n.' . $k;
+                    $query.= " AND $k = $v";
+                }
+            }
+        }
+
+        if(isset($option['selloff']) && $option['selloff']) {
+            $query .= ' AND IF(p.sell > 0, IF(p.sell < p.price, 1, 0), 0)';
+        }
+        
+        if($order) {
+            $query.= " ORDER BY " . $order;
+        } else {
+            $query.= " ORDER BY created DESC";
+        }
+        
+        $offset = $offset > 0 ? $offset : 0;
+        $query.= " LIMIT " . $offset . ',' . $limit;
+
+        $result = db_query($query);
+        
+        $products = array();
+        
+        while($row = db_fetch_object($result)) {
+            $row->price = number_format ($row->price,0,',','.');
+            $row->sell = number_format ($row->sell,0,',','.');
+            $row->date = date('d/m/Y H:i', $row->created);
+            $row->thumb = self::getProductThumb($row->image,'120x120');
+            $row->link_view = url($row->cate_alias.'/'.$row->alias.'-'.$row->nid.'.html');
+            $row->link_edit = url('node/' . $row->nid . '/edit', array('query' => 'destination=admin/product'));
+            $row->link_delete = url('node/' . $row->nid . '/edit', array('query' => 'destination=admin/product'));
+            $row->link_cate = url($row->cate_alias);
+            $row->link_user = url('user/' . $row->uid);
+            $products[] = $row;
+        }
+        
+        return $products;
+    }
+    public static function getNodesCount($filter = array()) {
+        $query = ' SELECT COUNT(*) AS count';
+        $query.= ' FROM {node} n';
+        $query.= ' INNER JOIN {node_revisions} r ON r.nid = n.nid AND n.vid = r.vid';
+        $query.= ' WHERE 1';
+        
+        $cid = isset($filter['r.cid']) ? $filter['r.cid'] : null;
+        
+        if ($cid) {
+            $query.= " AND r.cid IN (" . $cid . ")";
+            unset($filter['r.cid']);
+        }
+        
+        if ($filter) {
+            foreach($filter as $k => $v) {
+                if(is_array($v) && isset($v['op']) && isset($v['value'])) {
+                    $op = $v['op'];
+                    $value = $v['value'];
+                    $key = isset($v['key']) ? $v['key'] : $k;
+                    $key = strpos($key,'.') ? $key : 'n.' . $key;
+                    $query.= " AND $key $op $value";
+                } else {
+                    $k = strpos($k,'.') ? $k : 'n.' . $k;
+                    $query.= " AND $k = $v";
+                }
+            }
+        }
+        
+        $total = 0;
+        
+        if ($result = db_fetch_object(db_query($query))) {
+            $total = $result->count;
+        }
+        
+        return $total;
+    }
     public static function getProductsCount($filter = array()) {
         $query = ' SELECT COUNT(*) AS count';
         $query.= ' FROM {node} n';
         $query.= ' INNER JOIN {node_revisions} r ON r.nid = n.nid AND n.vid = r.vid';
         $query.= ' INNER JOIN {products} p ON p.vid = n.vid';
-        $query.= ' WHERE n.type=' . data::Quote('product');
+        $query.= ' WHERE 1';
         
         $cid = isset($filter['r.cid']) ? $filter['r.cid'] : null;
         

@@ -13,7 +13,7 @@ function product_access($op, $pid) {
     
     $account = $user;
     
-    $node = product::getProduct($pid);
+    $node = node::getProduct($pid);
     
     if ($op == 'create') {
         return user_access('Product Add', $account);
@@ -33,13 +33,13 @@ function product_access($op, $pid) {
 }
 
 function product_types_delete($type) {
-    product::deleteProductType($type);
+    node::deleteProductType($type);
     drupal_goto('admin/product/types');
 }
 
 function product_types_list_page() {
     $data = array();
-    $data['list'] = product::getProductTypes();
+    $data['list'] = node::getProductTypes();
     return render(dirname(__FILE__) . '/views/type/list.inc', $data, false);
 }
 
@@ -51,8 +51,8 @@ function product_types_fields_page($type = NULL) {
     $data   = array();
     $fields = array();
     
-    $temp   = product::getProductType($type);
-    $fields = product::getProductTypeFields($type);
+    $temp   = node::getProductType($type);
+    $fields = node::getProductTypeFields($type);
 
     if(!$temp) {
         drupal_set_message('The product type ' . $type . ' dose not exists, please select a product type fields below.', 'error');
@@ -120,7 +120,7 @@ function product_list_page() {
         }
     }
     
-    $totalPost = product::getProductsCount($filter);
+    $totalPost = node::getProductsCount($filter);
     $totalPage = ceil($totalPost / $limit);
 
     //Kiểm tra trang có hợp lệ
@@ -133,7 +133,7 @@ function product_list_page() {
 
     $offset = $limit * ($page - 1);
 
-    $nodes = product::getProducts($filter, $offset, $limit);
+    $nodes = node::getProducts($filter, $offset, $limit);
 
     $data['cid']     = $cid;
     $data['uid']     = $uid;
@@ -142,7 +142,7 @@ function product_list_page() {
     $data['total']   = $totalPage;
     $data['nodes']   = $nodes;
     $data['cates']   = nested::getCategories('product');
-    $data['authors'] = product::getAuthors();
+    $data['authors'] = node::getAuthors();
     $data['pages']   = page::getPaging($page, $totalPage, array(
         'prevTitle'  => 'Trang trước', 
         'nextTitle'  => 'Trang sau',

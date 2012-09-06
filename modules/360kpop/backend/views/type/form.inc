@@ -23,7 +23,7 @@ function product_type_form(&$data, $task, $type) {
     // Kiểm tra $item trường hợp là Edit
     if ($task == 'edit') {
         $title = 'Edit product type';
-        $item = product::getProductType($type);
+        $item = node::getProductType($type);
         if (empty($item)) {
             drupal_set_message(t('You do not select product type, please select one at !link and try again.', array('!link' => l(t('List product types'), 'admin/product/types'))));
             return $form;
@@ -147,7 +147,7 @@ function product_type_form_validate($form, &$form_state) {
     // Work out what the type was before the user submitted this form
     $old_type = trim($form_state['values']['old_type']);
 
-    $types = product::getProductTypes();
+    $types = node::getProductTypes();
 
     if (isset($types[$type->type]) && $type->type != $old_type) {
         form_set_error('type', t('Tên kiểu <em>Type</em> %type đã tồn tại.', array('%type' => $type->type)));
